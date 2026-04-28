@@ -63,47 +63,140 @@ export default function Home() {
       </div>
 
       {/* HERO */}
-      <section className="px-6 pb-24 pt-28 md:pt-36">
-        <div className="mx-auto max-w-7xl">
-          <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.06] p-8 shadow-2xl backdrop-blur-2xl md:p-14">
-            <p className="mb-6 text-sm font-bold uppercase tracking-[0.32em] text-emerald-300">
-              SEO · Google Ads · Meta Ads · Local Growth
-            </p>
+<section className="px-4 pb-24 pt-24 md:px-6 md:pt-36">
+  <div className="mx-auto max-w-7xl">
+    <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.06] p-6 shadow-2xl backdrop-blur-2xl md:p-14">
+      {/* glow */}
+      <div className="absolute right-[-10%] top-[-20%] h-[420px] w-[420px] rounded-full bg-emerald-300/20 blur-[120px]" />
+      <div className="absolute bottom-[-20%] left-[-10%] h-[380px] w-[380px] rounded-full bg-orange-400/10 blur-[120px]" />
 
-            <h1 className="max-w-6xl text-5xl font-black leading-[0.92] tracking-tight md:text-8xl">
-              Fatti trovare da chi sta già cercando ciò che vendi.
-            </h1>
+      <div className="relative z-10 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+        {/* LEFT */}
+        <div>
+          <div className="mb-7 inline-flex rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-xs font-black uppercase tracking-[0.24em] text-emerald-300">
+            SEO · Google Ads · Local Growth
+          </div>
 
-            <p className="mt-8 max-w-3xl text-lg leading-8 text-white/70 md:text-xl">
-              Mago System aiuta attività locali e aziende di servizi a costruire
-              un sistema di acquisizione clienti basato su Google: più visibilità,
-              più fiducia, più richieste concrete. Senza fuffa, senza promesse da
-              guru, senza buttare budget “per provare”.
-            </p>
+          <h1 className="max-w-5xl text-5xl font-black leading-[0.9] tracking-tight md:text-7xl xl:text-8xl">
+            Più visibilità.
+            <br />
+            Più fiducia.
+            <br />
+            Più richieste.
+          </h1>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a
-                href="/quiz"
-                className="rounded-full bg-white px-8 py-4 text-center font-black text-black transition hover:scale-[1.02]"
+          <p className="mt-8 max-w-3xl text-lg leading-8 text-white/72 md:text-xl md:leading-9">
+            Aiuto attività locali e aziende di servizi a trasformare Google in
+            un canale reale di acquisizione clienti: ti fai trovare meglio,
+            comunichi in modo più credibile e porti più persone verso chiamate,
+            prenotazioni e preventivi.
+          </p>
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            {[
+              "SEO pensata per ricerche locali",
+              "Pagine costruite per convertire",
+              "Ads solo quando servono davvero",
+            ].map((item) => (
+              <div
+                key={item}
+                className="rounded-2xl border border-white/10 bg-black/20 p-4 text-sm font-bold leading-6 text-white/75"
               >
-                Fai il quiz strategico
-              </a>
-              <a
-                href="/call"
-                className="rounded-full border border-white/20 bg-white/10 px-8 py-4 text-center font-black text-white backdrop-blur-xl transition hover:bg-white/15"
-              >
-                Fissa una videocall
-              </a>
+                {item}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <a
+              href="/quiz"
+              className="rounded-full bg-white px-8 py-4 text-center font-black text-black transition hover:scale-[1.02]"
+            >
+              Fai il quiz strategico
+            </a>
+
+            <a
+              href="/call"
+              className="rounded-full border border-white/20 bg-white/10 px-8 py-4 text-center font-black text-white backdrop-blur-xl transition hover:bg-white/15"
+            >
+              Fissa una videocall
+            </a>
+          </div>
+
+          <p className="mt-5 max-w-2xl text-sm leading-6 text-white/50">
+            Prima capiamo dove sei oggi. Poi decidiamo se ha più senso lavorare
+            su SEO, sito, landing page, Google Business Profile, Ads o tracking.
+            Niente pacchetti buttati lì.
+          </p>
+        </div>
+
+        {/* RIGHT */}
+        <div className="relative">
+          <div className="rounded-[2rem] border border-white/10 bg-black/30 p-5 backdrop-blur-2xl md:p-6">
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.06] p-5">
+              <p className="text-sm font-black uppercase tracking-[0.26em] text-emerald-300">
+                Obiettivo
+              </p>
+
+              <h2 className="mt-4 text-3xl font-black leading-tight md:text-4xl">
+                Essere tra le scelte più credibili quando il cliente cerca.
+              </h2>
+
+              <div className="mt-7 space-y-4">
+                {[
+                  {
+                    label: "Google",
+                    value: "Visibilità su ricerche ad alta intenzione",
+                  },
+                  {
+                    label: "Fiducia",
+                    value: "Recensioni, messaggi chiari e presenza curata",
+                  },
+                  {
+                    label: "Conversione",
+                    value: "Percorso semplice verso contatto o prenotazione",
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="rounded-2xl border border-white/10 bg-black/25 p-4"
+                  >
+                    <p className="text-sm font-black text-white">
+                      {item.label}
+                    </p>
+                    <p className="mt-1 text-sm leading-6 text-white/55">
+                      {item.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <p className="mt-5 max-w-2xl text-sm leading-6 text-white/50">
-              Il quiz serve a capire se oggi ti conviene lavorare su SEO,
-              campagne Ads, sito, landing page o tracciamento. La call serve se
-              vuoi parlarne direttamente con una persona.
-            </p>
+            <div className="mt-5 grid grid-cols-2 gap-4">
+              <div className="rounded-2xl border border-emerald-300/20 bg-emerald-300/10 p-4">
+                <p className="text-3xl font-black text-emerald-300">SEO</p>
+                <p className="mt-2 text-xs leading-5 text-white/55">
+                  Per costruire domanda stabile nel tempo.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
+                <p className="text-3xl font-black text-white">ADS</p>
+                <p className="mt-2 text-xs leading-5 text-white/55">
+                  Per accelerare quando la base è pronta.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute -right-4 -top-4 hidden rounded-2xl border border-white/10 bg-white/10 px-5 py-3 text-sm font-black text-white shadow-2xl backdrop-blur-xl md:block">
+            Local visibility system
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* TRUST */}
       <MagoInteractive />
