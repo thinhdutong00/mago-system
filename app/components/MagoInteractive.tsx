@@ -30,6 +30,20 @@ export default function MagoInteractive() {
 
   const activeItem = activeIndex !== null ? items[activeIndex] : null;
 
+  const goToPrevious = () => {
+    setActiveIndex((current) => {
+      if (current === null) return 0;
+      return current === 0 ? items.length - 1 : current - 1;
+    });
+  };
+
+  const goToNext = () => {
+    setActiveIndex((current) => {
+      if (current === null) return 0;
+      return current === items.length - 1 ? 0 : current + 1;
+    });
+  };
+
   return (
     <section className="px-4 py-20 md:px-6 md:py-28">
       <div className="mx-auto max-w-7xl">
@@ -50,17 +64,14 @@ export default function MagoInteractive() {
         </div>
 
         <div className="relative min-h-[720px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-4 backdrop-blur-2xl md:min-h-[560px] md:rounded-[3rem] md:p-10">
-          {/* effetto sfondo */}
           <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-300/10 blur-[100px] md:h-[520px] md:w-[520px] md:blur-[110px]" />
           <div className="absolute right-4 top-10 h-44 w-44 rounded-full bg-orange-400/10 blur-[70px] md:right-10 md:h-56 md:w-56 md:blur-[80px]" />
           <div className="absolute bottom-10 left-4 h-44 w-44 rounded-full bg-blue-400/10 blur-[70px] md:left-10 md:h-56 md:w-56 md:blur-[80px]" />
 
-          {/* linee orbitali */}
           <div className="absolute left-1/2 top-[38%] h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 md:top-1/2 md:h-[420px] md:w-[420px]" />
           <div className="absolute left-1/2 top-[38%] h-[220px] w-[390px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 md:top-1/2 md:h-[300px] md:w-[620px]" />
           <div className="absolute left-1/2 top-[38%] h-[390px] w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 md:top-1/2 md:h-[620px] md:w-[300px]" />
 
-          {/* lettere */}
           <div className="relative z-10 grid min-h-[690px] place-items-center md:min-h-[480px]">
             {items.map((item, index) => {
               const isActive = activeIndex === index;
@@ -99,7 +110,6 @@ export default function MagoInteractive() {
               );
             })}
 
-            {/* popup centrale */}
             {activeItem && (
               <div className="absolute bottom-4 left-1/2 z-20 w-[calc(100%-1rem)] max-w-2xl -translate-x-1/2 rounded-[1.7rem] border border-white/10 bg-black/60 p-5 shadow-2xl backdrop-blur-2xl md:bottom-10 md:w-full md:rounded-[2rem] md:p-9">
                 <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between md:gap-6">
@@ -117,18 +127,37 @@ export default function MagoInteractive() {
                     </p>
                   </div>
 
-                  <button
-                    onClick={() => setActiveIndex(null)}
-                    className="w-fit rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-bold text-white/70 transition hover:bg-white/20"
-                    aria-label="Chiudi"
-                  >
-                    Chiudi
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <div className="flex md:hidden">
+                      <button
+                        onClick={goToPrevious}
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-lg font-black text-white/80 transition hover:bg-white/20"
+                        aria-label="Lettera precedente"
+                      >
+                        ←
+                      </button>
+
+                      <button
+                        onClick={goToNext}
+                        className="ml-2 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-lg font-black text-white/80 transition hover:bg-white/20"
+                        aria-label="Lettera successiva"
+                      >
+                        →
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={() => setActiveIndex(null)}
+                      className="w-fit rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-bold text-white/70 transition hover:bg-white/20"
+                      aria-label="Chiudi"
+                    >
+                      Chiudi
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
 
-            {/* testo iniziale */}
             {activeIndex === null && (
               <div className="absolute left-1/2 top-[60%] z-10 w-[85%] max-w-md -translate-x-1/2 -translate-y-1/2 text-center md:top-1/2">
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-white/35 md:text-sm md:tracking-[0.3em]">
