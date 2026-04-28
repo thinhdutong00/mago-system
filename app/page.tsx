@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import MagoInteractive from "./components/MagoInteractive";
 
 export const metadata: Metadata = {
   title: "Mago System | SEO e Digital Marketing per Attività Locali",
@@ -105,25 +106,7 @@ export default function Home() {
       </section>
 
       {/* TRUST */}
-      <section className="px-6 py-10">
-        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-4">
-          {[
-            ["M", "Marketing", "Prima strategia, poi strumenti."],
-            ["A", "Advertising", "Ads solo quando hanno senso."],
-            ["G", "Growth", "Crescita misurabile, non vanità."],
-            ["O", "Optimization", "Miglioramento continuo."],
-          ].map(([letter, title, text]) => (
-            <div
-              key={title}
-              className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-7 backdrop-blur-2xl"
-            >
-              <p className="text-5xl font-black text-white/90">{letter}</p>
-              <h2 className="mt-5 text-xl font-black">{title}</h2>
-              <p className="mt-3 text-sm leading-6 text-white/55">{text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <MagoInteractive />
 
       {/* POSITIONING */}
       <section className="px-6 py-24">
