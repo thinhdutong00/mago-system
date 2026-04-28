@@ -1,265 +1,271 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Mago System | SEO e Digital Marketing per Attività Locali",
+  description:
+    "Mago System aiuta attività locali, professionisti e aziende di servizi a ottenere più richieste da Google con SEO, Google Ads, Meta Ads e landing page orientate alla conversione.",
+};
+
+const steps = [
+  {
+    number: "01",
+    title: "Prima capiamo dove si perde valore",
+    text: "Non partiamo da slogan o pacchetti preconfezionati. Analizziamo come ti trovano oggi, quali servizi vuoi spingere, quali ricerche fanno i clienti e dove il percorso si interrompe.",
+  },
+  {
+    number: "02",
+    title: "Poi costruiamo una presenza che risponde alle ricerche reali",
+    text: "Una persona non cerca “marketing”. Cerca un dentista, una pizzeria, un idraulico, un’impresa edile, una soluzione vicina, affidabile e chiara. Il sito deve intercettare quella domanda.",
+  },
+  {
+    number: "03",
+    title: "Dopo trasformiamo visite in contatti",
+    text: "Il traffico da solo non paga le fatture. Servono pagine chiare, CTA visibili, messaggi credibili, prove di fiducia e un percorso semplice per chiamare, prenotare o chiedere un preventivo.",
+  },
+  {
+    number: "04",
+    title: "Infine ottimizziamo con i dati",
+    text: "SEO, Ads e conversioni migliorano nel tempo. Guardiamo cosa porta richieste vere, cosa disperde budget e cosa può diventare un canale stabile di acquisizione clienti.",
+  },
+];
+
+const services = [
+  "SEO locale",
+  "Ottimizzazione Google Business Profile",
+  "Landing page per servizi specifici",
+  "Google Ads",
+  "Meta Ads",
+  "Tracking conversioni",
+  "Copywriting strategico",
+  "Analisi competitor locali",
+];
+
+const targets = [
+  "Ristoranti e pizzerie",
+  "Studi medici e dentistici",
+  "Imprese edili",
+  "Artigiani e manutentori",
+  "Centri estetici",
+  "Professionisti locali",
+  "Palestre e centri sportivi",
+  "Servizi B2B territoriali",
+];
+
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#f7f4ee] text-[#151515]">
+    <main className="min-h-screen overflow-hidden bg-[#070707] text-white">
+      {/* BACKGROUND */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute left-[-10%] top-[-10%] h-[500px] w-[500px] rounded-full bg-emerald-500/20 blur-[140px]" />
+        <div className="absolute right-[-10%] top-[20%] h-[520px] w-[520px] rounded-full bg-orange-500/20 blur-[150px]" />
+        <div className="absolute bottom-[-10%] left-[20%] h-[520px] w-[520px] rounded-full bg-blue-500/10 blur-[150px]" />
+      </div>
+
       {/* HERO */}
-      <section className="px-6 pt-28 pb-24">
-        <div className="mx-auto max-w-6xl">
-          <p className="mb-6 text-sm font-bold uppercase tracking-[0.28em] text-[#6f6a60]">
-            SEO · Google Ads · Meta Ads · Local Growth
-          </p>
+      <section className="px-6 pb-24 pt-28 md:pt-36">
+        <div className="mx-auto max-w-7xl">
+          <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.06] p-8 shadow-2xl backdrop-blur-2xl md:p-14">
+            <p className="mb-6 text-sm font-bold uppercase tracking-[0.32em] text-emerald-300">
+              SEO · Google Ads · Meta Ads · Local Growth
+            </p>
 
-          <h1 className="max-w-5xl text-5xl font-black leading-[0.95] tracking-tight md:text-7xl">
-            Trasformiamo Google in un canale stabile di richieste per la tua attività.
-          </h1>
+            <h1 className="max-w-6xl text-5xl font-black leading-[0.92] tracking-tight md:text-8xl">
+              Fatti trovare da chi sta già cercando ciò che vendi.
+            </h1>
 
-          <p className="mt-8 max-w-3xl text-xl leading-8 text-[#555047]">
-            Mago System aiuta attività locali e aziende di servizi a farsi trovare
-            dalle persone giuste, nel momento in cui stanno cercando una soluzione:
-            una prenotazione, un preventivo, una visita, una chiamata.
-          </p>
+            <p className="mt-8 max-w-3xl text-lg leading-8 text-white/70 md:text-xl">
+              Mago System aiuta attività locali e aziende di servizi a costruire
+              un sistema di acquisizione clienti basato su Google: più visibilità,
+              più fiducia, più richieste concrete. Senza fuffa, senza promesse da
+              guru, senza buttare budget “per provare”.
+            </p>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <a
-              href="/quiz"
-              className="rounded-full bg-[#151515] px-8 py-4 text-center text-base font-bold text-white transition hover:scale-[1.02]"
-            >
-              Fai il quiz strategico
-            </a>
-            <a
-              href="/call"
-              className="rounded-full border border-[#151515]/20 px-8 py-4 text-center text-base font-bold transition hover:bg-white"
-            >
-              Fissa una videocall
-            </a>
-          </div>
-
-          <p className="mt-5 text-sm text-[#6f6a60]">
-            In pochi minuti capiamo che tipo di visibilità ti serve: SEO, campagne Ads
-            o una strategia completa.
-          </p>
-        </div>
-      </section>
-
-      {/* POSIZIONAMENTO */}
-      <section className="px-6 py-24 bg-white">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#6f6a60]">
-            Posizionamento
-          </p>
-
-          <h2 className="mt-6 max-w-4xl text-4xl font-black leading-tight md:text-6xl">
-            Non vendiamo “marketing”. Costruiamo percorsi per ricevere più contatti qualificati.
-          </h2>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {[
-              {
-                title: "Farti trovare",
-                text: "Ottimizziamo la tua presenza online per intercettare chi cerca davvero i tuoi servizi nella tua zona.",
-              },
-              {
-                title: "Farti scegliere",
-                text: "Rendiamo più chiaro il tuo valore, i tuoi servizi e i motivi per cui un cliente dovrebbe contattarti.",
-              },
-              {
-                title: "Farti contattare",
-                text: "Costruiamo pagine e percorsi pensati per generare chiamate, richieste, prenotazioni e preventivi.",
-              },
-            ].map((item) => (
-              <div key={item.title} className="rounded-3xl bg-[#f7f4ee] p-8">
-                <h3 className="text-2xl font-black">{item.title}</h3>
-                <p className="mt-4 leading-7 text-[#5d574f]">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* RISULTATO */}
-      <section className="px-6 py-24 bg-[#151515] text-white">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#b8b0a3]">
-            Obiettivo
-          </p>
-
-          <h2 className="mt-6 max-w-4xl text-4xl font-black leading-tight md:text-6xl">
-            Il sito deve lavorare come un commerciale silenzioso, non come una brochure.
-          </h2>
-
-          <p className="mt-8 max-w-3xl text-xl leading-8 text-white/70">
-            Un sito professionale non deve solo “presentarti bene”. Deve guidare
-            l’utente verso un’azione: chiamare, compilare un modulo, prenotare,
-            richiedere un preventivo o fissare una consulenza.
-          </p>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
-              <h3 className="text-3xl font-black">SEO come fondamenta</h3>
-              <p className="mt-4 leading-7 text-white/70">
-                Creiamo pagine e contenuti pensati per posizionarsi su Google,
-                soprattutto nelle ricerche locali e nei servizi ad alta intenzione.
-              </p>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <a
+                href="/quiz"
+                className="rounded-full bg-white px-8 py-4 text-center font-black text-black transition hover:scale-[1.02]"
+              >
+                Fai il quiz strategico
+              </a>
+              <a
+                href="/call"
+                className="rounded-full border border-white/20 bg-white/10 px-8 py-4 text-center font-black text-white backdrop-blur-xl transition hover:bg-white/15"
+              >
+                Fissa una videocall
+              </a>
             </div>
 
-            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
-              <h3 className="text-3xl font-black">Ads come acceleratore</h3>
-              <p className="mt-4 leading-7 text-white/70">
-                Quando la struttura è pronta, Google Ads e Meta Ads possono
-                aumentare il volume delle richieste senza partire alla cieca.
-              </p>
-            </div>
+            <p className="mt-5 max-w-2xl text-sm leading-6 text-white/50">
+              Il quiz serve a capire se oggi ti conviene lavorare su SEO,
+              campagne Ads, sito, landing page o tracciamento. La call serve se
+              vuoi parlarne direttamente con una persona.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* METODO MAGO */}
-      <section id="metodo" className="px-6 py-24">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#6f6a60]">
-            Metodo Mago
-          </p>
+      {/* TRUST */}
+      <section className="px-6 py-10">
+        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-4">
+          {[
+            ["M", "Marketing", "Prima strategia, poi strumenti."],
+            ["A", "Advertising", "Ads solo quando hanno senso."],
+            ["G", "Growth", "Crescita misurabile, non vanità."],
+            ["O", "Optimization", "Miglioramento continuo."],
+          ].map(([letter, title, text]) => (
+            <div
+              key={title}
+              className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-7 backdrop-blur-2xl"
+            >
+              <p className="text-5xl font-black text-white/90">{letter}</p>
+              <h2 className="mt-5 text-xl font-black">{title}</h2>
+              <p className="mt-3 text-sm leading-6 text-white/55">{text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-          <h2 className="mt-6 max-w-4xl text-4xl font-black leading-tight md:text-6xl">
-            Un metodo semplice da capire, serio da eseguire.
-          </h2>
+      {/* POSITIONING */}
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.32em] text-orange-300">
+                Il punto è semplice
+              </p>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-4">
-            {[
-              {
-                letter: "M",
-                title: "Marketing",
-                text: "Analizziamo mercato, servizi, concorrenti e domanda reale per capire dove conviene posizionarti.",
-              },
-              {
-                letter: "A",
-                title: "Advertising",
-                text: "Attiviamo campagne solo quando esiste una base solida e un obiettivo misurabile.",
-              },
-              {
-                letter: "G",
-                title: "Growth",
-                text: "Lavoriamo per aumentare richieste, prenotazioni e opportunità commerciali nel tempo.",
-              },
-              {
-                letter: "O",
-                title: "Optimization",
-                text: "Miglioriamo continuamente pagine, messaggi, SEO, campagne e conversioni.",
-              },
-            ].map((item) => (
-              <div key={item.title} className="rounded-[2rem] bg-white p-8 shadow-sm">
-                <p className="text-6xl font-black">{item.letter}</p>
-                <h3 className="mt-6 text-2xl font-black">{item.title}</h3>
-                <p className="mt-4 leading-7 text-[#5d574f]">{item.text}</p>
-              </div>
-            ))}
+              <h2 className="mt-6 text-4xl font-black leading-tight md:text-6xl">
+                Se una persona ti cerca, deve capire subito perché scegliere te.
+              </h2>
+            </div>
+
+            <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.06] p-8 backdrop-blur-2xl md:p-10">
+              <p className="text-xl leading-9 text-white/75">
+                Il tuo potenziale cliente non ha tempo da perdere. Confronta,
+                valuta, apre due o tre risultati, guarda se sei credibile e decide
+                se contattarti. Il lavoro serio è qui: posizionarti bene, parlare
+                chiaro, eliminare attriti e rendere naturale il passo successivo.
+              </p>
+
+              <p className="mt-6 text-xl leading-9 text-white/75">
+                Non serve sembrare “grandi”. Serve sembrare affidabili, specifici
+                e facili da contattare. La differenza tra un sito che esiste e un
+                sito che lavora spesso è tutta lì.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* FUNNEL */}
-      <section className="px-6 py-24 bg-white">
-        <div className="mx-auto max-w-4xl">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#6f6a60]">
-            Percorso di lavoro
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-5xl">
+          <p className="text-sm font-bold uppercase tracking-[0.32em] text-emerald-300">
+            Percorso
           </p>
 
           <h2 className="mt-6 text-4xl font-black leading-tight md:text-6xl">
-            Dal primo clic alla richiesta di contatto.
+            Ogni fase risolve il problema successivo.
           </h2>
 
           <div className="mt-14 space-y-5">
-            {[
-              {
-                step: "01",
-                title: "Analisi iniziale",
-                text: "Capiremo cosa vendi, dove vuoi crescere, quali servizi hanno più valore e come ti trovano oggi i clienti.",
-              },
-              {
-                step: "02",
-                title: "Mappa delle opportunità",
-                text: "Individuiamo parole chiave, ricerche locali, concorrenti, zone strategiche e pagine da creare o migliorare.",
-              },
-              {
-                step: "03",
-                title: "Architettura del sito",
-                text: "Organizziamo le sezioni in modo che ogni pagina abbia un ruolo preciso nel percorso dell’utente.",
-              },
-              {
-                step: "04",
-                title: "SEO e contenuti",
-                text: "Scriviamo contenuti utili, chiari e ottimizzati per intercettare chi sta cercando il tuo servizio.",
-              },
-              {
-                step: "05",
-                title: "Conversione",
-                text: "Inseriamo CTA, moduli, chiamate, WhatsApp o prenotazioni nel punto giusto. Pochi fronzoli, più azioni.",
-              },
-              {
-                step: "06",
-                title: "Ottimizzazione continua",
-                text: "Monitoriamo cosa funziona, cosa va migliorato e dove conviene investire più energia o budget.",
-              },
-            ].map((item) => (
+            {steps.map((item) => (
               <div
-                key={item.step}
-                className="rounded-[2rem] border border-[#151515]/10 bg-[#f7f4ee] p-8"
+                key={item.number}
+                className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-8 backdrop-blur-2xl transition hover:bg-white/[0.09]"
               >
-                <div className="flex flex-col gap-4 md:flex-row md:items-start">
-                  <span className="text-3xl font-black text-[#9b907f]">
-                    {item.step}
+                <div className="flex flex-col gap-5 md:flex-row md:gap-8">
+                  <span className="text-4xl font-black text-white/30">
+                    {item.number}
                   </span>
                   <div>
-                    <h3 className="text-2xl font-black">{item.title}</h3>
-                    <p className="mt-3 leading-7 text-[#5d574f]">{item.text}</p>
+                    <h3 className="text-2xl font-black md:text-3xl">
+                      {item.title}
+                    </h3>
+                    <p className="mt-4 max-w-3xl text-lg leading-8 text-white/65">
+                      {item.text}
+                    </p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+
+          <div className="mt-10 rounded-[2rem] border border-emerald-300/20 bg-emerald-300/10 p-8 backdrop-blur-2xl">
+            <p className="text-lg leading-8 text-white/75">
+              Questo è il motivo per cui non partiamo dicendo “ti facciamo le
+              Ads” o “ti facciamo SEO”. Prima capiamo cosa blocca la crescita.
+              Poi scegliamo gli strumenti. Il contrario è il modo più elegante
+              per spendere soldi male.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* SERVIZI */}
+      {/* SERVICES */}
       <section className="px-6 py-24">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#6f6a60]">
-            Servizi
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 md:grid-cols-[1fr_1.2fr]">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.32em] text-orange-300">
+                Cosa possiamo costruire
+              </p>
+
+              <h2 className="mt-6 text-4xl font-black leading-tight md:text-6xl">
+                Un sistema su misura per ricevere richieste migliori.
+              </h2>
+
+              <p className="mt-6 text-lg leading-8 text-white/65">
+                Non tutte le attività hanno bisogno delle stesse cose. Una
+                pizzeria, uno studio medico e un’impresa edile hanno percorsi
+                decisionali diversi. Il sistema deve rispettare il modo in cui il
+                cliente sceglie.
+              </p>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {services.map((service) => (
+                <div
+                  key={service}
+                  className="rounded-[1.7rem] border border-white/10 bg-white/[0.06] p-6 font-bold backdrop-blur-2xl"
+                >
+                  {service}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* OBJECTIONS */}
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-7xl rounded-[2.5rem] border border-white/10 bg-white/[0.06] p-8 backdrop-blur-2xl md:p-14">
+          <p className="text-sm font-bold uppercase tracking-[0.32em] text-emerald-300">
+            Obiezioni legittime
           </p>
 
-          <h2 className="mt-6 max-w-4xl text-4xl font-black leading-tight md:text-6xl">
-            Le leve giuste, nel giusto ordine.
+          <h2 className="mt-6 max-w-5xl text-4xl font-black leading-tight md:text-6xl">
+            Hai ragione a essere prudente. Il marketing è pieno di parole grosse.
           </h2>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
             {[
               {
-                title: "SEO locale",
-                text: "Per essere visibile nelle ricerche della tua zona e intercettare clienti con intenzione reale.",
+                title: "“Ho già provato con le Ads.”",
+                text: "Spesso il problema non è la piattaforma. È l’offerta, la pagina, il tracciamento o il fatto che si manda traffico su un percorso poco convincente.",
               },
               {
-                title: "Siti e landing page",
-                text: "Per presentare i tuoi servizi con chiarezza e trasformare le visite in richieste concrete.",
+                title: "“La SEO è troppo lenta.”",
+                text: "La SEO richiede tempo, sì. Ma è anche ciò che può renderti meno dipendente dal budget pubblicitario. Tradizione vecchia scuola: fondamenta prima del tetto.",
               },
               {
-                title: "Google Business Profile",
-                text: "Per migliorare la tua presenza su Maps e nelle ricerche locali, dove spesso si decide tutto.",
-              },
-              {
-                title: "Google Ads",
-                text: "Per raggiungere subito chi cerca servizi specifici e misurare telefonate, moduli e conversioni.",
-              },
-              {
-                title: "Meta Ads",
-                text: "Per creare domanda, promuovere offerte e lavorare su pubblico locale con messaggi mirati.",
-              },
-              {
-                title: "Tracking e report",
-                text: "Per sapere da dove arrivano i contatti e quali attività stanno producendo risultati.",
+                title: "“Non voglio pagare per cose inutili.”",
+                text: "Giusto. Per questo ogni attività deve avere priorità diverse. Prima si individuano le leve con più impatto, poi si decide dove investire.",
               },
             ].map((item) => (
-              <div key={item.title} className="rounded-[2rem] bg-white p-8 shadow-sm">
+              <div key={item.title} className="rounded-[2rem] bg-black/25 p-7">
                 <h3 className="text-2xl font-black">{item.title}</h3>
-                <p className="mt-4 leading-7 text-[#5d574f]">{item.text}</p>
+                <p className="mt-4 leading-7 text-white/65">{item.text}</p>
               </div>
             ))}
           </div>
@@ -267,84 +273,110 @@ export default function Home() {
       </section>
 
       {/* TARGET */}
-      <section className="px-6 py-24 bg-[#151515] text-white">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#b8b0a3]">
-            Ideale per
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-bold uppercase tracking-[0.32em] text-orange-300">
+            Per chi è pensato
           </p>
 
-          <h2 className="mt-6 max-w-4xl text-4xl font-black leading-tight md:text-6xl">
-            Attività che vogliono diventare più facili da trovare e più semplici da contattare.
+          <h2 className="mt-6 max-w-5xl text-4xl font-black leading-tight md:text-6xl">
+            Per attività locali che vogliono essere scelte, non solo viste.
           </h2>
 
-          <div className="mt-14 grid gap-4 md:grid-cols-3">
-            {[
-              "Pizzerie e ristoranti",
-              "Studi medici e dentistici",
-              "Imprese edili",
-              "Manutentori e artigiani",
-              "Centri estetici",
-              "Professionisti locali",
-              "Palestre e centri sportivi",
-              "Negozi specializzati",
-              "Servizi B2B territoriali",
-            ].map((item) => (
-              <div key={item} className="rounded-2xl bg-white/5 p-5 font-bold">
-                {item}
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+            {targets.map((target) => (
+              <div
+                key={target}
+                className="rounded-[1.7rem] border border-white/10 bg-white/[0.06] p-6 font-bold backdrop-blur-2xl"
+              >
+                {target}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA DOPPIA */}
-      <section id="contatti" className="px-6 py-28">
-        <div className="mx-auto max-w-6xl">
-          <div className="rounded-[2.5rem] bg-white p-8 shadow-sm md:p-14">
-            <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#6f6a60]">
-              Prossimo passo
-            </p>
+      {/* PRICE */}
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-6xl rounded-[2.5rem] border border-white/10 bg-white/[0.08] p-8 shadow-2xl backdrop-blur-2xl md:p-14">
+          <p className="text-sm font-bold uppercase tracking-[0.32em] text-emerald-300">
+            Prezzi e collaborazione
+          </p>
 
-            <h2 className="mt-6 max-w-4xl text-4xl font-black leading-tight md:text-6xl">
-              Scegli il modo più comodo per iniziare.
+          <h2 className="mt-6 max-w-5xl text-4xl font-black leading-tight md:text-6xl">
+            Nessun pacchetto standard buttato sul tavolo.
+          </h2>
+
+          <p className="mt-8 max-w-4xl text-xl leading-9 text-white/75">
+            Ogni proposta viene costruita sulla tua situazione reale: settore,
+            zona, concorrenza, margini, obiettivi, urgenza e budget disponibile.
+            Il punto non è venderti “più servizi possibile”. Il punto è creare
+            una collaborazione sostenibile e vantaggiosa per entrambe le parti.
+          </p>
+
+          <p className="mt-6 max-w-4xl text-xl leading-9 text-white/75">
+            A volte ha senso partire dalla SEO. A volte serve prima sistemare il
+            sito. A volte conviene usare Google Ads per validare velocemente la
+            domanda. A volte, molto semplicemente, non è il momento giusto. Meglio
+            dirlo subito che costruire castelli sulla sabbia.
+          </p>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {[
+              "Analisi iniziale chiara",
+              "Priorità in base all’impatto",
+              "Proposta personalizzata",
+            ].map((item) => (
+              <div key={item} className="rounded-[1.7rem] bg-black/25 p-6 font-bold">
+                {item}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12">
+            <a
+              href="/quiz"
+              className="inline-block rounded-full bg-white px-9 py-5 text-center text-lg font-black text-black transition hover:scale-[1.02]"
+            >
+              Fai il quiz strategico
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="px-6 pb-28 pt-10">
+        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2">
+          <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.06] p-8 backdrop-blur-2xl md:p-12">
+            <h2 className="text-4xl font-black leading-tight">
+              Vuoi capire da dove partire?
             </h2>
-
-            <div className="mt-12 grid gap-6 md:grid-cols-2">
-              <div className="rounded-[2rem] bg-[#f7f4ee] p-8">
-                <h3 className="text-3xl font-black">Fai il quiz strategico</h3>
-                <p className="mt-4 leading-7 text-[#5d574f]">
-                  Rispondi a poche domande su attività, obiettivi e zona.
-                  Ti aiuta a capire se ti serve più SEO, più Ads o una strategia completa.
-                </p>
-
-                <a
-                  href="/quiz"
-                  className="mt-8 inline-block rounded-full bg-[#151515] px-8 py-4 font-black text-white"
-                >
-                  Inizia il quiz
-                </a>
-              </div>
-
-              <div className="rounded-[2rem] bg-[#151515] p-8 text-white">
-                <h3 className="text-3xl font-black">Fissa una videocall</h3>
-                <p className="mt-4 leading-7 text-white/70">
-                  Parla direttamente con un operatore. Valutiamo insieme la tua
-                  situazione, il potenziale su Google e il percorso più sensato.
-                </p>
-
-                <a
-                  href="/call"
-                  className="mt-8 inline-block rounded-full bg-white px-8 py-4 font-black text-[#151515]"
-                >
-                  Prenota una videocall
-                </a>
-              </div>
-            </div>
-
-            <p className="mt-8 text-sm leading-6 text-[#6f6a60]">
-              Consiglio pratico: se non sai da dove partire, fai prima il quiz.
-              Se hai già un obiettivo preciso, prenota direttamente la call.
+            <p className="mt-5 text-lg leading-8 text-white/65">
+              Rispondi al quiz: ci aiuta a capire obiettivi, situazione attuale
+              e priorità. È il modo più ordinato per evitare chiacchiere inutili.
             </p>
+            <a
+              href="/quiz"
+              className="mt-8 inline-block rounded-full bg-white px-8 py-4 font-black text-black"
+            >
+              Inizia il quiz
+            </a>
+          </div>
+
+          <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.06] p-8 backdrop-blur-2xl md:p-12">
+            <h2 className="text-4xl font-black leading-tight">
+              Preferisci parlare direttamente?
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-white/65">
+              Prenota una videocall con un operatore. Guardiamo insieme il tuo
+              caso e capiamo se c’è spazio per lavorare seriamente.
+            </p>
+            <a
+              href="/call"
+              className="mt-8 inline-block rounded-full border border-white/20 bg-white/10 px-8 py-4 font-black text-white"
+            >
+              Fissa una videocall
+            </a>
           </div>
         </div>
       </section>
