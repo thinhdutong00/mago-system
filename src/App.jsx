@@ -16,18 +16,18 @@ const ASSETS = '/assets/';
 const services = [
   {
     icon: 'icon-seo-content.svg',
-    title: 'Contenuti SEO con AI',
-    text: 'Creiamo contenuti ottimizzati per parole chiave, intenti di ricerca e conversioni reali.',
+    title: 'Google Ads e Meta Ads',
+    text: 'Creiamo campagne per intercettare persone pronte a chiedere informazioni, prenotare o acquistare.',
   },
   {
     icon: 'icon-seo-research.svg',
-    title: 'Ricerca SEO',
-    text: 'Analizziamo SERP, competitor e dati per individuare opportunità di crescita ad alto impatto.',
+    title: 'Siti e landing page',
+    text: 'Costruiamo pagine veloci, chiare e orientate alla conversione per trasformare il traffico in contatti.',
   },
   {
     icon: 'icon-automated-seo.svg',
-    title: 'Audit automatici',
-    text: 'Trasformiamo dati tecnici e contenuti in roadmap operative per migliorare ranking e lead.',
+    title: 'SEO e automazioni AI',
+    text: 'Miglioriamo la visibilità organica e automatizziamo i passaggi che rendono più semplice gestire i lead.',
   },
 ];
 
@@ -43,18 +43,18 @@ const logos = [
 const caseStudies = [
   {
     image: 'case-study-1.jpg',
-    category: 'Business',
-    title: 'Ecommerce SEO Score',
+    category: 'Lead Generation',
+    title: 'Richieste qualificate per PMI',
   },
   {
     image: 'case-study-2.jpg',
-    category: 'SEO Analysis',
-    title: 'Growth Marketing B2B',
+    category: 'Campagne Locali',
+    title: 'Appuntamenti da Google e Meta',
   },
   {
     image: 'case-study-3.jpg',
-    category: 'Planning',
-    title: 'Strategia Lead Gen',
+    category: 'Siti e Landing',
+    title: 'Pagine progettate per convertire',
   },
 ];
 
@@ -64,23 +64,23 @@ const blogPosts = [
     month: 'Set',
     day: '25',
     category: 'SEO',
-    title: 'Come costruire una strategia SEO che porta lead',
+    title: 'Come farsi trovare da chi cerca i tuoi servizi',
     author: 'Team Mago',
   },
   {
     image: 'blog-2.jpg',
     month: 'Ott',
     day: '28',
-    category: 'Marketing',
-    title: 'Linee guida pratiche per campagne più redditizie',
+    category: 'Advertising',
+    title: 'Campagne Google e Meta per generare richieste',
     author: 'Mago System',
   },
   {
     image: 'blog-3.jpg',
     month: 'Dic',
     day: '30',
-    category: 'SEO Analysis',
-    title: 'Dati, contenuti e automazioni per scalare meglio',
+    category: 'Automazioni AI',
+    title: 'Automazioni semplici per gestire meglio i contatti',
     author: 'Growth Team',
   },
 ];
@@ -110,7 +110,7 @@ function ContactModal({ isOpen, onClose }) {
     name: '',
     email: '',
     phone: '',
-    service: 'SEO e contenuti',
+    service: 'Google Ads e Meta Ads',
     message: '',
   });
   const [errors, setErrors] = useState({});
@@ -166,8 +166,8 @@ function ContactModal({ isOpen, onClose }) {
         <p className="eyebrow">Parliamo del progetto</p>
         <h2 id="contact-modal-title">Richiedi una consulenza</h2>
         <p>
-          Raccontaci obiettivi e canali attivi. Ti risponderemo con una prima analisi e le prossime azioni
-          consigliate.
+          Raccontaci che attività hai, quale zona o mercato servi e quali canali usi oggi. Ti risponderemo con una
+          prima lettura e le prossime azioni consigliate.
         </p>
         <form className="modal-form" onSubmit={submitForm} noValidate>
           <label>
@@ -187,10 +187,10 @@ function ContactModal({ isOpen, onClose }) {
           <label>
             Servizio
             <select name="service" value={form.service} onChange={updateField}>
-              <option>SEO e contenuti</option>
-              <option>Performance marketing</option>
-              <option>Automazioni AI</option>
-              <option>Strategia digitale completa</option>
+              <option>Google Ads e Meta Ads</option>
+              <option>Siti e landing page</option>
+              <option>SEO e automazioni AI</option>
+              <option>Sistema acquisizione clienti</option>
             </select>
           </label>
           <label className="full-field">
@@ -200,7 +200,7 @@ function ContactModal({ isOpen, onClose }) {
               value={form.message}
               onChange={updateField}
               rows="4"
-              placeholder="Obiettivi, mercato, sito attuale e canali da migliorare."
+              placeholder="Tipo di attività, obiettivi, zona servita, sito attuale e canali da migliorare."
             />
             {errors.message && <span>{errors.message}</span>}
           </label>
@@ -240,7 +240,7 @@ function App() {
             ))}
           </nav>
           <button className="button primary header-cta" type="button" onClick={openModal}>
-            Inizia ora <ArrowUpRight size={18} />
+            Richiedi consulenza <ArrowUpRight size={18} />
           </button>
           <button
             className="icon-button menu-button"
@@ -263,7 +263,7 @@ function App() {
             </a>
           ))}
           <button className="button primary" type="button" onClick={openModal}>
-            Richiedi audit <ArrowUpRight size={18} />
+            Richiedi consulenza <ArrowUpRight size={18} />
           </button>
         </nav>
       </header>
@@ -272,27 +272,27 @@ function App() {
         <section className="hero section-soft" id="home">
           <div className="container hero-grid">
             <div className="hero-copy reveal">
-              <p className="eyebrow">👋 Ciao, siamo Mago System</p>
-              <h1>Strategie SEO ad alto impatto per far crescere il tuo business</h1>
+              <p className="eyebrow">Agenzia italiana di acquisizione clienti</p>
+              <h1>Acquisisci clienti online con un sistema costruito per la tua attività</h1>
               <p>
-                Aiutiamo aziende e brand a trasformare ricerca, contenuti, advertising e automazioni AI in
-                acquisizione clienti misurabile.
+                Aiutiamo PMI, liberi professionisti e attività locali a generare richieste, appuntamenti e vendite
+                attraverso Google Ads, Meta Ads, SEO, siti web, landing page e automazioni AI.
               </p>
               <div className="hero-actions">
                 <button className="button primary" type="button" onClick={openModal}>
-                  I nostri servizi <ArrowUpRight size={18} />
+                  Richiedi una consulenza <ArrowUpRight size={18} />
                 </button>
-                <button className="button secondary" type="button" onClick={openModal}>
-                  Parla con noi <ArrowUpRight size={18} />
-                </button>
+                <a className="button secondary" href="#servizi">
+                  Scopri i servizi <ArrowUpRight size={18} />
+                </a>
               </div>
             </div>
             <div className="hero-visual reveal delay-1" aria-label="Consulente Mago System">
               <img className="hero-pattern" src={`${ASSETS}hero-pattern.svg`} alt="" />
               <img className="hero-glow" src={`${ASSETS}hero-glow.png`} alt="" />
-              <img className="hero-person" src={`${ASSETS}hero-person.png`} alt="Consulente digital agency" />
+              <img className="hero-person" src={`${ASSETS}hero-person.png`} alt="Consulente acquisizione clienti" />
               <div className="user-badge">
-                <strong>1M+ utenti raggiunti</strong>
+                <strong>1M+ persone raggiunte</strong>
                 <span>
                   <img src={`${ASSETS}avatar-1.png`} alt="" />
                   <img src={`${ASSETS}avatar-2.png`} alt="" />
@@ -302,7 +302,7 @@ function App() {
               <div className="review-badge">
                 <img src={`${ASSETS}google-logo.svg`} alt="" />
                 <span className="stars">★★★★★</span>
-                <span>(4.8) Review</span>
+                <span>(4.8) recensioni</span>
               </div>
             </div>
           </div>
@@ -311,7 +311,7 @@ function App() {
         <section className="services" id="servizi">
           <div className="container">
             <div className="service-panel reveal">
-              <h2>SEO potenziata dall'AI: ottimizza, analizza e domina</h2>
+              <h2>Canali, pagine e automazioni per acquisire clienti online</h2>
               <div className="service-grid">
                 {services.map((service) => (
                   <article className="service-card" key={service.title}>
@@ -330,7 +330,7 @@ function App() {
 
         <section className="brand-strip" aria-label="Aziende che si affidano a Mago System">
           <div className="container">
-            <h2>Scelti da aziende ambiziose</h2>
+            <h2>Scelti da attività che vogliono crescere online</h2>
             <div className="logo-marquee">
               <div>
                 {[...logos, ...logos, ...logos].map((logo, index) => (
@@ -348,22 +348,22 @@ function App() {
               <img className="feature-overlay" src={`${ASSETS}feature-overlay.png`} alt="Dashboard marketing" />
             </div>
             <div className="feature-copy reveal delay-1">
-              <p className="eyebrow">🤩 Funzionalità esclusive</p>
-              <h2>Fai crescere il business con strumenti AI e strategia digitale</h2>
+              <p className="eyebrow">Sistema di acquisizione clienti</p>
+              <h2>Trasforma i canali online in richieste, appuntamenti e vendite</h2>
               <p>
-                Uniamo analisi, creatività e automazioni per costruire funnel, contenuti e campagne che generano
-                opportunità concrete.
+                Uniamo strategia, creatività, advertising, SEO e automazioni per costruire percorsi semplici da
+                misurare e ottimizzare.
               </p>
               <div className="feature-items">
                 <article>
                   <img src={`${ASSETS}icon-ai-seo.svg`} alt="" />
-                  <h3>Soluzioni AI SEO</h3>
-                  <p>Tecnologie e processi per aumentare visibilità, posizionamenti e qualità del traffico.</p>
+                  <h3>Automazioni AI</h3>
+                  <p>Processi più rapidi per raccogliere, qualificare e seguire i contatti generati online.</p>
                 </article>
                 <article>
                   <img src={`${ASSETS}icon-digital-strategy.svg`} alt="" />
                   <h3>Strategia digitale</h3>
-                  <p>Piani data-driven per migliorare conversioni, tracciamento e performance dei canali.</p>
+                  <p>Piani chiari per migliorare campagne, conversioni, tracciamento e risultati dei canali.</p>
                 </article>
               </div>
             </div>
@@ -372,9 +372,9 @@ function App() {
 
         <section className="case-section section-soft" id="case-study">
           <div className="container">
-            <h2 className="center-title">Abbiamo completato 100+ progetti digitali</h2>
+            <h2 className="center-title">Abbiamo costruito sistemi di acquisizione per attività diverse</h2>
             <div className="filter-tabs" aria-label="Filtri case study">
-              {['Tutti', 'SEO', 'Marketing', 'Keyword', 'Planning', 'Business'].map((item, index) => (
+              {['Tutti', 'Google Ads', 'Meta Ads', 'SEO', 'Landing', 'AI'].map((item, index) => (
                 <button className={index === 0 ? 'active' : ''} type="button" key={item}>
                   {item}
                 </button>
@@ -392,7 +392,7 @@ function App() {
               ))}
             </div>
             <button className="button primary compact" type="button" onClick={openModal}>
-              Vedi altri
+              Parla con noi
             </button>
           </div>
         </section>
@@ -408,8 +408,8 @@ function App() {
                   <small>CEO</small>
                 </div>
                 <p>
-                  Mago System ha trasformato il nostro modo di acquisire lead: strategia chiara, contenuti solidi e
-                  campagne tracciate con precisione.
+                  Mago System ha trasformato il nostro modo di acquisire clienti: campagne più chiare, landing più
+                  efficaci e contatti gestiti con più precisione.
                 </p>
                 <div className="trust-row">
                   <span>★★★★★</span>
@@ -451,10 +451,12 @@ function App() {
           <div className="container">
             <div className="cta-card reveal">
               <div>
-                <h2>Cerchi una digital agency orientata ai risultati?</h2>
-                <p>Partiamo da audit, priorità e roadmap. Poi costruiamo il sistema per generare crescita.</p>
+                <h2>Vuoi generare più clienti dai canali online?</h2>
+                <p>
+                  Partiamo dalla tua attività, dai canali attivi e dagli obiettivi. Poi costruiamo un sistema concreto.
+                </p>
                 <button className="button primary" type="button" onClick={openModal}>
-                  Richiedi audit gratuito <ArrowUpRight size={18} />
+                  Richiedi una consulenza <ArrowUpRight size={18} />
                 </button>
               </div>
               <img src={`${ASSETS}footer-pattern.svg`} alt="" />
@@ -467,37 +469,17 @@ function App() {
         <div className="container footer-grid">
           <div className="footer-brand">
             <Logo />
-            <p>Digital agency per SEO, advertising, contenuti e automazioni AI orientate alla crescita.</p>
-            <form className="newsletter" onSubmit={(event) => event.preventDefault()}>
-              <input type="email" placeholder="Email Address" aria-label="Email newsletter" />
-              <button type="button" onClick={openModal} aria-label="Apri form contatti">
-                <ArrowUpRight size={20} />
-              </button>
-            </form>
+            <p>Agenzia italiana di acquisizione clienti per PMI, liberi professionisti e attività locali.</p>
           </div>
           <div>
-            <h3>Risorse</h3>
+            <h3>Servizi</h3>
+            <a href="#servizi">Servizi</a>
             <a href="#case-study">Case Study</a>
-            <a href="#blog">Blog</a>
-            <a href="#servizi">Servizi</a>
-            <button type="button" onClick={openModal}>Audit SEO</button>
-          </div>
-          <div>
-            <h3>Quick Link</h3>
-            <a href="#home">Home</a>
-            <a href="#servizi">Servizi</a>
-            <a href="#blog">Blog & Articoli</a>
-            <button type="button" onClick={openModal}>Consulenza</button>
-          </div>
-          <div>
-            <h3>Company</h3>
-            <a href="#home">Chi siamo</a>
-            <a href="#case-study">Portfolio</a>
-            <a href="#servizi">Metodo</a>
             <a href="#contatti">Contatti</a>
+            <button type="button" onClick={openModal}>Parla con noi</button>
           </div>
           <div>
-            <h3>Contact</h3>
+            <h3>Contatti</h3>
             <p>Via Roma 55, Milano, Italia</p>
             <a href="mailto:hello@magosystem.it">
               <Mail size={18} /> hello@magosystem.it

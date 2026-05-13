@@ -818,8 +818,8 @@ h3 {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.6fr repeat(4, 1fr);
-  gap: 54px;
+  grid-template-columns: 1.45fr 0.8fr 1fr;
+  gap: 64px;
   padding: 42px 0 58px;
 }
 
@@ -833,37 +833,6 @@ h3 {
   color: var(--muted);
   font-size: 16px;
   font-weight: 500;
-}
-
-.newsletter {
-  width: min(280px, 100%);
-  min-height: 66px;
-  margin-top: 28px;
-  border-radius: 8px;
-  display: flex;
-  overflow: hidden;
-  background: var(--white);
-}
-
-.newsletter input {
-  width: 100%;
-  min-width: 0;
-  border: 0;
-  padding: 0 22px;
-  color: var(--text);
-  outline: none;
-}
-
-.newsletter button {
-  width: 56px;
-  margin: 6px;
-  border: 0;
-  border-radius: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-  background: var(--orange);
 }
 
 .footer-grid h3 {
