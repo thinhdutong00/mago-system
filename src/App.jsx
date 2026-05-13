@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ArrowUp,
   ArrowUpRight,
@@ -12,6 +12,15 @@ import {
 } from 'lucide-react';
 
 const ASSETS = '/assets/';
+
+function OptimizedImage({ src, webp, alt, ...props }) {
+  return (
+    <picture>
+      {webp && <source srcSet={`${ASSETS}${webp}`} type="image/webp" />}
+      <img src={`${ASSETS}${src}`} alt={alt} decoding="async" {...props} />
+    </picture>
+  );
+}
 
 const services = [
   {
@@ -114,6 +123,7 @@ function ContactModal({ isOpen, onClose }) {
     message: '',
   });
   const [errors, setErrors] = useState({});
+  const firstFieldRef = useRef(null);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -122,6 +132,7 @@ function ContactModal({ isOpen, onClose }) {
       if (event.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', onKeyDown);
+    window.requestAnimationFrame(() => firstFieldRef.current?.focus());
     return () => {
       document.body.classList.remove('modal-open');
       window.removeEventListener('keydown', onKeyDown);
@@ -158,6 +169,7 @@ function ContactModal({ isOpen, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="contact-modal-title"
+        aria-describedby="contact-modal-description"
         onMouseDown={(event) => event.stopPropagation()}
       >
         <button className="icon-button modal-close" type="button" onClick={onClose} aria-label="Chiudi form">
@@ -165,24 +177,59 @@ function ContactModal({ isOpen, onClose }) {
         </button>
         <p className="eyebrow">Parliamo del progetto</p>
         <h2 id="contact-modal-title">Richiedi una consulenza</h2>
-        <p>
+        <p id="contact-modal-description">
           Raccontaci che attività hai, quale zona o mercato servi e quali canali usi oggi. Ti risponderemo con una
           prima lettura e le prossime azioni consigliate.
         </p>
         <form className="modal-form" onSubmit={submitForm} noValidate>
           <label>
             Nome
-            <input name="name" value={form.name} onChange={updateField} placeholder="Mario Rossi" />
-            {errors.name && <span>{errors.name}</span>}
+            <input
+              ref={firstFieldRef}
+              name="name"
+              value={form.name}
+              onChange={updateField}
+              placeholder="Mario Rossi"
+              autoComplete="name"
+              required
+              aria-invalid={Boolean(errors.name)}
+              aria-describedby={errors.name ? 'name-error' : undefined}
+            />
+            {errors.name && (
+              <span id="name-error" role="alert">
+                {errors.name}
+              </span>
+            )}
           </label>
           <label>
             Email
-            <input name="email" type="email" value={form.email} onChange={updateField} placeholder="mario@azienda.it" />
-            {errors.email && <span>{errors.email}</span>}
+            <input
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={updateField}
+              placeholder="mario@azienda.it"
+              autoComplete="email"
+              required
+              aria-invalid={Boolean(errors.email)}
+              aria-describedby={errors.email ? 'email-error' : undefined}
+            />
+            {errors.email && (
+              <span id="email-error" role="alert">
+                {errors.email}
+              </span>
+            )}
           </label>
           <label>
             Telefono
-            <input name="phone" value={form.phone} onChange={updateField} placeholder="+39 333 000 0000" />
+            <input
+              name="phone"
+              type="tel"
+              value={form.phone}
+              onChange={updateField}
+              placeholder="+39 333 000 0000"
+              autoComplete="tel"
+            />
           </label>
           <label>
             Servizio
@@ -201,8 +248,15 @@ function ContactModal({ isOpen, onClose }) {
               onChange={updateField}
               rows="4"
               placeholder="Tipo di attività, obiettivi, zona servita, sito attuale e canali da migliorare."
+              required
+              aria-invalid={Boolean(errors.message)}
+              aria-describedby={errors.message ? 'message-error' : undefined}
             />
-            {errors.message && <span>{errors.message}</span>}
+            {errors.message && (
+              <span id="message-error" role="alert">
+                {errors.message}
+              </span>
+            )}
           </label>
           <button className="button primary full-field" type="submit">
             Invia richiesta <Send size={18} />
@@ -248,11 +302,13 @@ function App() {
             onClick={() => setMenuOpen((current) => !current)}
             aria-label={menuOpen ? 'Chiudi menu' : 'Apri menu'}
             aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
           >
             {menuOpen ? <X size={23} /> : <Menu size={23} />}
           </button>
         </div>
         <nav
+          id="mobile-nav"
           className={`mobile-nav ${menuOpen ? 'is-open' : ''}`}
           aria-label="Navigazione mobile"
           aria-hidden={!menuOpen}
@@ -288,20 +344,36 @@ function App() {
               </div>
             </div>
             <div className="hero-visual reveal delay-1" aria-label="Consulente Mago System">
-              <img className="hero-pattern" src={`${ASSETS}hero-pattern.svg`} alt="" />
-              <img className="hero-glow" src={`${ASSETS}hero-glow.png`} alt="" />
-              <img className="hero-person" src={`${ASSETS}hero-person.png`} alt="Consulente acquisizione clienti" />
+              <img className="hero-pattern" src={`${ASSETS}hero-pattern.svg`} alt="" width="534" height="702" />
+              <img
+                className="hero-glow"
+                src={`${ASSETS}hero-glow.png`}
+                alt=""
+                width="780"
+                height="1024"
+                decoding="async"
+              />
+              <OptimizedImage
+                className="hero-person"
+                src="hero-person.png"
+                webp="hero-person.webp"
+                alt="Consulente acquisizione clienti"
+                width="780"
+                height="1024"
+                fetchPriority="high"
+              />
               <div className="user-badge">
                 <strong>1M+ persone raggiunte</strong>
                 <span>
-                  <img src={`${ASSETS}avatar-1.png`} alt="" />
-                  <img src={`${ASSETS}avatar-2.png`} alt="" />
-                  <img src={`${ASSETS}avatar-3.png`} alt="" />
+                  <img src={`${ASSETS}avatar-1.png`} alt="" width="34" height="34" decoding="async" />
+                  <img src={`${ASSETS}avatar-2.png`} alt="" width="34" height="34" decoding="async" />
+                  <img src={`${ASSETS}avatar-3.png`} alt="" width="34" height="34" decoding="async" />
                 </span>
               </div>
               <div className="review-badge">
-                <img src={`${ASSETS}google-logo.svg`} alt="" />
-                <span className="stars">★★★★★</span>
+                <img src={`${ASSETS}google-logo.svg`} alt="" width="30" height="30" />
+                <span className="stars" aria-hidden="true">★★★★★</span>
+                <span className="sr-only">Valutazione media 4.8 su 5.</span>
                 <span>(4.8) recensioni</span>
               </div>
             </div>
@@ -315,7 +387,7 @@ function App() {
               <div className="service-grid">
                 {services.map((service) => (
                   <article className="service-card" key={service.title}>
-                    <img src={`${ASSETS}${service.icon}`} alt="" />
+                    <img src={`${ASSETS}${service.icon}`} alt="" width="50" height="50" loading="lazy" />
                     <h3>{service.title}</h3>
                     <p>{service.text}</p>
                     <button type="button" onClick={openModal}>
@@ -334,7 +406,7 @@ function App() {
             <div className="logo-marquee">
               <div>
                 {[...logos, ...logos, ...logos].map((logo, index) => (
-                  <img key={`${logo}-${index}`} src={`${ASSETS}${logo}`} alt="" />
+                  <img key={`${logo}-${index}`} src={`${ASSETS}${logo}`} alt="" width="120" height="40" loading="lazy" />
                 ))}
               </div>
             </div>
@@ -344,8 +416,24 @@ function App() {
         <section className="feature-section">
           <div className="container feature-grid">
             <div className="feature-media reveal">
-              <img className="feature-main" src={`${ASSETS}feature-main.jpg`} alt="Consulente al telefono" />
-              <img className="feature-overlay" src={`${ASSETS}feature-overlay.png`} alt="Dashboard marketing" />
+              <OptimizedImage
+                className="feature-main"
+                src="feature-main.jpg"
+                webp="feature-main.webp"
+                alt="Consulente al telefono"
+                width="512"
+                height="341"
+                loading="lazy"
+              />
+              <img
+                className="feature-overlay"
+                src={`${ASSETS}feature-overlay.png`}
+                alt="Dashboard marketing"
+                width="512"
+                height="438"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             <div className="feature-copy reveal delay-1">
               <p className="eyebrow">Sistema di acquisizione clienti</p>
@@ -356,12 +444,12 @@ function App() {
               </p>
               <div className="feature-items">
                 <article>
-                  <img src={`${ASSETS}icon-ai-seo.svg`} alt="" />
+                  <img src={`${ASSETS}icon-ai-seo.svg`} alt="" width="43" height="40" loading="lazy" />
                   <h3>Automazioni AI</h3>
                   <p>Processi più rapidi per raccogliere, qualificare e seguire i contatti generati online.</p>
                 </article>
                 <article>
-                  <img src={`${ASSETS}icon-digital-strategy.svg`} alt="" />
+                  <img src={`${ASSETS}icon-digital-strategy.svg`} alt="" width="43" height="40" loading="lazy" />
                   <h3>Strategia digitale</h3>
                   <p>Piani chiari per migliorare campagne, conversioni, tracciamento e risultati dei canali.</p>
                 </article>
@@ -375,7 +463,7 @@ function App() {
             <h2 className="center-title">Abbiamo costruito sistemi di acquisizione per attività diverse</h2>
             <div className="filter-tabs" aria-label="Filtri case study">
               {['Tutti', 'Google Ads', 'Meta Ads', 'SEO', 'Landing', 'AI'].map((item, index) => (
-                <button className={index === 0 ? 'active' : ''} type="button" key={item}>
+                <button className={index === 0 ? 'active' : ''} type="button" key={item} aria-pressed={index === 0}>
                   {item}
                 </button>
               ))}
@@ -383,7 +471,15 @@ function App() {
             <div className="case-grid">
               {caseStudies.map((study) => (
                 <article className="case-card reveal" key={study.title}>
-                  <img src={`${ASSETS}${study.image}`} alt={study.title} />
+                  <OptimizedImage
+                    src={study.image}
+                    webp={study.image.replace('.jpg', '.webp')}
+                    alt={study.title}
+                    width="720"
+                    height="480"
+                    loading="lazy"
+                    sizes="(max-width: 760px) calc(100vw - 16px), 350px"
+                  />
                   <div>
                     <span>{study.category}</span>
                     <h3>{study.title}</h3>
@@ -412,11 +508,19 @@ function App() {
                   efficaci e contatti gestiti con più precisione.
                 </p>
                 <div className="trust-row">
-                  <span>★★★★★</span>
+                  <span aria-hidden="true">★★★★★</span>
+                  <span className="sr-only">Valutazione 4.7 su 5 su Trustpilot.</span>
                   <strong>4.7/5 su Trustpilot</strong>
                 </div>
               </div>
-              <img src={`${ASSETS}testimonial-person.png`} alt="Cliente soddisfatto" />
+              <OptimizedImage
+                src="testimonial-person.png"
+                webp="testimonial-person.webp"
+                alt="Cliente soddisfatto"
+                width="888"
+                height="1024"
+                loading="lazy"
+              />
             </div>
           </div>
         </section>
@@ -428,7 +532,15 @@ function App() {
               {blogPosts.map((post) => (
                 <article className="blog-card reveal" key={post.title}>
                   <div className="blog-image">
-                    <img src={`${ASSETS}${post.image}`} alt={post.title} />
+                    <OptimizedImage
+                      src={post.image}
+                      webp={post.image.replace('.jpg', '.webp')}
+                      alt={post.title}
+                      width="600"
+                      height={post.image === 'blog-2.jpg' ? '800' : '400'}
+                      loading="lazy"
+                      sizes="(max-width: 760px) calc(100vw - 16px), 350px"
+                    />
                     <time>
                       <strong>{post.day}</strong>
                       <span>{post.month}</span>
@@ -459,7 +571,7 @@ function App() {
                   Richiedi una consulenza <ArrowUpRight size={18} />
                 </button>
               </div>
-              <img src={`${ASSETS}footer-pattern.svg`} alt="" />
+              <img src={`${ASSETS}footer-pattern.svg`} alt="" width="534" height="290" loading="lazy" />
             </div>
           </div>
         </section>
