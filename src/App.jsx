@@ -587,7 +587,7 @@ function App() {
           </div>
           <div>
             <h3>Contatti</h3>
-            <p>Via Roma 55, Milano, Italia</p>
+            <p>Via L. Ariosto, 4/c, 41012 Carpi MO, Italia</p>
             <a href="mailto:hello@magosystem.it">
               <Mail size={18} /> hello@magosystem.it
             </a>
