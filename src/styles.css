@@ -80,7 +80,7 @@ picture {
 }
 
 .container {
-  width: min(1114px, calc(100% - 48px));
+  width: min(1360px, calc(100% - clamp(24px, 4vw, 64px)));
   margin: 0 auto;
 }
 
@@ -107,7 +107,7 @@ picture {
 }
 
 .header-inner {
-  width: min(1250px, calc(100% - 64px));
+  width: min(1440px, calc(100% - clamp(24px, 4vw, 64px)));
   min-height: 92px;
   margin: 0 auto;
   display: flex;
@@ -996,7 +996,7 @@ h3 {
 
 @media (max-width: 1100px) {
   .header-inner {
-    width: min(100% - 32px, 900px);
+    width: calc(100% - 32px);
   }
 
   .desktop-nav,
@@ -1012,7 +1012,7 @@ h3 {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    width: min(100% - 32px, 900px);
+    width: calc(100% - 32px);
     max-height: 0;
     margin: 0 auto;
     opacity: 0;
@@ -1047,6 +1047,61 @@ h3 {
     font-weight: 700;
   }
 
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 0.85fr);
+    gap: 42px;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  h2 {
+    font-size: 40px;
+  }
+
+  .hero-visual {
+    min-height: 520px;
+  }
+
+  .hero-pattern,
+  .hero-person,
+  .hero-glow {
+    width: 390px;
+  }
+
+  .service-panel {
+    padding: 64px 42px 58px;
+  }
+
+  .service-grid {
+    gap: 36px;
+  }
+
+  .feature-grid {
+    grid-template-columns: minmax(330px, 0.85fr) minmax(0, 1fr);
+    gap: 52px;
+  }
+
+  .feature-main {
+    width: 100%;
+  }
+
+  .testimonial-panel {
+    padding: 72px 48px;
+  }
+
+  .testimonial-panel img {
+    right: 28px;
+    width: 340px;
+  }
+
+  .footer-grid {
+    gap: 36px;
+  }
+}
+
+@media (max-width: 900px) {
   .hero-grid,
   .feature-grid,
   .testimonial-panel,
@@ -1057,6 +1112,16 @@ h3 {
 
   .feature-grid {
     gap: 56px;
+  }
+
+  .service-grid,
+  .case-grid,
+  .blog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .service-card p {
+    min-height: auto;
   }
 
   .testimonial-panel img {
@@ -1070,7 +1135,7 @@ h3 {
 
 @media (max-width: 760px) {
   .container {
-    width: calc(100% - 16px);
+    width: calc(100% - 24px);
   }
 
   .header-inner {
