@@ -591,9 +591,7 @@ function App() {
             <a href="mailto:hello@magosystem.it">
               <Mail size={18} /> hello@magosystem.it
             </a>
-            <a href="tel:+390000000000">
-              <Phone size={18} /> +39 000 000 000
-            </a>
+            
           </div>
         </div>
         <div className="container footer-bottom">
