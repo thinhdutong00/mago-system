@@ -104,7 +104,7 @@ const navItems = [
 function Logo() {
   return (
     <a href="#home" className="logo" aria-label="Mago System home">
-      <img src={`${ASSETS}mago-system-logo.png`} alt="Mago System" width="1094" height="228" />
+      <img src={`${ASSETS}mago-system-logo-2026-05-17.png`} alt="Mago System" width="865" height="288" />
     </a>
   );
 }
