@@ -589,7 +589,7 @@ function App() {
             <h3>Contatti</h3>
             <p>Via L. Ariosto, 4/c, 41012 Carpi MO, Italia</p>
             <a href="mailto:hello@magosystem.it">
-              <Mail size={18} /> hello@magosystem.it
+              <Mail size={18} /> info@magodigital.it
             </a>
             
           </div>
