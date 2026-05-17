@@ -41,7 +41,7 @@ const services = [
 ];
 
 const logos = [
-  'brand-one.svg',
+  'lumeabeauty.png',
   'brand-two.svg',
   'brand-three.svg',
   'brand-four.svg',
