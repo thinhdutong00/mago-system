@@ -42,7 +42,7 @@ const services = [
 
 const logos = [
   'lumea-beauty-logo.svg',
-  'brand-two.svg',
+  'infissi-domus-logo.svg',
   'brand-three.svg',
   'brand-four.svg',
   'brand-five.svg',
