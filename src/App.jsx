@@ -56,35 +56,35 @@ const acquisitionSystems = [
     key: 'google-ads',
     label: 'Google Ads',
     image: 'case-study-2.jpg',
-    category: 'Domanda pronta',
-    title: 'Richieste più vicine all’acquisto, senza disperdere budget',
-    text: 'Google Ads funziona meglio quando intercetta una domanda già consapevole. Per questo partiamo dalle ricerche con intento commerciale, le colleghiamo a pagine coerenti e ottimizziamo sulle richieste davvero utili, non sui click.',
-    bullets: ['Risultato: più conversazioni con persone già in ricerca', 'Più probabilità: keyword, annunci e pagina lavorano insieme', 'Meno attrito: tracciamento chiaro e ottimizzazioni continue'],
-    metric: 'Intento alto',
-    metricLabel: 'campagne costruite sulle ricerche più vicine alla richiesta',
+    category: 'Advertising su ricerca',
+    title: 'Portiamo il tuo servizio davanti a chi lo sta già cercando',
+    text: 'Su Google Ads lavoriamo sulla parte più calda della domanda: persone che stanno già cercando una soluzione. Selezioniamo ricerche, annunci e pagine in modo che ogni passaggio aumenti chiarezza e probabilità di contatto.',
+    bullets: ['Ricerche con intento commerciale, non traffico generico', 'Annunci coerenti con bisogno, zona e servizio', 'Ottimizzazione su richieste utili, non solo sul costo per click'],
+    metric: 'Alta intenzione',
+    metricLabel: 'meno dispersione tra ricerca, annuncio e richiesta',
     person: 'Elena Rinaldi',
     role: 'Titolare studio dentistico',
     quote:
-      'Con Google Ads abbiamo iniziato a distinguere meglio tra traffico e richieste vere. Ora sappiamo quali ricerche portano contatti più interessanti.',
+      'Abbiamo capito quali ricerche generavano contatti più seri e quali stavano solo consumando budget. Il lavoro è diventato molto più leggibile.',
     rating: '4.8/5 su Trustpilot',
-    testimonialImage: 'testimonial-person.png',
-    testimonialWebp: 'testimonial-person.webp',
-    testimonialAlt: 'Cliente che commenta i risultati Google Ads',
+    testimonialImage: 'case-study-2.jpg',
+    testimonialWebp: 'case-study-2.webp',
+    testimonialAlt: 'Consulenza su campagne Google Ads',
   },
   {
     key: 'meta-ads',
     label: 'Meta Ads',
     image: 'case-study-1.jpg',
-    category: 'Domanda latente',
-    title: 'Nuovi contatti da persone che prima non ti conoscevano',
-    text: 'Meta Ads riduce la distanza tra pubblico freddo e richiesta quando il messaggio è specifico. Costruiamo creatività, offerte e retargeting per far capire velocemente perché scegliere te e cosa fare dopo.',
-    bullets: ['Risultato: domanda nuova intorno alla tua offerta', 'Più probabilità: messaggi testati su bisogni reali', 'Meno sforzo: funnel semplice dal contenuto alla conversazione'],
-    metric: '3 leve',
-    metricLabel: 'creatività, pubblico e retargeting gestiti nello stesso sistema',
+    category: 'Advertising social',
+    title: 'Facciamo capire il valore della tua offerta a chi non ti conosce ancora',
+    text: 'Su Meta Ads il punto non è semplicemente “mostrare annunci”, ma rendere desiderabile e credibile il prossimo passo. Testiamo messaggi, creatività e pubblici per avvicinare persone nuove alla richiesta.',
+    bullets: ['Creatività costruite su problemi e desideri reali', 'Pubblici locali o verticali con messaggi specifici', 'Retargeting per recuperare interesse senza inseguire tutti'],
+    metric: 'Messaggio giusto',
+    metricLabel: 'più chiarezza prima della conversazione commerciale',
     person: 'Giulia Berti',
     role: 'Founder centro estetico',
     quote:
-      'Su Meta non ci siamo limitati a sponsorizzare post. Abbiamo testato messaggi diversi e capito quali portavano conversazioni più concrete.',
+      'La differenza è stata nel messaggio. Prima sponsorizzavamo contenuti, ora sappiamo quali creatività portano conversazioni più sensate.',
     rating: '4.7/5 su Trustpilot',
     testimonialImage: 'case-study-1.jpg',
     testimonialWebp: 'case-study-1.webp',
@@ -94,16 +94,16 @@ const acquisitionSystems = [
     key: 'seo',
     label: 'SEO',
     image: 'case-study-3.jpg',
-    category: 'Visibilità organica',
-    title: 'Traffico più stabile dalle ricerche che possono diventare clienti',
-    text: 'La SEO aumenta valore quando non punta solo a posizionarsi, ma a farsi trovare dalle persone giuste. Lavoriamo su struttura, contenuti e pagine servizio per rendere più chiaro cosa offri e perché contattarti.',
-    bullets: ['Risultato: più visibilità su ricerche commerciali', 'Più probabilità: contenuti collegati ai servizi reali', 'Meno dipendenza: canale organico che lavora nel tempo'],
-    metric: 'Base solida',
-    metricLabel: 'contenuti, tecnica e pagine locali allineati',
+    category: 'Crescita organica',
+    title: 'Rendiamo il sito più trovabile da chi cerca soluzioni come la tua',
+    text: 'La SEO deve creare fiducia prima ancora del contatto. Sistemiamo struttura, contenuti e pagine servizio per rendere più evidente cosa fai, per chi lo fai e perché vale la pena chiederti informazioni.',
+    bullets: ['Pagine costruite intorno a servizi e intenzioni di ricerca', 'Contenuti utili per aumentare fiducia e pertinenza', 'Ottimizzazione tecnica per rendere il sito più solido'],
+    metric: 'Canale duraturo',
+    metricLabel: 'visibilità che non dipende solo dal budget pubblicitario',
     person: 'Andrea Mori',
     role: 'Responsabile commerciale serramenti',
     quote:
-      'La SEO ci ha aiutato a rendere il sito più chiaro e più utile. Non è stata magia, ma un lavoro costante sulle ricerche davvero importanti.',
+      'Non ci hanno promesso miracoli. Hanno rimesso ordine nelle pagine e nelle priorità SEO, e il sito è diventato più comprensibile per chi cerca.',
     rating: '4.8/5 su Trustpilot',
     testimonialImage: 'case-study-3.jpg',
     testimonialWebp: 'case-study-3.webp',
@@ -113,16 +113,16 @@ const acquisitionSystems = [
     key: 'landing',
     label: 'Landing',
     image: 'case-study-1.jpg',
-    category: 'Conversione',
-    title: 'Più chiarezza prima del contatto, meno dubbi nel percorso',
-    text: 'Una landing efficace aumenta il valore percepito perché rende immediato il risultato promesso, credibile il metodo e semplice il passo successivo. La costruiamo per spiegare, rassicurare e convertire senza forzature.',
-    bullets: ['Risultato: una pagina focalizzata su una sola azione', 'Più probabilità: prove, casi e messaggi più specifici', 'Meno sforzo: form, CTA e sezioni ordinate per decidere prima'],
-    metric: '1 obiettivo',
-    metricLabel: 'ogni pagina guida verso una richiesta chiara',
+    category: 'Pagine di conversione',
+    title: 'Riduciamo i dubbi prima che l’utente lasci la pagina',
+    text: 'Una landing deve far percepire valore in pochi secondi e rendere semplice il passo successivo. Lavoriamo su promessa, prova, struttura e CTA per trasformare traffico già acquisito in richieste più consapevoli.',
+    bullets: ['Una pagina, un obiettivo, una CTA principale', 'Copy orientato a beneficio, prova e obiezioni', 'Form e sezioni pensati per ridurre sforzo e confusione'],
+    metric: 'Meno attrito',
+    metricLabel: 'percorso più chiaro tra interesse e richiesta',
     person: 'Luca Fontana',
     role: 'Direttore palestra',
     quote:
-      'La landing ha reso l’offerta più semplice da capire. Le persone arrivano al contatto con meno confusione e domande più pertinenti.',
+      'La nuova pagina spiega meglio cosa offriamo e filtra molte domande inutili. Le richieste arrivano più chiare già dal primo contatto.',
     rating: '4.9/5 su Trustpilot',
     testimonialImage: 'blog-2.jpg',
     testimonialWebp: 'blog-2.webp',
@@ -132,16 +132,16 @@ const acquisitionSystems = [
     key: 'ai',
     label: 'AI',
     image: 'case-study-2.jpg',
-    category: 'Automazioni',
-    title: 'Risposte più rapide e meno opportunità lasciate indietro',
-    text: 'Le automazioni AI riducono lo sforzo operativo dopo l’arrivo del lead. Aiutiamo il team a qualificare, ordinare e seguire i contatti con processi più rapidi, senza perdere il controllo umano sulle decisioni importanti.',
-    bullets: ['Risultato: contatti più ordinati e facili da gestire', 'Più probabilità: priorità e follow-up più chiari', 'Meno ritardo: notifiche e risposte iniziali più veloci'],
-    metric: 'Meno caos',
-    metricLabel: 'lead raccolti, qualificati e seguiti con un processo unico',
+    category: 'Processi e follow-up',
+    title: 'Aiutiamo il team a rispondere prima e perdere meno opportunità',
+    text: 'L’AI è utile quando toglie passaggi ripetitivi senza sostituire il giudizio umano. Automatizziamo qualifica, notifiche e follow-up iniziali per rendere la gestione dei lead più ordinata.',
+    bullets: ['Lead raccolti e classificati in modo più leggibile', 'Notifiche e follow-up per ridurre i tempi morti', 'Processi integrati con il modo in cui lavora il team'],
+    metric: 'Più ordine',
+    metricLabel: 'meno passaggi manuali dopo la richiesta',
     person: 'Martina Greco',
     role: 'Marketing manager clinica',
     quote:
-      'Le automazioni AI ci hanno aiutato a non perdere pezzi tra form, messaggi e richiami. Il team resta umano, ma lavora con più ordine.',
+      'Non volevamo un sistema complicato. Le automazioni ci aiutano a capire chi richiamare e cosa è già successo, senza togliere controllo al team.',
     rating: '4.8/5 su Trustpilot',
     testimonialImage: 'blog-3.jpg',
     testimonialWebp: 'blog-3.webp',
@@ -539,7 +539,12 @@ function App() {
 
         <section className="case-section section-soft" id="case-study">
           <div className="container">
-            <h2 className="center-title">Abbiamo costruito sistemi di acquisizione per attività diverse</h2>
+            <p className="case-eyebrow">Canali collegati a un sistema unico</p>
+            <h2 className="center-title">Scegli il canale e guarda come cambia il lavoro</h2>
+            <p className="case-intro">
+              Ogni canale ha un ruolo diverso: intercettare domanda, creare interesse, aumentare fiducia o ridurre
+              lavoro manuale. Il valore nasce quando il percorso è chiaro dall’annuncio alla richiesta.
+            </p>
             <div className="filter-tabs" aria-label="Filtri case study">
               {acquisitionSystems.map((system) => (
                 <button
@@ -602,6 +607,7 @@ function App() {
                 </div>
               </div>
               <OptimizedImage
+                key={activeSystem.testimonialImage}
                 src={activeSystem.testimonialImage}
                 webp={activeSystem.testimonialWebp}
                 alt={activeSystem.testimonialAlt}
