@@ -51,21 +51,86 @@ const logos = [
   'logo-forge-gym.svg',
 ];
 
-const caseStudies = [
+const acquisitionSystems = [
   {
-    image: 'case-study-1.jpg',
-    category: 'Lead Generation',
-    title: 'Richieste qualificate per PMI',
-  },
-  {
+    key: 'google-ads',
+    label: 'Google Ads',
     image: 'case-study-2.jpg',
-    category: 'Campagne Locali',
-    title: 'Appuntamenti da Google e Meta',
+    category: 'Domanda pronta',
+    title: 'Più richieste da chi sta già cercando il tuo servizio',
+    text: 'Costruiamo campagne Google Ads orientate alle intenzioni più vicine alla richiesta di preventivo, prenotazione o contatto. Organizziamo keyword, annunci, estensioni e landing per portare traffico utile, non visite casuali.',
+    bullets: ['Keyword con intento commerciale', 'Annunci e landing allineati', 'Ottimizzazione su lead reali'],
+    metric: '+64%',
+    metricLabel: 'richieste qualificate in 90 giorni',
+    person: 'Elena Rinaldi',
+    role: 'Titolare studio dentistico',
+    quote:
+      'Con Google Ads abbiamo smesso di ricevere click generici: ora arrivano richieste da persone che cercano davvero un dentista nella nostra zona.',
+    rating: '4.8/5 su Trustpilot',
   },
   {
+    key: 'meta-ads',
+    label: 'Meta Ads',
+    image: 'case-study-1.jpg',
+    category: 'Domanda latente',
+    title: 'Contatti nuovi da persone che ancora non ti conoscono',
+    text: 'Progettiamo campagne Meta Ads per intercettare il pubblico giusto con creatività, offerte e messaggi pensati per far nascere interesse e trasformarlo in conversazioni, appuntamenti o richieste.',
+    bullets: ['Creatività e angoli di vendita', 'Target e pubblici locali', 'Retargeting su chi mostra interesse'],
+    metric: '3.1x',
+    metricLabel: 'ritorno medio sulle campagne social',
+    person: 'Giulia Berti',
+    role: 'Founder centro estetico',
+    quote:
+      'Le campagne Meta ci hanno dato un flusso costante di nuovi contatti. La differenza l’hanno fatta i messaggi e le creatività, non solo il budget.',
+    rating: '4.7/5 su Trustpilot',
+  },
+  {
+    key: 'seo',
+    label: 'SEO',
     image: 'case-study-3.jpg',
-    category: 'Siti e Landing',
-    title: 'Pagine progettate per convertire',
+    category: 'Visibilità organica',
+    title: 'Più traffico stabile dalle ricerche che contano',
+    text: 'Lavoriamo su struttura, contenuti e ottimizzazione tecnica per rendere il sito più chiaro per Google e più utile per chi cerca. L’obiettivo è crescere sulle ricerche che possono generare contatti.',
+    bullets: ['Mappa keyword e contenuti', 'Ottimizzazione tecnica', 'Pagine locali e servizi'],
+    metric: '+118%',
+    metricLabel: 'traffico organico su pagine servizio',
+    person: 'Andrea Mori',
+    role: 'Responsabile commerciale serramenti',
+    quote:
+      'La SEO ci ha portato richieste continue anche senza aumentare ogni mese il budget pubblicitario. Ora il sito lavora meglio per noi.',
+    rating: '4.8/5 su Trustpilot',
+  },
+  {
+    key: 'landing',
+    label: 'Landing',
+    image: 'case-study-1.jpg',
+    category: 'Conversione',
+    title: 'Più contatti dallo stesso traffico',
+    text: 'Disegniamo landing page veloci, persuasive e coerenti con le campagne. Ogni sezione viene costruita per ridurre dubbi, spiegare l’offerta e guidare l’utente verso una richiesta chiara.',
+    bullets: ['Copy orientato alla conversione', 'Sezioni fiducia e prova sociale', 'Form e CTA più semplici'],
+    metric: '+42%',
+    metricLabel: 'conversion rate dopo il redesign',
+    person: 'Luca Fontana',
+    role: 'Direttore palestra',
+    quote:
+      'La nuova landing ha reso tutto più chiaro: meno domande inutili, più persone che compilano il form e appuntamenti più facili da chiudere.',
+    rating: '4.9/5 su Trustpilot',
+  },
+  {
+    key: 'ai',
+    label: 'AI',
+    image: 'case-study-2.jpg',
+    category: 'Automazioni',
+    title: 'Meno lead persi e risposte più rapide',
+    text: 'Implementiamo automazioni AI per qualificare, organizzare e seguire i contatti dopo la richiesta. Così il team risponde prima, capisce meglio le priorità e mantiene vivo il rapporto con i prospect.',
+    bullets: ['Qualifica automatica dei lead', 'Notifiche e follow-up', 'CRM e processi più ordinati'],
+    metric: '-37%',
+    metricLabel: 'lead senza risposta nel primo mese',
+    person: 'Martina Greco',
+    role: 'Marketing manager clinica',
+    quote:
+      'Le automazioni AI ci hanno tolto caos operativo. I contatti arrivano già ordinati e il team commerciale sa subito chi richiamare.',
+    rating: '4.8/5 su Trustpilot',
   },
 ];
 
@@ -267,6 +332,8 @@ function ContactModal({ isOpen, onClose }) {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [activeSystemKey, setActiveSystemKey] = useState(acquisitionSystems[0].key);
+  const activeSystem = acquisitionSystems.find((system) => system.key === activeSystemKey) ?? acquisitionSystems[0];
 
   const openModal = () => {
     setMenuOpen(false);
@@ -459,31 +526,43 @@ function App() {
           <div className="container">
             <h2 className="center-title">Abbiamo costruito sistemi di acquisizione per attività diverse</h2>
             <div className="filter-tabs" aria-label="Filtri case study">
-              {['Tutti', 'Google Ads', 'Meta Ads', 'SEO', 'Landing', 'AI'].map((item, index) => (
-                <button className={index === 0 ? 'active' : ''} type="button" key={item} aria-pressed={index === 0}>
-                  {item}
+              {acquisitionSystems.map((system) => (
+                <button
+                  className={system.key === activeSystem.key ? 'active' : ''}
+                  type="button"
+                  key={system.key}
+                  aria-pressed={system.key === activeSystem.key}
+                  onClick={() => setActiveSystemKey(system.key)}
+                >
+                  {system.label}
                 </button>
               ))}
             </div>
-            <div className="case-grid">
-              {caseStudies.map((study) => (
-                <article className="case-card reveal" key={study.title}>
-                  <OptimizedImage
-                    src={study.image}
-                    webp={study.image.replace('.jpg', '.webp')}
-                    alt={study.title}
-                    width="720"
-                    height="480"
-                    loading="lazy"
-                    sizes="(max-width: 760px) calc(100vw - 16px), 350px"
-                  />
-                  <div>
-                    <span>{study.category}</span>
-                    <h3>{study.title}</h3>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <article className="case-detail reveal" aria-live="polite">
+              <OptimizedImage
+                src={activeSystem.image}
+                webp={activeSystem.image.replace('.jpg', '.webp')}
+                alt={activeSystem.title}
+                width="720"
+                height="480"
+                loading="lazy"
+                sizes="(max-width: 900px) calc(100vw - 24px), 520px"
+              />
+              <div className="case-detail-content">
+                <span>{activeSystem.category}</span>
+                <h3>{activeSystem.title}</h3>
+                <p>{activeSystem.text}</p>
+                <ul>
+                  {activeSystem.bullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <div className="case-metric">
+                  <strong>{activeSystem.metric}</strong>
+                  <small>{activeSystem.metricLabel}</small>
+                </div>
+              </div>
+            </article>
             <button className="button primary compact" type="button" onClick={openModal}>
               Parla con noi
             </button>
@@ -497,17 +576,14 @@ function App() {
                 <h2>Cosa dicono i clienti di noi</h2>
                 <div className="testimonial-person">
                   <span />
-                  <strong>Marco Ferri</strong>
-                  <small>CEO</small>
+                  <strong>{activeSystem.person}</strong>
+                  <small>{activeSystem.role}</small>
                 </div>
-                <p>
-                  Mago System ha trasformato il nostro modo di acquisire clienti: campagne più chiare, landing più
-                  efficaci e contatti gestiti con più precisione.
-                </p>
+                <p>{activeSystem.quote}</p>
                 <div className="trust-row">
                   <span aria-hidden="true">★★★★★</span>
-                  <span className="sr-only">Valutazione 4.7 su 5 su Trustpilot.</span>
-                  <strong>4.7/5 su Trustpilot</strong>
+                  <span className="sr-only">Valutazione {activeSystem.rating}.</span>
+                  <strong>{activeSystem.rating}</strong>
                 </div>
               </div>
               <OptimizedImage
