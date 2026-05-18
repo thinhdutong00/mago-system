@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="56" viewBox="0 0 240 56" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Studio Legale Ferri</title>
+  <g fill="#7B7B7B">
+    <path d="M25.5 8h5v33h-5V8Z"/>
+    <path d="M12.2 41h31.6v5H12.2v-5ZM16.2 15.6h23.6v4.7H16.2v-4.7Z"/>
+    <path d="M16 18h4.9l-7.2 15h-4.9L16 18ZM20.6 18l7.2 15h-4.9l-7.2-15h4.9ZM36.9 18h4.9l-7.2 15h-4.9l7.2-15ZM41.5 18l7.2 15h-4.9l-7.2-15h4.9Z"/>
+    <path d="M7.8 33h21c-.7 5.2-4.6 8.2-10.5 8.2S8.5 38.2 7.8 33ZM27.2 33h21c-.7 5.2-4.6 8.2-10.5 8.2s-9.8-3-10.5-8.2Z"/>
+    <text x="62" y="25" font-family="Georgia, 'Times New Roman', serif" font-size="15" font-weight="700" letter-spacing="1.5">STUDIO LEGALE</text>
+    <text x="62" y="43" font-family="Georgia, 'Times New Roman', serif" font-size="23" font-weight="700" letter-spacing=".8">FERRI</text>
+  </g>
+</svg>

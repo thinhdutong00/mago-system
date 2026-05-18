@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="56" viewBox="0 0 240 56" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Forge Gym</title>
+  <g fill="#7B7B7B">
+    <path d="M10 23.8h6.2v8.4H10v-8.4ZM39.8 23.8H46v8.4h-6.2v-8.4ZM18.1 18.4h6.4v19.2h-6.4V18.4ZM31.5 18.4h6.4v19.2h-6.4V18.4ZM24.5 25.4h7v5.2h-7v-5.2Z"/>
+    <path d="M28 6.6 49.2 18.7v18.6L28 49.4 6.8 37.3V18.7L28 6.6Zm0 5.8L11.9 21.6v12.8L28 43.6l16.1-9.2V21.6L28 12.4Z"/>
+    <text x="63" y="35" font-family="Helvetica, Arial, sans-serif" font-size="31" font-weight="800" letter-spacing="1.2">FORGE</text>
+    <text x="170" y="35" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="800" letter-spacing="2.4">GYM</text>
+  </g>
+</svg>

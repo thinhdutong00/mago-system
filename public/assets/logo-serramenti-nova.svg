@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="56" viewBox="0 0 240 56" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Serramenti Nova</title>
+  <g fill="#7B7B7B">
+    <path d="M9 8h39v40H9V8Zm5.3 5.2v29.6h28.4V13.2H14.3Z"/>
+    <path d="M27.6 10.6h4.8v34.8h-4.8V10.6ZM11.7 25.6h33.6v4.8H11.7v-4.8Z"/>
+    <path d="M17.4 17.2h7.5v5.2h-7.5v-5.2ZM35.1 17.2h5.2v5.2h-5.2v-5.2ZM17.4 33.7h7.5v5.1h-7.5v-5.1ZM35.1 33.7h5.2v5.1h-5.2v-5.1Z"/>
+    <text x="62" y="25" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1.5">SERRAMENTI</text>
+    <text x="62" y="43" font-family="Helvetica, Arial, sans-serif" font-size="23" font-weight="700" letter-spacing=".8">NOVA</text>
+  </g>
+</svg>

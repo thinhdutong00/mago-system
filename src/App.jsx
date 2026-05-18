@@ -41,12 +41,14 @@ const services = [
 ];
 
 const logos = [
-  'lumea-beauty-logo.svg',
-  'infissi-domus-logo.svg',
-  'brand-three.svg',
-  'brand-four.svg',
-  'brand-five.svg',
-  'brand-six.svg',
+  'logo-centro-fisio-armonia.svg',
+  'logo-studio-dentale-verdi.svg',
+  'logo-clinica-forma.svg',
+  'logo-serramenti-nova.svg',
+  'logo-solaria-energia.svg',
+  'logo-trattoria-montanara.svg',
+  'logo-studio-legale-ferri.svg',
+  'logo-forge-gym.svg',
 ];
 
 const caseStudies = [
@@ -401,7 +403,7 @@ function App() {
             <div className="logo-marquee">
               <div>
                 {[...logos, ...logos, ...logos].map((logo, index) => (
-                  <img key={`${logo}-${index}`} src={`${ASSETS}${logo}`} alt="" width="120" height="40" loading="lazy" />
+                  <img key={`${logo}-${index}`} src={`${ASSETS}${logo}`} alt="" width="240" height="56" loading="lazy" />
                 ))}
               </div>
             </div>
