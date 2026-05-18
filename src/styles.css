@@ -766,13 +766,21 @@ h3 {
   font-size: 17px;
 }
 
-.testimonial-panel img {
+.testimonial-panel picture {
   position: absolute;
   right: 78px;
-  bottom: 0;
-  width: 390px;
-  max-height: 520px;
-  object-fit: contain;
+  bottom: 54px;
+  width: min(390px, 34vw);
+  height: min(520px, 43vw);
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.testimonial-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .blog-section {
@@ -1175,7 +1183,7 @@ h3 {
     padding: 72px 48px;
   }
 
-  .testimonial-panel img {
+  .testimonial-panel picture {
     right: 28px;
     width: 340px;
   }
@@ -1213,7 +1221,7 @@ h3 {
     min-height: auto;
   }
 
-  .testimonial-panel img {
+  .testimonial-panel picture {
     display: none;
   }
 
