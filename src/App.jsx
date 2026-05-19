@@ -606,15 +606,9 @@ function App() {
                   <strong>{activeSystem.rating}</strong>
                 </div>
               </div>
-              <OptimizedImage
-                key={activeSystem.testimonialImage}
-                src={activeSystem.testimonialImage}
-                webp={activeSystem.testimonialWebp}
-                alt={activeSystem.testimonialAlt}
-                width="888"
-                height="1024"
-                loading="lazy"
-              />
+              <div className="testimonial-placeholder" aria-hidden="true">
+                <span>MS</span>
+              </div>
             </div>
           </div>
         </section>
