@@ -40,10 +40,7 @@ const sectors = [
     headline: 'Appuntamenti già fissati da pazienti locali per prestazioni ad alto valore',
     subhead:
       'Aiutiamo studi e cliniche dentali a intercettare persone con necessità concrete, senza basarsi solo su sconti, passaparola o campagne generiche.',
-    desired: 'più prime visite qualificate',
-    success: 'agenda più leggibile',
-    time: 'dalla prima settimana di test',
-    effort: 'meno richieste fredde e non pertinenti',
+    cardText: 'Funnel locali per prime visite, urgenze e trattamenti ad alto valore.',
     pain: 'Troppe campagne parlano a tutti e portano preventivi al ribasso.',
     system:
       'Costruiamo funnel locali per urgenze, implantologia, ortodonzia invisibile e trattamenti ad alto valore, collegando annuncio, pagina e follow-up.',
@@ -56,10 +53,7 @@ const sectors = [
     headline: 'Prenotazioni private più prevedibili per esami, visite e check-up',
     subhead:
       'Rendiamo visibili disponibilità, tempi e specializzazioni del centro a chi sta già cercando una soluzione privata nella propria zona.',
-    desired: 'più richieste per servizi privati',
-    success: 'sale e agende più piene',
-    time: 'senza mesi di attesa SEO',
-    effort: 'meno traffico informativo che non prenota',
+    cardText: 'Campagne e landing per esami, visite, screening e check-up privati.',
     pain: 'Il paziente confronta tempi, chiarezza e fiducia prima ancora del prezzo.',
     system:
       'Creiamo campagne e landing per radiologia, ecografie, analisi, screening e pacchetti diagnostici, con messaggi distinti per urgenza e prevenzione.',
@@ -72,10 +66,7 @@ const sectors = [
     headline: 'Portiamo pazienti motivati verso percorsi fisioterapici specialistici',
     subhead:
       'Aiutiamo studi e centri fisioterapici a comunicare specializzazione, metodo e continuità del percorso, non semplici sedute isolate.',
-    desired: 'più pazienti in percorso',
-    success: 'agenda meno discontinua',
-    time: 'con campagne e landing focalizzate',
-    effort: 'meno dipendenza da promozioni',
+    cardText: 'Percorsi digitali per riabilitazione, sport, post-operatorio e dolore.',
     pain: 'Se il valore clinico non è spiegato, il confronto diventa solo sul prezzo della seduta.',
     system:
       'Segmentiamo per problema, zona e percorso: riabilitazione sportiva, post-operatoria, dolore persistente, postura e programmi specialistici.',
@@ -88,10 +79,7 @@ const sectors = [
     headline: 'Aumentiamo richieste qualificate per visite, controlli e trattamenti dermatologici',
     subhead:
       'Costruiamo percorsi di acquisizione che fanno percepire autorevolezza, sicurezza e chiarezza prima del primo contatto.',
-    desired: 'più pazienti privati',
-    success: 'specializzazioni più valorizzate',
-    time: 'senza disperdere budget',
-    effort: 'meno contatti vaghi',
+    cardText: 'Posizionamento e richieste per visite, controlli e trattamenti specialistici.',
     pain: 'Molte persone rimandano o cercano online senza capire a chi affidarsi.',
     system:
       'Allineiamo intenti di ricerca, campagne e landing per visite dermatologiche, mappatura nei, acne, tricologia e trattamenti specialistici.',
@@ -104,10 +92,7 @@ const sectors = [
     headline: 'Più richieste per visite, controlli e percorsi oculistici privati',
     subhead:
       'Aiutiamo studi e centri oculistici a intercettare chi cerca una risposta rapida e professionale nella propria area.',
-    desired: 'più visite prenotate',
-    success: 'servizi specialistici più riconoscibili',
-    time: 'con funnel attivi e misurabili',
-    effort: 'meno traffico non pertinente',
+    cardText: 'Percorsi per visite private, prevenzione, diagnostica e servizi avanzati.',
     pain: 'La ricerca online è piena di informazioni, ma poche pagine trasformano il bisogno in prenotazione.',
     system:
       'Creiamo percorsi per visite, prevenzione, diagnostica e servizi specialistici, con messaggi costruiti sul bisogno reale del paziente.',
@@ -120,10 +105,7 @@ const sectors = [
     headline: 'Richieste più qualificate per visite ginecologiche e percorsi privati',
     subhead:
       'Comunichiamo attenzione, competenza e semplicità di prenotazione per aiutare la paziente a scegliere con più sicurezza.',
-    desired: 'più prime visite pertinenti',
-    success: 'percorsi più continuativi',
-    time: 'senza comunicazione aggressiva',
-    effort: 'meno dispersione tra canali',
+    cardText: 'Messaggi chiari e rispettosi per visite, prevenzione e percorsi specialistici.',
     pain: 'In ambiti sensibili, la fiducia pesa quanto la visibilità.',
     system:
       'Disegniamo campagne e pagine per visite, prevenzione, gravidanza, menopausa e percorsi specialistici con tono chiaro e rispettoso.',
@@ -136,10 +118,7 @@ const sectors = [
     headline: 'Facilitiamo il primo contatto per visite urologiche e andrologiche private',
     subhead:
       'Riduciamo attrito, imbarazzo e confusione con messaggi chiari, discreti e orientati alla prenotazione.',
-    desired: 'più richieste riservate',
-    success: 'agenda più stabile',
-    time: 'con canali misurabili',
-    effort: 'meno barriere al primo passo',
+    cardText: 'Acquisizione discreta per visite, prevenzione e problemi ricorrenti.',
     pain: 'Il paziente spesso rimanda: la pagina deve rendere semplice e rassicurante chiedere informazioni.',
     system:
       'Attiviamo funnel per visite, prevenzione, problemi ricorrenti e percorsi specialistici, con privacy e chiarezza al centro.',
@@ -151,15 +130,12 @@ const sectors = [
     eyebrow: 'Domanda estetica ad alto valore',
     headline: 'Più consulenze qualificate per trattamenti estetici e chirurgia privata',
     subhead:
-      'Aiutiamo cliniche e medici estetici a generare richieste più consapevoli, spostando la conversazione da prezzo a valore, fiducia e risultato desiderato.',
-    desired: 'più consulenze ad alto valore',
-    success: 'percezione premium più forte',
-    time: 'senza inseguire lead curiosi',
-    effort: 'meno richieste da coupon',
+      'Aiutiamo cliniche e medici estetici a generare richieste più consapevoli, spostando la conversazione da prezzo a valore, fiducia e risultato atteso.',
+    cardText: 'Funnel premium per trattamenti viso/corpo, consulenze e percorsi estetici.',
     pain: 'Il settore è competitivo: se il posizionamento è debole, il paziente sceglie per prezzo.',
     system:
       'Costruiamo campagne, landing e follow-up per trattamenti viso/corpo, consulenze e percorsi premium con prova sociale e filtri di qualità.',
-    benefits: ['Posizionamento premium', 'Creatività orientate al desiderio', 'Qualifica prima della consulenza'],
+    benefits: ['Posizionamento premium', 'Creatività orientate al valore', 'Qualifica prima della consulenza'],
   },
   {
     slug: 'psicologi-psicoterapeuti',
@@ -168,10 +144,7 @@ const sectors = [
     headline: 'Aiutiamo professionisti e centri psicologici a ricevere richieste più adatte',
     subhead:
       'Creiamo percorsi digitali sobri e rispettosi, pensati per far capire approccio, specializzazione e modalità di contatto.',
-    desired: 'più richieste in linea',
-    success: 'posizionamento più chiaro',
-    time: 'senza comunicazione forzata',
-    effort: 'meno contatti fuori target',
+    cardText: 'Comunicazione sobria per specializzazioni, approccio e modalità di contatto.',
     pain: 'Chi cerca supporto ha bisogno di capire rapidamente se si sente nel posto giusto.',
     system:
       'Organizziamo messaggi e pagine per aree di intervento, terapia individuale, coppia, adolescenti e percorsi online o in studio.',
@@ -184,10 +157,7 @@ const sectors = [
     headline: 'Più richieste per percorsi nutrizionali specialistici e continuativi',
     subhead:
       'Aiutiamo nutrizionisti e studi specializzati a comunicare metodo, differenza e valore del percorso oltre la semplice dieta.',
-    desired: 'più pazienti motivati',
-    success: 'percorsi più completi',
-    time: 'con messaggi specifici',
-    effort: 'meno richieste da prezzo basso',
+    cardText: 'Percorsi per nutrizione sportiva, clinica, metabolica e specialistica.',
     pain: 'Il mercato è saturo di soluzioni rapide: serve rendere evidente perché scegliere un percorso professionale.',
     system:
       'Creiamo funnel per nutrizione sportiva, clinica, metabolica, femminile e percorsi specialistici, con contenuti che qualificano la domanda.',
@@ -206,7 +176,7 @@ const homeMeta = {
 
 const navItems = [
   { label: 'Metodo', href: '/#metodo' },
-  { label: 'Risultati', href: '/#risultati' },
+  { label: 'MAGO', href: '/#mago' },
   { label: 'Settori sanitari', href: '/#settori' },
 ];
 
@@ -228,24 +198,35 @@ const methodSteps = [
   },
 ];
 
-const proofCards = [
+const magoPillars = [
   {
-    value: '+ desiderio',
-    label: 'Più pazienti locali che cercano proprio quel servizio',
+    letter: 'M',
+    title: 'Marketing',
+    text: 'Definiamo posizionamento, promessa e messaggi sanitari per far percepire valore prima ancora del contatto.',
   },
   {
-    value: '+ percezione',
-    label: 'Più fiducia prima della chiamata o richiesta',
+    letter: 'A',
+    title: 'Advertising',
+    text: 'Attiviamo campagne Google e Meta orientate a pazienti locali, servizi prioritari e intenzioni realmente prenotabili.',
   },
   {
-    value: '- sacrificio',
-    label: 'Meno tempo perso con richieste non pertinenti',
+    letter: 'G',
+    title: 'Growth',
+    text: 'Costruiamo crescita sostenibile: più richieste qualificate, più continuità e meno dipendenza da sconti o passaparola.',
   },
   {
-    value: '- spreco',
-    label: 'Meno budget su traffico generico e campagne senza filtro',
+    letter: 'O',
+    title: 'Optimization',
+    text: 'Ottimizziamo landing, tracking, follow-up e creatività per migliorare qualità del lead e controllo del budget.',
   },
 ];
+
+const privacyMeta = {
+  title: 'Privacy Policy - Mago System',
+  description:
+    'Informativa privacy di Mago System per il sito, le richieste di contatto e la gestione dei soli cookie tecnici essenziali.',
+  path: '/privacy-policy',
+};
 
 const testimonials = [
   {
@@ -572,6 +553,11 @@ function HeroVisual() {
         <strong>Fiducia</strong>
         <small>prova, chiarezza e percorso</small>
       </div>
+      <div className="hero-switchers" aria-hidden="true">
+        <span className="active">Pazienti locali</span>
+        <span>Servizi premium</span>
+        <span>Follow-up</span>
+      </div>
     </div>
   );
 }
@@ -585,8 +571,8 @@ function HomePage({ navigate, openModal }) {
             <p className="eyebrow">Mago System per il settore sanitario</p>
             <h1>Portiamo alla tua struttura appuntamenti qualificati da pazienti locali</h1>
             <p>
-              Costruiamo sistemi di acquisizione per cliniche e professionisti sanitari: più servizi ad alto valore,
-              più percezione di fiducia, meno tempo perso con contatti freddi e meno dipendenza da sconti o passaparola.
+              Costruiamo sistemi di acquisizione per cliniche e professionisti sanitari: posizionamento chiaro,
+              campagne locali, crescita misurabile e ottimizzazione continua dei percorsi di richiesta.
             </p>
             <div className="hero-actions">
               <button className="button primary" type="button" onClick={openModal}>
@@ -596,26 +582,18 @@ function HomePage({ navigate, openModal }) {
                 Vedi i settori <ArrowUpRight size={18} />
               </SmartLink>
             </div>
-            <div className="hero-proof" aria-label="Indicatori del sistema">
-              <span>+ pazienti locali</span>
-              <span>- spreco budget</span>
-              <span>+ valore percepito</span>
+            <div className="hero-proof" aria-label="Leve del sistema MAGO">
+              <span>Marketing sanitario</span>
+              <span>Advertising locale</span>
+              <span>Growth misurata</span>
+              <span>Optimization continua</span>
             </div>
           </div>
           <HeroVisual />
         </div>
       </section>
 
-      <section className="proof-section" id="risultati">
-        <div className="container proof-grid">
-          {proofCards.map((card) => (
-            <article className="proof-card reveal" key={card.value}>
-              <strong>{card.value}</strong>
-              <p>{card.label}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+      <MagoSection />
 
       <section className="split-section">
         <div className="container split-grid">
@@ -666,7 +644,7 @@ function HomePage({ navigate, openModal }) {
               <SmartLink className="sector-card reveal" key={sector.slug} href={`/${sector.slug}`} navigate={navigate}>
                 <span>{sector.eyebrow}</span>
                 <h3>{sector.label}</h3>
-                <p>{sector.desired}, {sector.effort}.</p>
+                <p>{sector.cardText}</p>
                 <ArrowUpRight size={20} aria-hidden="true" />
               </SmartLink>
             ))}
@@ -735,6 +713,32 @@ function HomePage({ navigate, openModal }) {
   );
 }
 
+function MagoSection() {
+  return (
+    <section className="mago-section" id="mago">
+      <div className="wide-container mago-panel reveal">
+        <div className="mago-intro">
+          <p className="eyebrow">Metodo proprietario</p>
+          <h2>MAGO: quattro leve per trasformare visibilità sanitaria in richieste qualificate</h2>
+          <p>
+            Non lavoriamo su un singolo canale isolato. Colleghiamo strategia, campagne, crescita e ottimizzazione in
+            un sistema leggibile per il paziente e misurabile per la struttura.
+          </p>
+        </div>
+        <div className="mago-grid" aria-label="Significato dell'acronimo MAGO">
+          {magoPillars.map((pillar, index) => (
+            <article className="mago-card reveal" style={{ transitionDelay: `${index * 0.06}s` }} key={pillar.letter}>
+              <span>{pillar.letter}</span>
+              <h3>{pillar.title}</h3>
+              <p>{pillar.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function SectorPage({ sector, navigate, openModal }) {
   return (
     <main>
@@ -753,13 +757,13 @@ function SectorPage({ sector, navigate, openModal }) {
               </SmartLink>
             </div>
           </div>
-          <div className="sector-score reveal delay-1" aria-label={`Formula di acquisizione per ${sector.label}`}>
+          <div className="sector-score reveal delay-1" aria-label={`Sistema MAGO per ${sector.label}`}>
             <span>{sector.label}</span>
             <div>
-              <strong>+ {sector.desired}</strong>
-              <strong>+ {sector.success}</strong>
-              <strong>- {sector.time}</strong>
-              <strong>- {sector.effort}</strong>
+              <strong>M Marketing sanitario</strong>
+              <strong>A Advertising locale</strong>
+              <strong>G Growth misurata</strong>
+              <strong>O Optimization continua</strong>
             </div>
           </div>
         </div>
@@ -849,6 +853,86 @@ function NotFoundPage({ navigate }) {
   );
 }
 
+function PrivacyPolicyPage({ navigate }) {
+  return (
+    <main className="privacy-page">
+      <section className="privacy-hero">
+        <div className="container">
+          <p className="eyebrow">Privacy Policy</p>
+          <h1>Informativa sul trattamento dei dati personali</h1>
+          <p>
+            Questa informativa descrive come Mago System tratta i dati inviati tramite il sito e come gestisce i soli
+            cookie tecnici essenziali necessari al funzionamento dell’esperienza.
+          </p>
+        </div>
+      </section>
+
+      <section className="privacy-content">
+        <div className="container privacy-grid">
+          <aside className="privacy-summary">
+            <h2>In breve</h2>
+            <p>Usiamo i dati solo per rispondere alle richieste e gestire il rapporto commerciale avviato dall’utente.</p>
+            <SmartLink href="/" navigate={navigate}>
+              Torna alla home <ArrowUpRight size={16} />
+            </SmartLink>
+          </aside>
+          <div className="privacy-copy">
+            <article>
+              <h2>Titolare del trattamento</h2>
+              <p>
+                Il titolare del trattamento è Mago System. Per richieste relative alla privacy puoi scrivere a
+                <a href="mailto:info@magodigital.it"> info@magodigital.it</a>.
+              </p>
+            </article>
+            <article>
+              <h2>Dati trattati</h2>
+              <p>
+                Trattiamo i dati che invii volontariamente tramite il modulo di contatto, come nome, email, telefono,
+                settore, messaggio e informazioni sulla struttura sanitaria.
+              </p>
+            </article>
+            <article>
+              <h2>Finalità e base giuridica</h2>
+              <p>
+                I dati vengono usati per rispondere alla richiesta, valutare il progetto, inviare informazioni collegate
+                alla consulenza e gestire eventuali rapporti precontrattuali o contrattuali.
+              </p>
+            </article>
+            <article>
+              <h2>Cookie</h2>
+              <p>
+                Il sito utilizza solo strumenti tecnici essenziali, inclusa la preferenza di visualizzazione del banner
+                cookie salvata nel browser. Non vengono caricati tag Google, GA4, GTM, Ads o cookie di profilazione.
+              </p>
+            </article>
+            <article>
+              <h2>Conservazione</h2>
+              <p>
+                I dati sono conservati per il tempo necessario a rispondere alla richiesta e, se nasce un rapporto,
+                secondo gli obblighi amministrativi e fiscali applicabili.
+              </p>
+            </article>
+            <article>
+              <h2>Diritti dell’utente</h2>
+              <p>
+                Puoi chiedere accesso, rettifica, cancellazione, limitazione, opposizione o portabilità dei dati nei
+                limiti previsti dalla normativa applicabile.
+              </p>
+            </article>
+            <article>
+              <h2>Nota</h2>
+              <p>
+                Questa informativa è pensata per un sito vetrina e lead generation. Per usi più complessi, integrazioni
+                analytics o campagne con tracciamenti, sarà necessario aggiornarla.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 function FinalCta({ openModal, title = 'Vuoi portare più pazienti qualificati alla tua struttura?' }) {
   return (
     <section className="footer-cta">
@@ -895,6 +979,9 @@ function Footer({ navigate, openModal }) {
             <Mail size={18} /> info@magodigital.it
           </a>
           <button type="button" onClick={openModal}>Parla con noi</button>
+          <SmartLink href="/privacy-policy" navigate={navigate}>
+            Privacy Policy
+          </SmartLink>
         </div>
       </div>
       <div className="container footer-bottom">
@@ -907,12 +994,50 @@ function Footer({ navigate, openModal }) {
   );
 }
 
+function CookieBanner({ navigate }) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(window.localStorage.getItem('mago-essential-cookie-consent') !== 'accepted');
+  }, []);
+
+  if (!isVisible) return null;
+
+  return (
+    <aside className="cookie-banner" aria-label="Informativa cookie">
+      <div>
+        <strong>Cookie essenziali</strong>
+        <p>
+          Usiamo solo cookie tecnici necessari al funzionamento del sito e alla memorizzazione di questa preferenza. Non
+          carichiamo tag Google o cookie di profilazione.
+        </p>
+      </div>
+      <div className="cookie-actions">
+        <SmartLink href="/privacy-policy" navigate={navigate}>
+          Privacy Policy
+        </SmartLink>
+        <button
+          className="button primary"
+          type="button"
+          onClick={() => {
+            window.localStorage.setItem('mago-essential-cookie-consent', 'accepted');
+            setIsVisible(false);
+          }}
+        >
+          Accetta essenziali
+        </button>
+      </div>
+    </aside>
+  );
+}
+
 function App() {
   const [path, setPath] = useState(getPath);
   const [modalOpen, setModalOpen] = useState(false);
 
   const activeSector = useMemo(() => sectors.find((sector) => `/${sector.slug}` === path), [path]);
-  const isKnownPath = path === '/' || Boolean(activeSector);
+  const isPrivacyPath = path === '/privacy-policy';
+  const isKnownPath = path === '/' || Boolean(activeSector) || isPrivacyPath;
 
   const navigate = (to) => {
     const [nextPath, hash] = to.split('#');
@@ -941,7 +1066,9 @@ function App() {
           description: activeSector.subhead,
           path: `/${activeSector.slug}`,
         }
-      : homeMeta;
+      : isPrivacyPath
+        ? privacyMeta
+        : homeMeta;
 
     document.title = pageMeta.title;
     setMeta('description', pageMeta.description);
@@ -958,7 +1085,7 @@ function App() {
       document.head.appendChild(canonical);
     }
     canonical.setAttribute('href', `${SITE_URL}${pageMeta.path}`);
-  }, [activeSector]);
+  }, [activeSector, isPrivacyPath]);
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -989,9 +1116,11 @@ function App() {
       <Header navigate={navigate} openModal={() => setModalOpen(true)} />
       {path === '/' && <HomePage navigate={navigate} openModal={() => setModalOpen(true)} />}
       {activeSector && <SectorPage sector={activeSector} navigate={navigate} openModal={() => setModalOpen(true)} />}
+      {isPrivacyPath && <PrivacyPolicyPage navigate={navigate} />}
       {!isKnownPath && <NotFoundPage navigate={navigate} />}
       <Footer navigate={navigate} openModal={() => setModalOpen(true)} />
       <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      <CookieBanner navigate={navigate} />
     </>
   );
 }
