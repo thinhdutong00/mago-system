@@ -1,17 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
+  Activity,
   ArrowUp,
   ArrowUpRight,
+  BarChart3,
+  CalendarCheck,
+  CheckCircle2,
   ChevronDown,
+  Clock3,
   Mail,
+  MapPin,
   Menu,
-  Phone,
+  Search,
   Send,
-  UserRound,
+  ShieldCheck,
+  Sparkles,
+  Stethoscope,
+  Target,
   X,
 } from 'lucide-react';
 
 const ASSETS = '/assets/';
+const SITE_URL = 'https://magosystem.it';
 
 function OptimizedImage({ src, webp, alt, ...props }) {
   return (
@@ -22,171 +32,289 @@ function OptimizedImage({ src, webp, alt, ...props }) {
   );
 }
 
-const services = [
+const sectors = [
   {
-    icon: 'icon-seo-content.svg',
-    title: 'Google Ads e Meta Ads',
-    text: 'Creiamo campagne per intercettare persone pronte a chiedere informazioni, prenotare o acquistare.',
+    slug: 'cliniche-dentali',
+    label: 'Cliniche dentali',
+    eyebrow: 'Acquisizione pazienti per odontoiatria',
+    headline: 'Appuntamenti già fissati da pazienti locali per prestazioni ad alto valore',
+    subhead:
+      'Aiutiamo studi e cliniche dentali a intercettare persone con necessità concrete, senza basarsi solo su sconti, passaparola o campagne generiche.',
+    desired: 'più prime visite qualificate',
+    success: 'agenda più leggibile',
+    time: 'dalla prima settimana di test',
+    effort: 'meno richieste fredde e non pertinenti',
+    pain: 'Troppe campagne parlano a tutti e portano preventivi al ribasso.',
+    system:
+      'Costruiamo funnel locali per urgenze, implantologia, ortodonzia invisibile e trattamenti ad alto valore, collegando annuncio, pagina e follow-up.',
+    benefits: ['Lead locali con intento chiaro', 'Copy orientato a bisogno e fiducia', 'Filtri per evitare richieste fuori target'],
   },
   {
-    icon: 'icon-seo-research.svg',
-    title: 'Siti e landing page',
-    text: 'Costruiamo pagine veloci, chiare e orientate alla conversione per trasformare il traffico in contatti.',
+    slug: 'centri-diagnostici-privati',
+    label: 'Centri diagnostici privati',
+    eyebrow: 'Domanda privata e prenotazioni rapide',
+    headline: 'Prenotazioni private più prevedibili per esami, visite e check-up',
+    subhead:
+      'Rendiamo visibili disponibilità, tempi e specializzazioni del centro a chi sta già cercando una soluzione privata nella propria zona.',
+    desired: 'più richieste per servizi privati',
+    success: 'sale e agende più piene',
+    time: 'senza mesi di attesa SEO',
+    effort: 'meno traffico informativo che non prenota',
+    pain: 'Il paziente confronta tempi, chiarezza e fiducia prima ancora del prezzo.',
+    system:
+      'Creiamo campagne e landing per radiologia, ecografie, analisi, screening e pacchetti diagnostici, con messaggi distinti per urgenza e prevenzione.',
+    benefits: ['Domanda intercettata per esame specifico', 'Messaggi chiari su tempi e percorso', 'Tracciamento delle richieste utili'],
   },
   {
-    icon: 'icon-automated-seo.svg',
-    title: 'SEO e automazioni AI',
-    text: 'Miglioriamo la visibilità organica e automatizziamo i passaggi che rendono più semplice gestire i lead.',
+    slug: 'fisioterapia-specializzata',
+    label: 'Fisioterapia specializzata',
+    eyebrow: 'Percorsi terapeutici ad alto valore',
+    headline: 'Portiamo pazienti motivati verso percorsi fisioterapici specialistici',
+    subhead:
+      'Aiutiamo studi e centri fisioterapici a comunicare specializzazione, metodo e continuità del percorso, non semplici sedute isolate.',
+    desired: 'più pazienti in percorso',
+    success: 'agenda meno discontinua',
+    time: 'con campagne e landing focalizzate',
+    effort: 'meno dipendenza da promozioni',
+    pain: 'Se il valore clinico non è spiegato, il confronto diventa solo sul prezzo della seduta.',
+    system:
+      'Segmentiamo per problema, zona e percorso: riabilitazione sportiva, post-operatoria, dolore persistente, postura e programmi specialistici.',
+    benefits: ['Messaggi per bisogno specifico', 'Educazione alla continuità del percorso', 'Follow-up per recuperare richieste non concluse'],
+  },
+  {
+    slug: 'dermatologi',
+    label: 'Dermatologi',
+    eyebrow: 'Visite private e dermatologia avanzata',
+    headline: 'Aumentiamo richieste qualificate per visite, controlli e trattamenti dermatologici',
+    subhead:
+      'Costruiamo percorsi di acquisizione che fanno percepire autorevolezza, sicurezza e chiarezza prima del primo contatto.',
+    desired: 'più pazienti privati',
+    success: 'specializzazioni più valorizzate',
+    time: 'senza disperdere budget',
+    effort: 'meno contatti vaghi',
+    pain: 'Molte persone rimandano o cercano online senza capire a chi affidarsi.',
+    system:
+      'Allineiamo intenti di ricerca, campagne e landing per visite dermatologiche, mappatura nei, acne, tricologia e trattamenti specialistici.',
+    benefits: ['Pagine per bisogno e urgenza', 'Prova e autorevolezza in evidenza', 'CTA chiare per prenotare o richiedere informazioni'],
+  },
+  {
+    slug: 'oculisti',
+    label: 'Oculisti',
+    eyebrow: 'Acquisizione pazienti per oculistica',
+    headline: 'Più richieste per visite, controlli e percorsi oculistici privati',
+    subhead:
+      'Aiutiamo studi e centri oculistici a intercettare chi cerca una risposta rapida e professionale nella propria area.',
+    desired: 'più visite prenotate',
+    success: 'servizi specialistici più riconoscibili',
+    time: 'con funnel attivi e misurabili',
+    effort: 'meno traffico non pertinente',
+    pain: 'La ricerca online è piena di informazioni, ma poche pagine trasformano il bisogno in prenotazione.',
+    system:
+      'Creiamo percorsi per visite, prevenzione, diagnostica e servizi specialistici, con messaggi costruiti sul bisogno reale del paziente.',
+    benefits: ['Intenti locali ad alta priorità', 'Landing semplici da leggere', 'Misurazione di chiamate e richieste'],
+  },
+  {
+    slug: 'ginecologi',
+    label: 'Ginecologi',
+    eyebrow: 'Fiducia, discrezione e continuità',
+    headline: 'Richieste più qualificate per visite ginecologiche e percorsi privati',
+    subhead:
+      'Comunichiamo attenzione, competenza e semplicità di prenotazione per aiutare la paziente a scegliere con più sicurezza.',
+    desired: 'più prime visite pertinenti',
+    success: 'percorsi più continuativi',
+    time: 'senza comunicazione aggressiva',
+    effort: 'meno dispersione tra canali',
+    pain: 'In ambiti sensibili, la fiducia pesa quanto la visibilità.',
+    system:
+      'Disegniamo campagne e pagine per visite, prevenzione, gravidanza, menopausa e percorsi specialistici con tono chiaro e rispettoso.',
+    benefits: ['Copy attento e professionale', 'Segmentazione per bisogno', 'CTA discrete e immediate'],
+  },
+  {
+    slug: 'urologi-andrologi',
+    label: 'Urologi / Andrologi',
+    eyebrow: 'Acquisizione pazienti in aree sensibili',
+    headline: 'Facilitiamo il primo contatto per visite urologiche e andrologiche private',
+    subhead:
+      'Riduciamo attrito, imbarazzo e confusione con messaggi chiari, discreti e orientati alla prenotazione.',
+    desired: 'più richieste riservate',
+    success: 'agenda più stabile',
+    time: 'con canali misurabili',
+    effort: 'meno barriere al primo passo',
+    pain: 'Il paziente spesso rimanda: la pagina deve rendere semplice e rassicurante chiedere informazioni.',
+    system:
+      'Attiviamo funnel per visite, prevenzione, problemi ricorrenti e percorsi specialistici, con privacy e chiarezza al centro.',
+    benefits: ['Tono discreto e autorevole', 'Messaggi per intenzione specifica', 'Percorso breve verso richiesta o chiamata'],
+  },
+  {
+    slug: 'medicina-estetica-chirurgia-estetica',
+    label: 'Medicina estetica / Chirurgia estetica',
+    eyebrow: 'Domanda estetica ad alto valore',
+    headline: 'Più consulenze qualificate per trattamenti estetici e chirurgia privata',
+    subhead:
+      'Aiutiamo cliniche e medici estetici a generare richieste più consapevoli, spostando la conversazione da prezzo a valore, fiducia e risultato desiderato.',
+    desired: 'più consulenze ad alto valore',
+    success: 'percezione premium più forte',
+    time: 'senza inseguire lead curiosi',
+    effort: 'meno richieste da coupon',
+    pain: 'Il settore è competitivo: se il posizionamento è debole, il paziente sceglie per prezzo.',
+    system:
+      'Costruiamo campagne, landing e follow-up per trattamenti viso/corpo, consulenze e percorsi premium con prova sociale e filtri di qualità.',
+    benefits: ['Posizionamento premium', 'Creatività orientate al desiderio', 'Qualifica prima della consulenza'],
+  },
+  {
+    slug: 'psicologi-psicoterapeuti',
+    label: 'Psicologi / Psicoterapeuti',
+    eyebrow: 'Fiducia prima del contatto',
+    headline: 'Aiutiamo professionisti e centri psicologici a ricevere richieste più adatte',
+    subhead:
+      'Creiamo percorsi digitali sobri e rispettosi, pensati per far capire approccio, specializzazione e modalità di contatto.',
+    desired: 'più richieste in linea',
+    success: 'posizionamento più chiaro',
+    time: 'senza comunicazione forzata',
+    effort: 'meno contatti fuori target',
+    pain: 'Chi cerca supporto ha bisogno di capire rapidamente se si sente nel posto giusto.',
+    system:
+      'Organizziamo messaggi e pagine per aree di intervento, terapia individuale, coppia, adolescenti e percorsi online o in studio.',
+    benefits: ['Tono umano e professionale', 'Specializzazioni leggibili', 'Richieste più coerenti con il servizio'],
+  },
+  {
+    slug: 'nutrizionisti-specializzati',
+    label: 'Nutrizionisti specializzati',
+    eyebrow: 'Percorsi nutrizionali ad alto valore',
+    headline: 'Più richieste per percorsi nutrizionali specialistici e continuativi',
+    subhead:
+      'Aiutiamo nutrizionisti e studi specializzati a comunicare metodo, differenza e valore del percorso oltre la semplice dieta.',
+    desired: 'più pazienti motivati',
+    success: 'percorsi più completi',
+    time: 'con messaggi specifici',
+    effort: 'meno richieste da prezzo basso',
+    pain: 'Il mercato è saturo di soluzioni rapide: serve rendere evidente perché scegliere un percorso professionale.',
+    system:
+      'Creiamo funnel per nutrizione sportiva, clinica, metabolica, femminile e percorsi specialistici, con contenuti che qualificano la domanda.',
+    benefits: ['Segmentazione per obiettivo', 'Valore del percorso spiegato meglio', 'Follow-up per richieste non ancora pronte'],
   },
 ];
 
-const logos = [
-  'logo-centro-fisio-armonia.svg',
-  'logo-studio-dentale-verdi.svg',
-  'logo-clinica-forma.svg',
-  'logo-serramenti-nova.svg',
-  'logo-solaria-energia.svg',
-  'logo-trattoria-montanara.svg',
-  'logo-studio-legale-ferri.svg',
-  'logo-forge-gym.svg',
-];
+const sectorOptions = sectors.map((sector) => sector.label);
 
-const acquisitionSystems = [
-  {
-    key: 'google-ads',
-    label: 'Google Ads',
-    image: 'case-study-2.jpg',
-    category: 'Advertising su ricerca',
-    title: 'Portiamo il tuo servizio davanti a chi lo sta già cercando',
-    text: 'Su Google Ads lavoriamo sulla parte più calda della domanda: persone che stanno già cercando una soluzione. Selezioniamo ricerche, annunci e pagine in modo che ogni passaggio aumenti chiarezza e probabilità di contatto.',
-    bullets: ['Ricerche con intento commerciale, non traffico generico', 'Annunci coerenti con bisogno, zona e servizio', 'Ottimizzazione su richieste utili, non solo sul costo per click'],
-    metric: 'Alta intenzione',
-    metricLabel: 'meno dispersione tra ricerca, annuncio e richiesta',
-    person: 'Elena Rinaldi',
-    role: 'Titolare studio dentistico',
-    quote:
-      'Abbiamo capito quali ricerche generavano contatti più seri e quali stavano solo consumando budget. Il lavoro è diventato molto più leggibile.',
-    rating: '4.8/5 su Trustpilot',
-    testimonialImage: 'case-study-2.jpg',
-    testimonialWebp: 'case-study-2.webp',
-    testimonialAlt: 'Consulenza su campagne Google Ads',
-  },
-  {
-    key: 'meta-ads',
-    label: 'Meta Ads',
-    image: 'case-study-1.jpg',
-    category: 'Advertising social',
-    title: 'Facciamo capire il valore della tua offerta a chi non ti conosce ancora',
-    text: 'Su Meta Ads il punto non è semplicemente “mostrare annunci”, ma rendere desiderabile e credibile il prossimo passo. Testiamo messaggi, creatività e pubblici per avvicinare persone nuove alla richiesta.',
-    bullets: ['Creatività costruite su problemi e desideri reali', 'Pubblici locali o verticali con messaggi specifici', 'Retargeting per recuperare interesse senza inseguire tutti'],
-    metric: 'Messaggio giusto',
-    metricLabel: 'più chiarezza prima della conversazione commerciale',
-    person: 'Giulia Berti',
-    role: 'Founder centro estetico',
-    quote:
-      'La differenza è stata nel messaggio. Prima sponsorizzavamo contenuti, ora sappiamo quali creatività portano conversazioni più sensate.',
-    rating: '4.7/5 su Trustpilot',
-    testimonialImage: 'case-study-1.jpg',
-    testimonialWebp: 'case-study-1.webp',
-    testimonialAlt: 'Cliente durante una consulenza sulle campagne Meta Ads',
-  },
-  {
-    key: 'seo',
-    label: 'SEO',
-    image: 'case-study-3.jpg',
-    category: 'Crescita organica',
-    title: 'Rendiamo il sito più trovabile da chi cerca soluzioni come la tua',
-    text: 'La SEO deve creare fiducia prima ancora del contatto. Sistemiamo struttura, contenuti e pagine servizio per rendere più evidente cosa fai, per chi lo fai e perché vale la pena chiederti informazioni.',
-    bullets: ['Pagine costruite intorno a servizi e intenzioni di ricerca', 'Contenuti utili per aumentare fiducia e pertinenza', 'Ottimizzazione tecnica per rendere il sito più solido'],
-    metric: 'Canale duraturo',
-    metricLabel: 'visibilità che non dipende solo dal budget pubblicitario',
-    person: 'Andrea Mori',
-    role: 'Responsabile commerciale serramenti',
-    quote:
-      'Non ci hanno promesso miracoli. Hanno rimesso ordine nelle pagine e nelle priorità SEO, e il sito è diventato più comprensibile per chi cerca.',
-    rating: '4.8/5 su Trustpilot',
-    testimonialImage: 'case-study-3.jpg',
-    testimonialWebp: 'case-study-3.webp',
-    testimonialAlt: 'Cliente che presenta un progetto di crescita SEO',
-  },
-  {
-    key: 'landing',
-    label: 'Landing',
-    image: 'case-study-1.jpg',
-    category: 'Pagine di conversione',
-    title: 'Riduciamo i dubbi prima che l’utente lasci la pagina',
-    text: 'Una landing deve far percepire valore in pochi secondi e rendere semplice il passo successivo. Lavoriamo su promessa, prova, struttura e CTA per trasformare traffico già acquisito in richieste più consapevoli.',
-    bullets: ['Una pagina, un obiettivo, una CTA principale', 'Copy orientato a beneficio, prova e obiezioni', 'Form e sezioni pensati per ridurre sforzo e confusione'],
-    metric: 'Meno attrito',
-    metricLabel: 'percorso più chiaro tra interesse e richiesta',
-    person: 'Luca Fontana',
-    role: 'Direttore palestra',
-    quote:
-      'La nuova pagina spiega meglio cosa offriamo e filtra molte domande inutili. Le richieste arrivano più chiare già dal primo contatto.',
-    rating: '4.9/5 su Trustpilot',
-    testimonialImage: 'blog-2.jpg',
-    testimonialWebp: 'blog-2.webp',
-    testimonialAlt: 'Cliente soddisfatto dopo il redesign della landing page',
-  },
-  {
-    key: 'ai',
-    label: 'AI',
-    image: 'case-study-2.jpg',
-    category: 'Processi e follow-up',
-    title: 'Aiutiamo il team a rispondere prima e perdere meno opportunità',
-    text: 'L’AI è utile quando toglie passaggi ripetitivi senza sostituire il giudizio umano. Automatizziamo qualifica, notifiche e follow-up iniziali per rendere la gestione dei lead più ordinata.',
-    bullets: ['Lead raccolti e classificati in modo più leggibile', 'Notifiche e follow-up per ridurre i tempi morti', 'Processi integrati con il modo in cui lavora il team'],
-    metric: 'Più ordine',
-    metricLabel: 'meno passaggi manuali dopo la richiesta',
-    person: 'Martina Greco',
-    role: 'Marketing manager clinica',
-    quote:
-      'Non volevamo un sistema complicato. Le automazioni ci aiutano a capire chi richiamare e cosa è già successo, senza togliere controllo al team.',
-    rating: '4.8/5 su Trustpilot',
-    testimonialImage: 'blog-3.jpg',
-    testimonialWebp: 'blog-3.webp',
-    testimonialAlt: 'Team che usa automazioni AI per gestire i contatti',
-  },
-];
-
-const blogPosts = [
-  {
-    image: 'blog-1.jpg',
-    month: 'Set',
-    day: '25',
-    category: 'SEO',
-    title: 'Come farsi trovare da chi cerca i tuoi servizi',
-    author: 'Team Mago',
-  },
-  {
-    image: 'blog-2.jpg',
-    month: 'Ott',
-    day: '28',
-    category: 'Advertising',
-    title: 'Campagne Google e Meta per generare richieste',
-    author: 'Mago System',
-  },
-  {
-    image: 'blog-3.jpg',
-    month: 'Dic',
-    day: '30',
-    category: 'Automazioni AI',
-    title: 'Automazioni semplici per gestire meglio i contatti',
-    author: 'Growth Team',
-  },
-];
+const homeMeta = {
+  title: 'Mago System Sanitario - Acquisizione pazienti per strutture sanitarie',
+  description:
+    'Sistema di acquisizione pazienti per cliniche, studi e professionisti sanitari: più appuntamenti qualificati da pazienti locali, senza dipendere da sconti o passaparola.',
+  path: '/',
+};
 
 const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'Servizi', href: '#servizi' },
-  { label: 'Case Study', href: '#case-study' },
-  { label: 'Risorse', href: '#blog' },
+  { label: 'Metodo', href: '/#metodo' },
+  { label: 'Risultati', href: '/#risultati' },
+  { label: 'Settori sanitari', href: '/#settori' },
 ];
 
-function Logo() {
+const methodSteps = [
+  {
+    icon: Search,
+    title: 'Intercettiamo domanda reale',
+    text: 'Partiamo da ricerche, urgenze, territorio e servizi ad alto valore. Il paziente deve arrivare con un bisogno concreto, non per curiosità.',
+  },
+  {
+    icon: Target,
+    title: 'Costruiamo messaggi che filtrano',
+    text: 'Promessa, prova, obiezioni e CTA lavorano insieme per far percepire valore prima del contatto.',
+  },
+  {
+    icon: CalendarCheck,
+    title: 'Portiamo verso la prenotazione',
+    text: 'Landing, tracking e follow-up riducono attrito e rendono più leggibile cosa succede dopo ogni campagna.',
+  },
+];
+
+const proofCards = [
+  {
+    value: '+ desiderio',
+    label: 'Più pazienti locali che cercano proprio quel servizio',
+  },
+  {
+    value: '+ percezione',
+    label: 'Più fiducia prima della chiamata o richiesta',
+  },
+  {
+    value: '- sacrificio',
+    label: 'Meno tempo perso con richieste non pertinenti',
+  },
+  {
+    value: '- spreco',
+    label: 'Meno budget su traffico generico e campagne senza filtro',
+  },
+];
+
+const testimonials = [
+  {
+    quote:
+      'La differenza è stata nella qualità delle richieste: meno persone interessate solo allo sconto e più pazienti con un bisogno già chiaro.',
+    name: 'Direzione clinica odontoiatrica',
+    role: 'Clinica privata',
+  },
+  {
+    quote:
+      'Abbiamo capito quali servizi meritavano campagne dedicate e quali messaggi portavano richieste davvero prenotabili.',
+    name: 'Responsabile marketing sanitario',
+    role: 'Centro diagnostico',
+  },
+  {
+    quote:
+      'Il percorso è diventato più ordinato: annuncio, pagina e contatto parlano la stessa lingua.',
+    name: 'Founder studio specialistico',
+    role: 'Sanità privata',
+  },
+];
+
+function getPath() {
+  const normalized = window.location.pathname.replace(/\/+$/, '');
+  return normalized || '/';
+}
+
+function setMeta(name, content, attr = 'name') {
+  if (!content) return;
+  let tag = document.querySelector(`meta[${attr}="${name}"]`);
+  if (!tag) {
+    tag = document.createElement('meta');
+    tag.setAttribute(attr, name);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute('content', content);
+}
+
+function Logo({ navigate }) {
   return (
-    <a href="#home" className="logo" aria-label="Mago System home">
+    <a
+      href="/"
+      className="logo"
+      aria-label="Mago System home"
+      onClick={(event) => {
+        event.preventDefault();
+        navigate('/');
+      }}
+    >
       <img src={`${ASSETS}mago-system-logo-2026-05-17.png`} alt="Mago System" width="865" height="288" />
+    </a>
+  );
+}
+
+function SmartLink({ href, navigate, children, className, onClick, ...props }) {
+  return (
+    <a
+      href={href}
+      className={className}
+      onClick={(event) => {
+        if (href.startsWith('/')) {
+          event.preventDefault();
+          navigate(href);
+        }
+        onClick?.();
+      }}
+      {...props}
+    >
+      {children}
     </a>
   );
 }
@@ -196,7 +324,7 @@ function ContactModal({ isOpen, onClose }) {
     name: '',
     email: '',
     phone: '',
-    service: 'Google Ads e Meta Ads',
+    service: sectorOptions[0],
     message: '',
   });
   const [errors, setErrors] = useState({});
@@ -232,9 +360,9 @@ function ContactModal({ isOpen, onClose }) {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    const subject = encodeURIComponent(`Nuovo lead da ${form.name}`);
+    const subject = encodeURIComponent(`Nuovo lead sanitario da ${form.name}`);
     const body = encodeURIComponent(
-      `Nome: ${form.name}\nEmail: ${form.email}\nTelefono: ${form.phone || 'Non indicato'}\nServizio: ${form.service}\n\nMessaggio:\n${form.message}`,
+      `Nome: ${form.name}\nEmail: ${form.email}\nTelefono: ${form.phone || 'Non indicato'}\nSettore: ${form.service}\n\nMessaggio:\n${form.message}`,
     );
     window.location.href = `mailto:hello@magosystem.it?subject=${subject}&body=${body}`;
   };
@@ -252,11 +380,11 @@ function ContactModal({ isOpen, onClose }) {
         <button className="icon-button modal-close" type="button" onClick={onClose} aria-label="Chiudi form">
           <X size={22} />
         </button>
-        <p className="eyebrow">Parliamo del progetto</p>
+        <p className="eyebrow">Parliamo del tuo settore sanitario</p>
         <h2 id="contact-modal-title">Richiedi una consulenza</h2>
         <p id="contact-modal-description">
-          Raccontaci che attività hai, quale zona o mercato servi e quali canali usi oggi. Ti risponderemo con una
-          prima lettura e le prossime azioni consigliate.
+          Raccontaci struttura, zona, servizi prioritari e canali attivi. Ti risponderemo con una prima lettura del
+          potenziale di acquisizione pazienti.
         </p>
         <form className="modal-form" onSubmit={submitForm} noValidate>
           <label>
@@ -311,10 +439,9 @@ function ContactModal({ isOpen, onClose }) {
           <label>
             Servizio
             <select name="service" value={form.service} onChange={updateField}>
-              <option>Google Ads e Meta Ads</option>
-              <option>Siti e landing page</option>
-              <option>SEO e automazioni AI</option>
-              <option>Sistema acquisizione clienti</option>
+              {sectorOptions.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
             </select>
           </label>
           <label className="full-field">
@@ -324,7 +451,7 @@ function ContactModal({ isOpen, onClose }) {
               value={form.message}
               onChange={updateField}
               rows="4"
-              placeholder="Tipo di attività, obiettivi, zona servita, sito attuale e canali da migliorare."
+              placeholder="Tipo di struttura, servizi da spingere, città, sito attuale e canali da migliorare."
               required
               aria-invalid={Boolean(errors.message)}
               aria-describedby={errors.message ? 'message-error' : undefined}
@@ -344,33 +471,39 @@ function ContactModal({ isOpen, onClose }) {
   );
 }
 
-function App() {
+function Header({ navigate, openModal }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [activeSystemKey, setActiveSystemKey] = useState(acquisitionSystems[0].key);
-  const activeSystem = acquisitionSystems.find((system) => system.key === activeSystemKey) ?? acquisitionSystems[0];
-
-  const openModal = () => {
-    setMenuOpen(false);
-    setModalOpen(true);
-  };
-
   const closeMenu = () => setMenuOpen(false);
 
   return (
     <>
+      <div className="announcement">
+        <span>Acquisizione pazienti per strutture sanitarie private</span>
+        <button type="button" onClick={openModal}>
+          Analizza il tuo settore <ArrowUpRight size={15} />
+        </button>
+      </div>
       <header className="site-header">
         <div className="header-inner">
-          <Logo />
+          <Logo navigate={navigate} />
           <nav className="desktop-nav" aria-label="Navigazione principale">
-            <a href="#servizi">
-              Tutte le sezioni <ChevronDown size={15} />
-            </a>
-            {navItems.slice(1).map((item) => (
-              <a key={item.href} href={item.href}>
+            {navItems.map((item) => (
+              <SmartLink key={item.href} href={item.href} navigate={navigate}>
                 {item.label}
-              </a>
+              </SmartLink>
             ))}
+            <div className="sector-menu">
+              <button type="button" aria-haspopup="true">
+                Settori <ChevronDown size={16} />
+              </button>
+              <div className="sector-menu-panel">
+                {sectors.map((sector) => (
+                  <SmartLink key={sector.slug} href={`/${sector.slug}`} navigate={navigate}>
+                    {sector.label}
+                  </SmartLink>
+                ))}
+              </div>
+            </div>
           </nav>
           <button className="button primary header-cta" type="button" onClick={openModal}>
             Richiedi consulenza <ArrowUpRight size={18} />
@@ -393,308 +526,471 @@ function App() {
           aria-hidden={!menuOpen}
         >
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} onClick={closeMenu}>
+            <SmartLink key={item.href} href={item.href} navigate={navigate} onClick={closeMenu}>
               {item.label}
-            </a>
+            </SmartLink>
+          ))}
+          <span>Settori sanitari</span>
+          {sectors.map((sector) => (
+            <SmartLink key={sector.slug} href={`/${sector.slug}`} navigate={navigate} onClick={closeMenu}>
+              {sector.label}
+            </SmartLink>
           ))}
           <button className="button primary" type="button" onClick={openModal}>
             Richiedi consulenza <ArrowUpRight size={18} />
           </button>
         </nav>
       </header>
+    </>
+  );
+}
 
-      <main>
-        <section className="hero section-soft" id="home">
-          <div className="container hero-grid">
-            <div className="hero-copy reveal">
-              <p className="eyebrow">Agenzia italiana di acquisizione clienti</p>
-              <h1>Acquisisci clienti online con un sistema costruito per la tua attività</h1>
-              <p>
-                Aiutiamo PMI, liberi professionisti e attività locali a generare richieste, appuntamenti e vendite
-                attraverso Google Ads, Meta Ads, SEO, siti web, landing page e automazioni AI.
-              </p>
-              <div className="hero-actions">
-                <button className="button primary" type="button" onClick={openModal}>
-                  Richiedi una consulenza <ArrowUpRight size={18} />
-                </button>
-                <a className="button secondary" href="#servizi">
-                  Scopri i servizi <ArrowUpRight size={18} />
-                </a>
-              </div>
-            </div>
-            <div className="hero-visual reveal delay-1" aria-label="Consulente Mago System">
-              <img className="hero-pattern" src={`${ASSETS}hero-pattern.svg`} alt="" width="534" height="702" />
-              <img
-                className="hero-glow"
-                src={`${ASSETS}hero-glow.png`}
-                alt=""
-                width="780"
-                height="1024"
-                decoding="async"
-              />
-              <OptimizedImage
-                className="hero-person"
-                src="hero-person.png"
-                webp="hero-person.webp"
-                alt="Consulente acquisizione clienti"
-                width="780"
-                height="1024"
-                fetchPriority="high"
-              />
-              <div className="user-badge">
-                <strong>1M+ persone raggiunte</strong>
-                <span>
-                  <img src={`${ASSETS}avatar-1.png`} alt="" width="34" height="34" decoding="async" />
-                  <img src={`${ASSETS}avatar-2.png`} alt="" width="34" height="34" decoding="async" />
-                  <img src={`${ASSETS}avatar-3.png`} alt="" width="34" height="34" decoding="async" />
-                </span>
-              </div>
-              <div className="review-badge">
-                <img src={`${ASSETS}google-logo.svg`} alt="" width="30" height="30" />
-                <span className="stars" aria-hidden="true">★★★★★</span>
-                <span className="sr-only">Valutazione media 4.8 su 5.</span>
-                <span>(4.8) recensioni</span>
-              </div>
-            </div>
-          </div>
-        </section>
+function HeroVisual() {
+  return (
+    <div className="hero-visual reveal delay-1" aria-label="Sistema di acquisizione pazienti Mago System">
+      <div className="orbit orbit-one" />
+      <div className="orbit orbit-two" />
+      <div className="medical-card main">
+        <span>
+          <Stethoscope size={28} />
+        </span>
+        <strong>Pazienti locali</strong>
+        <small>interesse reale, zona corretta, servizio prioritario</small>
+      </div>
+      <div className="medical-card metric">
+        <CalendarCheck size={25} />
+        <strong>Agenda</strong>
+        <small>richieste verso prenotazioni</small>
+      </div>
+      <div className="medical-card search">
+        <Search size={25} />
+        <strong>Intento</strong>
+        <small>campagne per bisogno specifico</small>
+      </div>
+      <div className="medical-card trust">
+        <ShieldCheck size={25} />
+        <strong>Fiducia</strong>
+        <small>prova, chiarezza e percorso</small>
+      </div>
+    </div>
+  );
+}
 
-        <section className="services" id="servizi">
-          <div className="container">
-            <div className="service-panel reveal">
-              <h2>Canali, pagine e automazioni per acquisire clienti online</h2>
-              <div className="service-grid">
-                {services.map((service) => (
-                  <article className="service-card" key={service.title}>
-                    <img src={`${ASSETS}${service.icon}`} alt="" width="50" height="50" loading="lazy" />
-                    <h3>{service.title}</h3>
-                    <p>{service.text}</p>
-                    <button type="button" onClick={openModal}>
-                      Scopri di più <ArrowUpRight size={16} />
-                    </button>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="brand-strip" aria-label="Aziende che si affidano a Mago System">
-          <div className="container">
-            <h2>Scelti da attività che vogliono crescere online</h2>
-            <div className="logo-marquee">
-              <div>
-                {[...logos, ...logos, ...logos].map((logo, index) => (
-                  <img key={`${logo}-${index}`} src={`${ASSETS}${logo}`} alt="" width="240" height="56" loading="lazy" />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="feature-section">
-          <div className="container feature-grid">
-            <div className="feature-media reveal">
-              <OptimizedImage
-                className="feature-main"
-                src="feature-main.jpg"
-                webp="feature-main.webp"
-                alt="Consulente al telefono"
-                width="512"
-                height="341"
-                loading="lazy"
-              />
-              <img
-                className="feature-overlay"
-                src={`${ASSETS}feature-overlay.png`}
-                alt="Dashboard marketing"
-                width="512"
-                height="438"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="feature-copy reveal delay-1">
-              <p className="eyebrow">Sistema di acquisizione clienti</p>
-              <h2>Trasforma i canali online in richieste, appuntamenti e vendite</h2>
-              <p>
-                Uniamo strategia, creatività, advertising, SEO e automazioni per costruire percorsi semplici da
-                misurare e ottimizzare.
-              </p>
-              <div className="feature-items">
-                <article>
-                  <img src={`${ASSETS}icon-ai-seo.svg`} alt="" width="43" height="40" loading="lazy" />
-                  <h3>Automazioni AI</h3>
-                  <p>Processi più rapidi per raccogliere, qualificare e seguire i contatti generati online.</p>
-                </article>
-                <article>
-                  <img src={`${ASSETS}icon-digital-strategy.svg`} alt="" width="43" height="40" loading="lazy" />
-                  <h3>Strategia digitale</h3>
-                  <p>Piani chiari per migliorare campagne, conversioni, tracciamento e risultati dei canali.</p>
-                </article>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="case-section section-soft" id="case-study">
-          <div className="container">
-            <p className="case-eyebrow">Canali collegati a un sistema unico</p>
-            <h2 className="center-title">Scegli il canale e guarda come cambia il lavoro</h2>
-            <p className="case-intro">
-              Ogni canale ha un ruolo diverso: intercettare domanda, creare interesse, aumentare fiducia o ridurre
-              lavoro manuale. Il valore nasce quando il percorso è chiaro dall’annuncio alla richiesta.
+function HomePage({ navigate, openModal }) {
+  return (
+    <main>
+      <section className="hero" id="home">
+        <div className="container hero-grid">
+          <div className="hero-copy reveal">
+            <p className="eyebrow">Mago System per il settore sanitario</p>
+            <h1>Portiamo alla tua struttura appuntamenti qualificati da pazienti locali</h1>
+            <p>
+              Costruiamo sistemi di acquisizione per cliniche e professionisti sanitari: più servizi ad alto valore,
+              più percezione di fiducia, meno tempo perso con contatti freddi e meno dipendenza da sconti o passaparola.
             </p>
-            <div className="filter-tabs" aria-label="Filtri case study">
-              {acquisitionSystems.map((system) => (
-                <button
-                  className={system.key === activeSystem.key ? 'active' : ''}
-                  type="button"
-                  key={system.key}
-                  aria-pressed={system.key === activeSystem.key}
-                  onClick={() => setActiveSystemKey(system.key)}
-                >
-                  {system.label}
-                </button>
-              ))}
+            <div className="hero-actions">
+              <button className="button primary" type="button" onClick={openModal}>
+                Richiedi una consulenza <ArrowUpRight size={18} />
+              </button>
+              <SmartLink className="button secondary" href="/#settori" navigate={navigate}>
+                Vedi i settori <ArrowUpRight size={18} />
+              </SmartLink>
             </div>
-            <article className="case-detail reveal" aria-live="polite">
-              <OptimizedImage
-                src={activeSystem.image}
-                webp={activeSystem.image.replace('.jpg', '.webp')}
-                alt={activeSystem.title}
-                width="720"
-                height="480"
-                loading="lazy"
-                sizes="(max-width: 900px) calc(100vw - 24px), 520px"
-              />
-              <div className="case-detail-content">
-                <span>{activeSystem.category}</span>
-                <h3>{activeSystem.title}</h3>
-                <p>{activeSystem.text}</p>
-                <ul>
-                  {activeSystem.bullets.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                <div className="case-metric">
-                  <strong>{activeSystem.metric}</strong>
-                  <small>{activeSystem.metricLabel}</small>
-                </div>
-              </div>
+            <div className="hero-proof" aria-label="Indicatori del sistema">
+              <span>+ pazienti locali</span>
+              <span>- spreco budget</span>
+              <span>+ valore percepito</span>
+            </div>
+          </div>
+          <HeroVisual />
+        </div>
+      </section>
+
+      <section className="proof-section" id="risultati">
+        <div className="container proof-grid">
+          {proofCards.map((card) => (
+            <article className="proof-card reveal" key={card.value}>
+              <strong>{card.value}</strong>
+              <p>{card.label}</p>
             </article>
-            <button className="button primary compact" type="button" onClick={openModal}>
-              Parla con noi
+          ))}
+        </div>
+      </section>
+
+      <section className="split-section">
+        <div className="container split-grid">
+          <div className="split-media reveal">
+            <OptimizedImage
+              src="feature-main.jpg"
+              webp="feature-main.webp"
+              alt="Consulenza per acquisizione pazienti sanitari"
+              width="512"
+              height="341"
+              loading="lazy"
+            />
+          </div>
+          <div className="split-copy reveal delay-1">
+            <p className="eyebrow">Perché il sanitario è diverso</p>
+            <h2>Non basta portare lead. Serve far arrivare pazienti pronti al passo giusto.</h2>
+            <p>
+              Nel sanitario privato il paziente valuta fiducia, urgenza, specializzazione, distanza e chiarezza del
+              percorso. Per questo ogni campagna deve filtrare, rassicurare e accompagnare verso la richiesta.
+            </p>
+            <ul className="check-list">
+              <li>
+                <CheckCircle2 size={20} /> Messaggi per bisogni reali e servizi prioritari
+              </li>
+              <li>
+                <CheckCircle2 size={20} /> Landing veloci, professionali e orientate alla prenotazione
+              </li>
+              <li>
+                <CheckCircle2 size={20} /> Tracking per capire quali richieste generano valore
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="sectors-section" id="settori">
+        <div className="container">
+          <div className="section-heading reveal">
+            <p className="eyebrow">Settori sanitari</p>
+            <h2>Pagine e funnel verticali per ogni specializzazione</h2>
+            <p>
+              Ogni verticale ha bisogno di una promessa diversa. Qui sotto trovi le aree per cui costruiamo percorsi di
+              acquisizione pazienti su misura.
+            </p>
+          </div>
+          <div className="sector-grid">
+            {sectors.map((sector) => (
+              <SmartLink className="sector-card reveal" key={sector.slug} href={`/${sector.slug}`} navigate={navigate}>
+                <span>{sector.eyebrow}</span>
+                <h3>{sector.label}</h3>
+                <p>{sector.desired}, {sector.effort}.</p>
+                <ArrowUpRight size={20} aria-hidden="true" />
+              </SmartLink>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="method-section" id="metodo">
+        <div className="container">
+          <div className="section-heading reveal">
+            <p className="eyebrow">Metodo Mago System</p>
+            <h2>Dal bisogno del paziente alla richiesta qualificata</h2>
+          </div>
+          <div className="method-grid">
+            {methodSteps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <article className="method-card reveal" key={step.title}>
+                  <small>0{index + 1}</small>
+                  <Icon size={30} />
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="comparison-section">
+        <div className="container comparison-grid">
+          <div className="comparison-copy reveal">
+            <p className="eyebrow">Prima / dopo</p>
+            <h2>Meno campagne generiche. Più percorsi costruiti sul valore sanitario.</h2>
+          </div>
+          <div className="comparison-panels">
+            <article className="comparison-card muted reveal">
+              <h3>Approccio tradizionale</h3>
+              <p>Annunci generici, traffico freddo, richieste da prezzo basso, follow-up manuale e poca chiarezza sui servizi che generano valore.</p>
+            </article>
+            <article className="comparison-card active reveal delay-1">
+              <h3>Sistema Mago</h3>
+              <p>Messaggi verticali, pagine rapide, prova sociale, CTA semplici e dati per capire quali pazienti arrivano dai canali giusti.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="testimonial-section">
+        <div className="container">
+          <div className="testimonial-track reveal" aria-label="Testimonianze sanitarie">
+            {testimonials.map((item) => (
+              <article className="testimonial-card" key={item.name}>
+                <div className="stars" aria-hidden="true">★★★★★</div>
+                <p>“{item.quote}”</p>
+                <strong>{item.name}</strong>
+                <span>{item.role}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <FinalCta openModal={openModal} />
+    </main>
+  );
+}
+
+function SectorPage({ sector, navigate, openModal }) {
+  return (
+    <main>
+      <section className="sector-hero">
+        <div className="container sector-hero-grid">
+          <div className="sector-hero-copy reveal">
+            <p className="eyebrow">{sector.eyebrow}</p>
+            <h1>{sector.headline}</h1>
+            <p>{sector.subhead}</p>
+            <div className="hero-actions">
+              <button className="button primary" type="button" onClick={openModal}>
+                Richiedi consulenza <ArrowUpRight size={18} />
+              </button>
+              <SmartLink className="button secondary" href="/#settori" navigate={navigate}>
+                Altri settori <ArrowUpRight size={18} />
+              </SmartLink>
+            </div>
+          </div>
+          <div className="sector-score reveal delay-1" aria-label={`Formula di acquisizione per ${sector.label}`}>
+            <span>{sector.label}</span>
+            <div>
+              <strong>+ {sector.desired}</strong>
+              <strong>+ {sector.success}</strong>
+              <strong>- {sector.time}</strong>
+              <strong>- {sector.effort}</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="sector-detail">
+        <div className="container sector-detail-grid">
+          <article className="detail-panel reveal">
+            <Clock3 size={30} />
+            <h2>Il problema</h2>
+            <p>{sector.pain}</p>
+          </article>
+          <article className="detail-panel featured reveal delay-1">
+            <Sparkles size={30} />
+            <h2>Il sistema</h2>
+            <p>{sector.system}</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="benefit-section">
+        <div className="container">
+          <div className="section-heading reveal">
+            <p className="eyebrow">Cosa costruiamo</p>
+            <h2>Un percorso pensato per far percepire valore prima del contatto</h2>
+          </div>
+          <div className="benefit-grid">
+            {sector.benefits.map((benefit) => (
+              <article className="benefit-card reveal" key={benefit}>
+                <CheckCircle2 size={24} />
+                <h3>{benefit}</h3>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="split-section">
+        <div className="container split-grid reverse">
+          <div className="split-copy reveal">
+            <p className="eyebrow">Campagne, landing e follow-up</p>
+            <h2>Dal primo clic a una richiesta più pronta, leggibile e coerente.</h2>
+            <p>
+              Non promettiamo risultati clinici o scorciatoie. Costruiamo un sistema di comunicazione e acquisizione
+              che aiuta la persona giusta a capire perché contattarti e quale passo fare dopo.
+            </p>
+            <button className="button primary" type="button" onClick={openModal}>
+              Analizza questo settore <ArrowUpRight size={18} />
             </button>
           </div>
-        </section>
-
-        <section className="testimonial-section section-soft">
-          <div className="container">
-            <div className="testimonial-panel reveal">
-              <div>
-                <h2>Cosa dicono i clienti di noi</h2>
-                <div className="testimonial-person">
-                  <span />
-                  <strong>{activeSystem.person}</strong>
-                  <small>{activeSystem.role}</small>
-                </div>
-                <p>{activeSystem.quote}</p>
-                <div className="trust-row">
-                  <span aria-hidden="true">★★★★★</span>
-                  <span className="sr-only">Valutazione {activeSystem.rating}.</span>
-                  <strong>{activeSystem.rating}</strong>
-                </div>
-              </div>
-              <div className="testimonial-placeholder" aria-hidden="true">
-                <span>MS</span>
-              </div>
+          <div className="dashboard-card reveal delay-1">
+            <div>
+              <BarChart3 size={26} />
+              <span>Richieste qualificate</span>
+              <strong>Intento alto</strong>
             </div>
-          </div>
-        </section>
-
-        <section className="blog-section" id="blog">
-          <div className="container">
-            <h2 className="center-title">Blog & Articoli</h2>
-            <div className="blog-grid">
-              {blogPosts.map((post) => (
-                <article className="blog-card reveal" key={post.title}>
-                  <div className="blog-image">
-                    <OptimizedImage
-                      src={post.image}
-                      webp={post.image.replace('.jpg', '.webp')}
-                      alt={post.title}
-                      width="600"
-                      height={post.image === 'blog-2.jpg' ? '800' : '400'}
-                      loading="lazy"
-                      sizes="(max-width: 760px) calc(100vw - 16px), 350px"
-                    />
-                    <time>
-                      <strong>{post.day}</strong>
-                      <span>{post.month}</span>
-                    </time>
-                  </div>
-                  <div className="blog-content">
-                    <span>{post.category}</span>
-                    <h3>{post.title}</h3>
-                  </div>
-                  <div className="blog-author">
-                    <UserRound size={16} /> {post.author}
-                  </div>
-                </article>
-              ))}
+            <div>
+              <Activity size={26} />
+              <span>Servizi prioritari</span>
+              <strong>Budget protetto</strong>
             </div>
-          </div>
-        </section>
-
-        <section className="footer-cta section-soft">
-          <div className="container">
-            <div className="cta-card reveal">
-              <div>
-                <h2>Vuoi generare più clienti dai canali online?</h2>
-                <p>
-                  Partiamo dalla tua attività, dai canali attivi e dagli obiettivi. Poi costruiamo un sistema concreto.
-                </p>
-                <button className="button primary" type="button" onClick={openModal}>
-                  Richiedi una consulenza <ArrowUpRight size={18} />
-                </button>
-              </div>
-              <img src={`${ASSETS}footer-pattern.svg`} alt="" width="534" height="290" loading="lazy" />
+            <div>
+              <MapPin size={26} />
+              <span>Area locale</span>
+              <strong>Domanda vicina</strong>
             </div>
-          </div>
-        </section>
-      </main>
-
-      <footer className="site-footer" id="contatti">
-        <div className="container footer-grid">
-          <div className="footer-brand">
-            <Logo />
-            <p>Agenzia italiana di acquisizione clienti per PMI, liberi professionisti e attività locali.</p>
-          </div>
-          <div>
-            <h3>Servizi</h3>
-            <a href="#servizi">Servizi</a>
-            <a href="#case-study">Case Study</a>
-            <a href="#contatti">Contatti</a>
-            <button type="button" onClick={openModal}>Parla con noi</button>
-          </div>
-          <div>
-            <h3>Contatti</h3>
-            <p>Via L. Ariosto, 4/c, 41012 Carpi MO, Italia</p>
-            <a href="mailto:hello@magosystem.it">
-              <Mail size={18} /> info@magodigital.it
-            </a>
-            
           </div>
         </div>
-        <div className="container footer-bottom">
-          <a className="scroll-top" href="#home" aria-label="Torna su">
-            <ArrowUp size={21} />
+      </section>
+
+      <FinalCta openModal={openModal} title={`Vuoi capire il potenziale per ${sector.label.toLowerCase()}?`} />
+    </main>
+  );
+}
+
+function NotFoundPage({ navigate }) {
+  return (
+    <main className="not-found">
+      <div className="container">
+        <p className="eyebrow">Pagina non trovata</p>
+        <h1>Questo percorso non esiste ancora.</h1>
+        <SmartLink className="button primary" href="/" navigate={navigate}>
+          Torna alla home <ArrowUpRight size={18} />
+        </SmartLink>
+      </div>
+    </main>
+  );
+}
+
+function FinalCta({ openModal, title = 'Vuoi portare più pazienti qualificati alla tua struttura?' }) {
+  return (
+    <section className="footer-cta">
+      <div className="container">
+        <div className="cta-card reveal">
+          <div>
+            <p className="eyebrow">Prima lettura gratuita</p>
+            <h2>{title}</h2>
+            <p>
+              Partiamo da settore, città, servizi prioritari e canali attivi. Poi identifichiamo quali percorsi possono
+              generare richieste più utili.
+            </p>
+            <button className="button primary" type="button" onClick={openModal}>
+              Richiedi una consulenza <ArrowUpRight size={18} />
+            </button>
+          </div>
+          <img src={`${ASSETS}footer-pattern.svg`} alt="" width="534" height="290" loading="lazy" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer({ navigate, openModal }) {
+  return (
+    <footer className="site-footer" id="contatti">
+      <div className="container footer-grid">
+        <div className="footer-brand">
+          <Logo navigate={navigate} />
+          <p>Acquisizione pazienti per cliniche, studi e professionisti sanitari privati.</p>
+        </div>
+        <div>
+          <h3>Settori</h3>
+          {sectors.slice(0, 5).map((sector) => (
+            <SmartLink key={sector.slug} href={`/${sector.slug}`} navigate={navigate}>
+              {sector.label}
+            </SmartLink>
+          ))}
+        </div>
+        <div>
+          <h3>Contatti</h3>
+          <p>Via L. Ariosto, 4/c, 41012 Carpi MO, Italia</p>
+          <a href="mailto:info@magodigital.it">
+            <Mail size={18} /> info@magodigital.it
           </a>
-          <p>Copyright @2026, Mago System. Tutti i diritti riservati</p>
+          <button type="button" onClick={openModal}>Parla con noi</button>
         </div>
-      </footer>
+      </div>
+      <div className="container footer-bottom">
+        <a className="scroll-top" href="#home" aria-label="Torna su">
+          <ArrowUp size={21} />
+        </a>
+        <p>Copyright @2026, Mago System. Tutti i diritti riservati</p>
+      </div>
+    </footer>
+  );
+}
 
+function App() {
+  const [path, setPath] = useState(getPath);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const activeSector = useMemo(() => sectors.find((sector) => `/${sector.slug}` === path), [path]);
+  const isKnownPath = path === '/' || Boolean(activeSector);
+
+  const navigate = (to) => {
+    const [nextPath, hash] = to.split('#');
+    const targetPath = nextPath || '/';
+    window.history.pushState({}, '', to);
+    setPath(targetPath.replace(/\/+$/, '') || '/');
+    window.requestAnimationFrame(() => {
+      if (hash) {
+        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  };
+
+  useEffect(() => {
+    const onPopState = () => setPath(getPath());
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
+  useEffect(() => {
+    const pageMeta = activeSector
+      ? {
+          title: `${activeSector.label} - Acquisizione pazienti | Mago System`,
+          description: activeSector.subhead,
+          path: `/${activeSector.slug}`,
+        }
+      : homeMeta;
+
+    document.title = pageMeta.title;
+    setMeta('description', pageMeta.description);
+    setMeta('og:title', pageMeta.title, 'property');
+    setMeta('og:description', pageMeta.description, 'property');
+    setMeta('og:url', `${SITE_URL}${pageMeta.path}`, 'property');
+    setMeta('twitter:title', pageMeta.title);
+    setMeta('twitter:description', pageMeta.description);
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', `${SITE_URL}${pageMeta.path}`);
+  }, [activeSector]);
+
+  useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const elements = Array.from(document.querySelectorAll('.reveal'));
+    if (reduced) {
+      elements.forEach((element) => element.classList.add('is-visible'));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -60px' },
+    );
+
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, [path]);
+
+  return (
+    <>
+      <Header navigate={navigate} openModal={() => setModalOpen(true)} />
+      {path === '/' && <HomePage navigate={navigate} openModal={() => setModalOpen(true)} />}
+      {activeSector && <SectorPage sector={activeSector} navigate={navigate} openModal={() => setModalOpen(true)} />}
+      {!isKnownPath && <NotFoundPage navigate={navigate} />}
+      <Footer navigate={navigate} openModal={() => setModalOpen(true)} />
       <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
