@@ -537,27 +537,35 @@ function Header({ navigate, openModal, modalOpen }) {
           aria-label="Navigazione mobile"
           aria-hidden={!menuOpen}
         >
-          {navItems.map((item) => (
-            <SmartLink key={item.href} href={item.href} navigate={navigate} onClick={closeMenu}>
-              {item.label}
-            </SmartLink>
-          ))}
-          <span>Settori sanitari</span>
-          {sectors.map((sector) => (
-            <SmartLink key={sector.slug} href={`/${sector.slug}`} navigate={navigate} onClick={closeMenu}>
-              {sector.label}
-            </SmartLink>
-          ))}
-          <button
-            className="button primary"
-            type="button"
-            onClick={() => {
-              closeMenu();
-              openModal();
-            }}
-          >
-            Richiedi consulenza <ArrowUpRight size={18} />
-          </button>
+          <div className="mobile-nav-scroll">
+            <div className="mobile-nav-section mobile-nav-primary">
+              {navItems.map((item) => (
+                <SmartLink key={item.href} href={item.href} navigate={navigate} onClick={closeMenu}>
+                  {item.label}
+                </SmartLink>
+              ))}
+            </div>
+            <div className="mobile-nav-section">
+              <span className="mobile-nav-label">Settori sanitari</span>
+              <div className="mobile-sector-list">
+                {sectors.map((sector) => (
+                  <SmartLink key={sector.slug} href={`/${sector.slug}`} navigate={navigate} onClick={closeMenu}>
+                    {sector.label}
+                  </SmartLink>
+                ))}
+              </div>
+            </div>
+            <button
+              className="button primary"
+              type="button"
+              onClick={() => {
+                closeMenu();
+                openModal();
+              }}
+            >
+              Richiedi consulenza <ArrowUpRight size={18} />
+            </button>
+          </div>
         </nav>
       </header>
     </>
