@@ -4,6 +4,7 @@ import {
   ArrowUp,
   ArrowUpRight,
   BarChart3,
+  CalendarDays,
   CalendarCheck,
   CheckCircle2,
   ChevronDown,
@@ -17,6 +18,7 @@ import {
   Sparkles,
   Stethoscope,
   Target,
+  Video,
   X,
 } from 'lucide-react';
 
@@ -167,6 +169,13 @@ const sectors = [
 
 const sectorOptions = sectors.map((sector) => sector.label);
 
+const bookingWindows = [
+  'Mattina 09:00 - 12:00',
+  'Pausa pranzo 12:00 - 14:00',
+  'Pomeriggio 14:00 - 18:00',
+  'Fine giornata 18:00 - 20:00',
+];
+
 const homeMeta = {
   title: 'Mago System Sanitario - Acquisizione pazienti per strutture sanitarie',
   description:
@@ -252,6 +261,12 @@ const testimonials = [
 function getPath() {
   const normalized = window.location.pathname.replace(/\/+$/, '');
   return normalized || '/';
+}
+
+function getTodayInputValue() {
+  const today = new Date();
+  today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  return today.toISOString().slice(0, 10);
 }
 
 function setMeta(name, content, attr = 'name') {
@@ -480,7 +495,244 @@ function ContactModal({ isOpen, onClose }) {
   );
 }
 
-function Header({ navigate, openModal, modalOpen }) {
+function BookingModal({ isOpen, onClose }) {
+  const minBookingDate = useMemo(getTodayInputValue, []);
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    service: sectorOptions[0],
+    preferredDate: '',
+    preferredTime: bookingWindows[0],
+    website: '',
+    notes: '',
+  });
+  const [errors, setErrors] = useState({});
+  const [submitState, setSubmitState] = useState('idle');
+  const firstFieldRef = useRef(null);
+
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    document.body.classList.add('modal-open');
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    window.requestAnimationFrame(() => firstFieldRef.current?.focus());
+    return () => {
+      document.body.classList.remove('modal-open');
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  const updateField = (event) => {
+    const { name, value } = event.target;
+    setForm((current) => ({ ...current, [name]: value }));
+    setSubmitState('idle');
+  };
+
+  const submitForm = async (event) => {
+    event.preventDefault();
+    const nextErrors = {};
+    if (!form.name.trim()) nextErrors.name = 'Inserisci il nome.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) nextErrors.email = 'Inserisci una email valida.';
+    if (!form.preferredDate) nextErrors.preferredDate = 'Scegli un giorno indicativo.';
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return;
+
+    setSubmitState('loading');
+
+    const message = [
+      'Richiesta booking videochiamata strategica.',
+      '',
+      `Giorno preferito: ${form.preferredDate}`,
+      `Fascia preferita: ${form.preferredTime}`,
+      `Sito attuale: ${form.website || 'Non indicato'}`,
+      '',
+      'Note:',
+      form.notes || 'Nessuna nota aggiuntiva.',
+    ].join('\n');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          requestType: 'booking',
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          service: form.service,
+          preferredDate: form.preferredDate,
+          preferredTime: form.preferredTime,
+          website: form.website,
+          message,
+        }),
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Prenotazione non riuscita.');
+      }
+
+      setForm({
+        name: '',
+        email: '',
+        phone: '',
+        service: sectorOptions[0],
+        preferredDate: '',
+        preferredTime: bookingWindows[0],
+        website: '',
+        notes: '',
+      });
+      setSubmitState('success');
+    } catch (error) {
+      setSubmitState('error');
+      setErrors({ submit: error.message || 'Prenotazione non riuscita. Riprova tra poco.' });
+    }
+  };
+
+  return (
+    <div className="modal-layer" role="presentation" onMouseDown={onClose}>
+      <div
+        className="contact-modal booking-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="booking-modal-title"
+        aria-describedby="booking-modal-description"
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        <button className="icon-button modal-close" type="button" onClick={onClose} aria-label="Chiudi booking">
+          <X size={22} />
+        </button>
+        <p className="eyebrow">Videochiamata strategica</p>
+        <h2 id="booking-modal-title">Prenota una videochiamata</h2>
+        <p id="booking-modal-description">
+          Scegli una preferenza indicativa: ti ricontatteremo per confermare lo slot migliore e preparare una lettura
+          mirata su settore, zona e canali attivi.
+        </p>
+        <form className="modal-form" onSubmit={submitForm} noValidate>
+          <label>
+            Nome
+            <input
+              ref={firstFieldRef}
+              name="name"
+              value={form.name}
+              onChange={updateField}
+              placeholder="Mario Rossi"
+              autoComplete="name"
+              required
+              aria-invalid={Boolean(errors.name)}
+              aria-describedby={errors.name ? 'booking-name-error' : undefined}
+            />
+            {errors.name && (
+              <span id="booking-name-error" role="alert">
+                {errors.name}
+              </span>
+            )}
+          </label>
+          <label>
+            Email
+            <input
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={updateField}
+              placeholder="mario@azienda.it"
+              autoComplete="email"
+              required
+              aria-invalid={Boolean(errors.email)}
+              aria-describedby={errors.email ? 'booking-email-error' : undefined}
+            />
+            {errors.email && (
+              <span id="booking-email-error" role="alert">
+                {errors.email}
+              </span>
+            )}
+          </label>
+          <label>
+            Telefono
+            <input
+              name="phone"
+              type="tel"
+              value={form.phone}
+              onChange={updateField}
+              placeholder="+39 333 000 0000"
+              autoComplete="tel"
+            />
+          </label>
+          <label>
+            Settore
+            <select name="service" value={form.service} onChange={updateField}>
+              {sectorOptions.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Giorno preferito
+            <input
+              name="preferredDate"
+              type="date"
+              value={form.preferredDate}
+              onChange={updateField}
+              min={minBookingDate}
+              required
+              aria-invalid={Boolean(errors.preferredDate)}
+              aria-describedby={errors.preferredDate ? 'booking-date-error' : undefined}
+            />
+            {errors.preferredDate && (
+              <span id="booking-date-error" role="alert">
+                {errors.preferredDate}
+              </span>
+            )}
+          </label>
+          <label>
+            Fascia oraria
+            <select name="preferredTime" value={form.preferredTime} onChange={updateField}>
+              {bookingWindows.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </select>
+          </label>
+          <label className="full-field">
+            Sito attuale
+            <input
+              name="website"
+              type="url"
+              value={form.website}
+              onChange={updateField}
+              placeholder="https://www.tuosito.it"
+              autoComplete="url"
+            />
+          </label>
+          <label className="full-field">
+            Note utili
+            <textarea
+              name="notes"
+              value={form.notes}
+              onChange={updateField}
+              rows="3"
+              placeholder="Servizi da spingere, città, urgenze commerciali o campagne già attive."
+            />
+          </label>
+          <button className="button primary full-field" type="submit" disabled={submitState === 'loading'}>
+            {submitState === 'loading' ? 'Invio in corso...' : 'Prenota videochiamata'} <CalendarCheck size={18} />
+          </button>
+          <p className={`form-status full-field ${submitState === 'success' ? 'is-success' : ''}`} role="status">
+            {submitState === 'success'
+              ? 'Richiesta booking inviata. Ti ricontatteremo per confermare lo slot.'
+              : errors.submit || ''}
+          </p>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function Header({ navigate, openModal, openBooking, modalOpen }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerHidden, setHeaderHidden] = useState(false);
   const closeMenu = () => setMenuOpen(false);
@@ -519,8 +771,8 @@ function Header({ navigate, openModal, modalOpen }) {
     <>
       <div className="announcement">
         <span>Acquisizione pazienti per strutture sanitarie private</span>
-        <button type="button" onClick={openModal}>
-          Analizza il tuo settore <ArrowUpRight size={15} />
+        <button type="button" onClick={openBooking}>
+          Prenota videochiamata <CalendarCheck size={15} />
         </button>
       </div>
       <header className={`site-header ${headerHidden ? 'is-hidden' : ''}`}>
@@ -545,8 +797,8 @@ function Header({ navigate, openModal, modalOpen }) {
               </div>
             </div>
           </nav>
-          <button className="button primary header-cta" type="button" onClick={openModal}>
-            Richiedi consulenza <ArrowUpRight size={18} />
+          <button className="button primary header-cta" type="button" onClick={openBooking}>
+            Prenota videochiamata <CalendarCheck size={18} />
           </button>
           <button
             className="icon-button menu-button"
@@ -585,6 +837,16 @@ function Header({ navigate, openModal, modalOpen }) {
             </div>
             <button
               className="button primary"
+              type="button"
+              onClick={() => {
+                closeMenu();
+                openBooking();
+              }}
+            >
+              Prenota videochiamata <CalendarCheck size={18} />
+            </button>
+            <button
+              className="button secondary"
               type="button"
               onClick={() => {
                 closeMenu();
@@ -636,7 +898,7 @@ function HeroVisual() {
   );
 }
 
-function HomePage({ navigate, openModal }) {
+function HomePage({ navigate, openModal, openBooking }) {
   return (
     <main>
       <section className="hero" id="home">
@@ -649,12 +911,12 @@ function HomePage({ navigate, openModal }) {
               campagne locali, crescita misurabile e ottimizzazione continua dei percorsi di richiesta.
             </p>
             <div className="hero-actions">
-              <button className="button primary" type="button" onClick={openModal}>
-                Richiedi una consulenza <ArrowUpRight size={18} />
+              <button className="button primary" type="button" onClick={openBooking}>
+                Prenota videochiamata <CalendarCheck size={18} />
               </button>
-              <SmartLink className="button secondary" href="/#settori" navigate={navigate}>
-                Vedi i settori <ArrowUpRight size={18} />
-              </SmartLink>
+              <button className="button secondary" type="button" onClick={openModal}>
+                Richiedi consulenza <ArrowUpRight size={18} />
+              </button>
             </div>
             <div className="hero-proof" aria-label="Leve del sistema MAGO">
               <span>Marketing sanitario</span>
@@ -668,6 +930,8 @@ function HomePage({ navigate, openModal }) {
       </section>
 
       <MagoSection />
+
+      <BookingBand openBooking={openBooking} />
 
       <section className="split-section">
         <div className="container split-grid">
@@ -782,7 +1046,7 @@ function HomePage({ navigate, openModal }) {
         </div>
       </section>
 
-      <FinalCta openModal={openModal} />
+      <FinalCta openModal={openModal} openBooking={openBooking} />
     </main>
   );
 }
@@ -813,7 +1077,30 @@ function MagoSection() {
   );
 }
 
-function SectorPage({ sector, navigate, openModal }) {
+function BookingBand({ openBooking }) {
+  return (
+    <section className="booking-band" aria-labelledby="booking-band-title">
+      <div className="container booking-band-card reveal">
+        <div className="booking-band-icon" aria-hidden="true">
+          <Video size={30} />
+        </div>
+        <div>
+          <p className="eyebrow">Slot strategico</p>
+          <h2 id="booking-band-title">Blocca una videochiamata prima di investire altro budget</h2>
+          <p>
+            In 30 minuti analizziamo settore, città, servizi prioritari e frizioni del funnel. Così capisci dove può
+            nascere crescita prima di aggiungere nuove campagne.
+          </p>
+        </div>
+        <button className="button primary" type="button" onClick={openBooking}>
+          Prenota videochiamata <CalendarDays size={18} />
+        </button>
+      </div>
+    </section>
+  );
+}
+
+function SectorPage({ sector, navigate, openModal, openBooking }) {
   return (
     <main>
       <section className="sector-hero">
@@ -823,12 +1110,12 @@ function SectorPage({ sector, navigate, openModal }) {
             <h1>{sector.headline}</h1>
             <p>{sector.subhead}</p>
             <div className="hero-actions">
-              <button className="button primary" type="button" onClick={openModal}>
+              <button className="button primary" type="button" onClick={openBooking}>
+                Prenota videochiamata <CalendarCheck size={18} />
+              </button>
+              <button className="button secondary" type="button" onClick={openModal}>
                 Richiedi consulenza <ArrowUpRight size={18} />
               </button>
-              <SmartLink className="button secondary" href="/#settori" navigate={navigate}>
-                Altri settori <ArrowUpRight size={18} />
-              </SmartLink>
             </div>
           </div>
           <div className="sector-score reveal delay-1" aria-label={`Sistema MAGO per ${sector.label}`}>
@@ -884,9 +1171,14 @@ function SectorPage({ sector, navigate, openModal }) {
               Non promettiamo risultati clinici o scorciatoie. Costruiamo un sistema di comunicazione e acquisizione
               che aiuta la persona giusta a capire perché contattarti e quale passo fare dopo.
             </p>
-            <button className="button primary" type="button" onClick={openModal}>
-              Analizza questo settore <ArrowUpRight size={18} />
-            </button>
+            <div className="split-actions">
+              <button className="button primary" type="button" onClick={openBooking}>
+                Prenota videochiamata <CalendarCheck size={18} />
+              </button>
+              <button className="button secondary" type="button" onClick={openModal}>
+                Analizza questo settore <ArrowUpRight size={18} />
+              </button>
+            </div>
           </div>
           <div className="dashboard-card reveal delay-1">
             <div>
@@ -908,7 +1200,11 @@ function SectorPage({ sector, navigate, openModal }) {
         </div>
       </section>
 
-      <FinalCta openModal={openModal} title={`Vuoi capire il potenziale per ${sector.label.toLowerCase()}?`} />
+      <FinalCta
+        openModal={openModal}
+        openBooking={openBooking}
+        title={`Vuoi capire il potenziale per ${sector.label.toLowerCase()}?`}
+      />
     </main>
   );
 }
@@ -1007,7 +1303,7 @@ function PrivacyPolicyPage({ navigate }) {
   );
 }
 
-function FinalCta({ openModal, title = 'Vuoi portare più pazienti qualificati alla tua struttura?' }) {
+function FinalCta({ openModal, openBooking, title = 'Vuoi portare più pazienti qualificati alla tua struttura?' }) {
   return (
     <section className="footer-cta">
       <div className="container">
@@ -1019,9 +1315,14 @@ function FinalCta({ openModal, title = 'Vuoi portare più pazienti qualificati a
               Partiamo da settore, città, servizi prioritari e canali attivi. Poi identifichiamo quali percorsi possono
               generare richieste più utili.
             </p>
-            <button className="button primary" type="button" onClick={openModal}>
-              Richiedi una consulenza <ArrowUpRight size={18} />
-            </button>
+            <div className="cta-actions">
+              <button className="button primary" type="button" onClick={openBooking}>
+                Prenota videochiamata <CalendarCheck size={18} />
+              </button>
+              <button className="button secondary" type="button" onClick={openModal}>
+                Richiedi consulenza <ArrowUpRight size={18} />
+              </button>
+            </div>
           </div>
           <img src={`${ASSETS}footer-pattern.svg`} alt="" width="534" height="290" loading="lazy" />
         </div>
@@ -1030,7 +1331,7 @@ function FinalCta({ openModal, title = 'Vuoi portare più pazienti qualificati a
   );
 }
 
-function Footer({ navigate, openModal }) {
+function Footer({ navigate, openModal, openBooking }) {
   return (
     <footer className="site-footer" id="contatti">
       <div className="container footer-grid">
@@ -1052,6 +1353,7 @@ function Footer({ navigate, openModal }) {
           <a href="mailto:info@magodigital.it">
             <Mail size={18} /> info@magodigital.it
           </a>
+          <button type="button" onClick={openBooking}>Prenota videochiamata</button>
           <button type="button" onClick={openModal}>Parla con noi</button>
           <SmartLink href="/privacy-policy" navigate={navigate}>
             Privacy Policy
@@ -1108,6 +1410,7 @@ function CookieBanner({ navigate }) {
 function App() {
   const [path, setPath] = useState(getPath);
   const [modalOpen, setModalOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   const activeSector = useMemo(() => sectors.find((sector) => `/${sector.slug}` === path), [path]);
   const isPrivacyPath = path === '/privacy-policy';
@@ -1187,13 +1490,28 @@ function App() {
 
   return (
     <>
-      <Header navigate={navigate} openModal={() => setModalOpen(true)} modalOpen={modalOpen} />
-      {path === '/' && <HomePage navigate={navigate} openModal={() => setModalOpen(true)} />}
-      {activeSector && <SectorPage sector={activeSector} navigate={navigate} openModal={() => setModalOpen(true)} />}
+      <Header
+        navigate={navigate}
+        openModal={() => setModalOpen(true)}
+        openBooking={() => setBookingOpen(true)}
+        modalOpen={modalOpen || bookingOpen}
+      />
+      {path === '/' && (
+        <HomePage navigate={navigate} openModal={() => setModalOpen(true)} openBooking={() => setBookingOpen(true)} />
+      )}
+      {activeSector && (
+        <SectorPage
+          sector={activeSector}
+          navigate={navigate}
+          openModal={() => setModalOpen(true)}
+          openBooking={() => setBookingOpen(true)}
+        />
+      )}
       {isPrivacyPath && <PrivacyPolicyPage navigate={navigate} />}
       {!isKnownPath && <NotFoundPage navigate={navigate} />}
-      <Footer navigate={navigate} openModal={() => setModalOpen(true)} />
+      <Footer navigate={navigate} openModal={() => setModalOpen(true)} openBooking={() => setBookingOpen(true)} />
       <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
       <CookieBanner navigate={navigate} />
     </>
   );

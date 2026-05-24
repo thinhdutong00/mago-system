@@ -33,6 +33,10 @@ export default async function handler(request, response) {
     const phone = sanitize(request.body?.phone, 80);
     const service = sanitize(request.body?.service, 160);
     const message = sanitize(request.body?.message, 2000);
+    const requestType = sanitize(request.body?.requestType, 40);
+    const preferredDate = sanitize(request.body?.preferredDate, 80);
+    const preferredTime = sanitize(request.body?.preferredTime, 120);
+    const website = sanitize(request.body?.website, 240);
 
     if (!name || !isEmail(email) || !message) {
       return response.status(400).json({ error: 'Controlla nome, email e messaggio.' });
@@ -40,12 +44,21 @@ export default async function handler(request, response) {
 
     const from = (process.env.RESEND_FROM_EMAIL || 'Mago System <noreply@mago.digital.group>').trim();
     const to = (process.env.LEAD_TO_EMAIL || 'info@magodigital.it').trim();
-    const subject = `Nuovo lead sanitario da ${name}`;
+    const isBooking = requestType === 'booking';
+    const subject = isBooking ? `Nuova videochiamata richiesta da ${name}` : `Nuovo lead sanitario da ${name}`;
     const text = [
+      `Tipo richiesta: ${isBooking ? 'Booking videochiamata' : 'Consulenza'}`,
       `Nome: ${name}`,
       `Email: ${email}`,
       `Telefono: ${phone || 'Non indicato'}`,
       `Settore: ${service || 'Non indicato'}`,
+      ...(isBooking
+        ? [
+            `Giorno preferito: ${preferredDate || 'Non indicato'}`,
+            `Fascia oraria: ${preferredTime || 'Non indicata'}`,
+            `Sito attuale: ${website || 'Non indicato'}`,
+          ]
+        : []),
       '',
       'Messaggio:',
       message,
@@ -54,10 +67,18 @@ export default async function handler(request, response) {
     const html = `
     <div style="font-family:Arial,sans-serif;line-height:1.5;color:#111">
       <h2 style="margin:0 0 16px">Nuovo lead sanitario</h2>
+      <p><strong>Tipo richiesta:</strong> ${isBooking ? 'Booking videochiamata' : 'Consulenza'}</p>
       <p><strong>Nome:</strong> ${escapeHtml(name)}</p>
       <p><strong>Email:</strong> ${escapeHtml(email)}</p>
       <p><strong>Telefono:</strong> ${escapeHtml(phone || 'Non indicato')}</p>
       <p><strong>Settore:</strong> ${escapeHtml(service || 'Non indicato')}</p>
+      ${
+        isBooking
+          ? `<p><strong>Giorno preferito:</strong> ${escapeHtml(preferredDate || 'Non indicato')}</p>
+      <p><strong>Fascia oraria:</strong> ${escapeHtml(preferredTime || 'Non indicata')}</p>
+      <p><strong>Sito attuale:</strong> ${escapeHtml(website || 'Non indicato')}</p>`
+          : ''
+      }
       <hr style="border:none;border-top:1px solid #ddd;margin:20px 0" />
       <p style="white-space:pre-line">${escapeHtml(message)}</p>
     </div>
