@@ -18,8 +18,8 @@
   --shadow-soft: 0 14px 42px rgba(17, 101, 186, 0.12);
   --radius: 8px;
   --rounded-pill: 999px;
-  --font-display: OPPOSans, Montserrat, 'Helvetica Neue', Arial, sans-serif;
-  --font-body: OPPOSans, Montserrat, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 * {
@@ -28,6 +28,7 @@
 
 html {
   scroll-behavior: smooth;
+  line-height: normal;
 }
 
 body {
@@ -39,9 +40,11 @@ body {
     linear-gradient(180deg, #f7fcff 0%, #edf8ff 48%, #ffffff 100%);
   font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.65;
+  letter-spacing: 0;
+  line-height: normal;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body.modal-open {
@@ -110,8 +113,8 @@ picture {
   color: #ffffff;
   background: var(--navy);
   font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.01em;
+  font-weight: 700;
+  letter-spacing: 0;
   text-align: center;
 }
 
@@ -160,7 +163,8 @@ picture {
   align-items: center;
   gap: 24px;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .desktop-nav > a,
@@ -241,8 +245,9 @@ picture {
   justify-content: center;
   gap: 8px;
   font-size: 15px;
-  font-weight: 900;
-  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.2;
   transition:
     transform 0.18s ease,
     box-shadow 0.18s ease,
@@ -321,9 +326,9 @@ picture {
   margin: 0 0 18px;
   color: var(--blue-2);
   font-size: 14px;
-  font-weight: 950;
-  letter-spacing: 0.08em;
-  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
@@ -333,23 +338,26 @@ h3 {
   margin: 0;
   color: var(--navy);
   font-family: var(--font-display);
-  font-weight: 950;
-  line-height: 1.04;
+  font-weight: 800;
+  line-height: 1.05;
   letter-spacing: 0;
 }
 
 h1 {
   max-width: 780px;
   font-size: clamp(43px, 6.2vw, 86px);
+  line-height: 1;
 }
 
 h2 {
   font-size: clamp(34px, 4.2vw, 56px);
+  line-height: 1.08;
 }
 
 h3 {
   font-size: 21px;
-  line-height: 1.22;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .hero-copy > p:not(.eyebrow),
@@ -360,8 +368,8 @@ h3 {
 .detail-panel p {
   color: var(--muted);
   font-size: 18px;
-  font-weight: 650;
-  line-height: 1.72;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
 .hero-copy > p:not(.eyebrow),
@@ -391,7 +399,7 @@ h3 {
   color: var(--navy);
   background: rgba(255, 255, 255, 0.72);
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .hero-proof span:first-child {
@@ -443,7 +451,7 @@ h3 {
 
 .medical-card strong {
   font-size: 20px;
-  font-weight: 950;
+  font-weight: 800;
 }
 
 .medical-card small {
@@ -520,7 +528,7 @@ h3 {
   place-items: center;
   color: var(--muted);
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 700;
   text-align: center;
   transition:
     color 0.3s ease,
@@ -577,7 +585,7 @@ h3 {
   color: rgba(22, 135, 242, 0.07);
   content: 'MAGO';
   font-size: clamp(72px, 16vw, 220px);
-  font-weight: 950;
+  font-weight: 800;
   line-height: 1;
   pointer-events: none;
 }
@@ -592,8 +600,8 @@ h3 {
   margin: 22px 0 0;
   color: var(--muted);
   font-size: 18px;
-  font-weight: 650;
-  line-height: 1.7;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
 .mago-grid {
@@ -629,7 +637,7 @@ h3 {
   color: #ffffff;
   background: var(--navy);
   font-size: 34px;
-  font-weight: 950;
+  font-weight: 800;
   line-height: 1;
 }
 
@@ -640,8 +648,8 @@ h3 {
 .mago-card p {
   margin: 16px 0 0;
   color: var(--muted);
-  font-weight: 650;
-  line-height: 1.58;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .split-section {
@@ -697,7 +705,7 @@ h3 {
   align-items: flex-start;
   gap: 10px;
   color: var(--navy);
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .check-list svg {
@@ -743,8 +751,8 @@ h3 {
 .sector-card span {
   color: var(--blue-2);
   font-size: 12px;
-  font-weight: 950;
-  letter-spacing: 0.05em;
+  font-weight: 700;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -756,8 +764,8 @@ h3 {
 .sector-card p {
   margin: 16px 0 0;
   color: var(--muted);
-  font-weight: 720;
-  line-height: 1.52;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .sector-card svg {
@@ -793,7 +801,7 @@ h3 {
 .method-card small {
   display: block;
   color: var(--cyan);
-  font-weight: 950;
+  font-weight: 800;
   margin-bottom: 22px;
 }
 
@@ -809,8 +817,8 @@ h3 {
 .method-card p {
   margin: 16px 0 0;
   color: rgba(255, 255, 255, 0.76);
-  font-weight: 650;
-  line-height: 1.66;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
 .comparison-grid {
@@ -870,15 +878,15 @@ h3 {
   color: var(--blue);
   font-family: Arial, sans-serif;
   font-size: 16px;
-  letter-spacing: 2px;
+  letter-spacing: 0;
 }
 
 .testimonial-card p {
   margin: 20px 0 24px;
   color: var(--navy);
   font-size: 18px;
-  font-weight: 760;
-  line-height: 1.58;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .testimonial-card strong,
@@ -888,13 +896,13 @@ h3 {
 
 .testimonial-card strong {
   color: var(--navy);
-  font-weight: 950;
+  font-weight: 800;
 }
 
 .testimonial-card span {
   color: var(--muted);
   font-size: 14px;
-  font-weight: 750;
+  font-weight: 500;
   margin-top: 4px;
 }
 
@@ -915,7 +923,7 @@ h3 {
   padding: 7px 12px;
   color: var(--blue-2);
   font-size: 13px;
-  font-weight: 950;
+  font-weight: 700;
 }
 
 .sector-score div {
@@ -928,8 +936,8 @@ h3 {
   display: block;
   color: var(--navy);
   font-size: clamp(24px, 3vw, 38px);
-  font-weight: 950;
-  line-height: 1.1;
+  font-weight: 800;
+  line-height: 1.08;
 }
 
 .sector-detail-grid {
@@ -1005,7 +1013,7 @@ h3 {
 .dashboard-card span {
   color: rgba(255, 255, 255, 0.72);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .dashboard-card strong {
@@ -1037,7 +1045,7 @@ h3 {
   margin: 22px 0 32px;
   color: var(--muted);
   font-size: 18px;
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .cta-card img {
@@ -1069,7 +1077,7 @@ h3 {
 .footer-grid p {
   margin: 22px 0 0;
   color: rgba(255, 255, 255, 0.72);
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .footer-grid h3 {
@@ -1090,7 +1098,7 @@ h3 {
   color: rgba(255, 255, 255, 0.72);
   background: transparent;
   font-size: 15px;
-  font-weight: 650;
+  font-weight: 500;
   text-align: left;
 }
 
@@ -1125,7 +1133,7 @@ h3 {
 .footer-bottom p {
   margin: 0;
   color: rgba(255, 255, 255, 0.66);
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .modal-layer {
@@ -1165,7 +1173,7 @@ h3 {
 .contact-modal > p:not(.eyebrow) {
   margin: 18px 0 28px;
   color: var(--muted);
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .modal-form {
@@ -1179,7 +1187,7 @@ h3 {
   gap: 8px;
   color: var(--navy);
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .modal-form input,
@@ -1228,8 +1236,8 @@ h3 {
   margin: 28px 0 0;
   color: var(--muted);
   font-size: 18px;
-  font-weight: 650;
-  line-height: 1.72;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
 .privacy-content {
@@ -1259,8 +1267,8 @@ h3 {
 .privacy-summary p {
   margin: 14px 0 20px;
   color: var(--muted);
-  font-weight: 650;
-  line-height: 1.6;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .privacy-summary a {
@@ -1268,7 +1276,7 @@ h3 {
   align-items: center;
   gap: 8px;
   color: #0758cf;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .privacy-copy {
@@ -1292,13 +1300,13 @@ h3 {
   margin: 16px 0 0;
   color: var(--muted);
   font-size: 17px;
-  font-weight: 650;
-  line-height: 1.7;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
 .privacy-copy a {
   color: var(--blue-2);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .cookie-banner {
@@ -1324,14 +1332,14 @@ h3 {
 .cookie-banner strong {
   display: block;
   font-size: 17px;
-  font-weight: 950;
+  font-weight: 800;
 }
 
 .cookie-banner p {
   margin: 6px 0 0;
   color: var(--muted);
   font-size: 14px;
-  font-weight: 650;
+  font-weight: 500;
   line-height: 1.45;
 }
 
@@ -1344,7 +1352,7 @@ h3 {
 .cookie-actions a {
   color: var(--blue-2);
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 700;
   white-space: nowrap;
 }
 
@@ -1434,14 +1442,14 @@ h3 {
     align-items: center;
     padding: 0 12px;
     color: var(--navy);
-    font-weight: 850;
+    font-weight: 700;
   }
 
   .mobile-nav span {
     margin-top: 8px;
     color: var(--blue-2);
     font-size: 13px;
-    letter-spacing: 0.06em;
+    letter-spacing: 0;
     text-transform: uppercase;
   }
 
