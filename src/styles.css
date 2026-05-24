@@ -20,6 +20,11 @@
   --rounded-pill: 999px;
   --font-display: OPPOSans, Helvetica, Arial, sans-serif, system-ui;
   --font-body: OPPOSans, Helvetica, Arial, sans-serif, system-ui;
+  --type-hero: clamp(40px, 5vw, 64px);
+  --type-section: clamp(38px, 5vw, 64px);
+  --type-panel: clamp(32px, 4vw, 48px);
+  --type-card: clamp(24px, 2.5vw, 32px);
+  --type-body: 18px;
 }
 
 @font-face {
@@ -177,6 +182,16 @@ picture {
   background: rgba(255, 255, 255, 0.88);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(20px) saturate(1.25);
+  transform: translateY(0);
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+  will-change: transform;
+}
+
+.site-header.is-hidden {
+  transform: translateY(-100%);
 }
 
 .header-inner {
@@ -387,15 +402,15 @@ h3 {
 
 h1 {
   max-width: 760px;
-  font-size: clamp(32px, 5vw, 64px);
-  font-weight: 700;
+  font-size: var(--type-hero);
+  font-weight: 800;
   line-height: 1.08;
 }
 
 h2 {
-  font-size: clamp(32px, 3.75vw, 48px);
-  font-weight: 600;
-  line-height: 1.12;
+  font-size: var(--type-panel);
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 h3 {
@@ -404,13 +419,31 @@ h3 {
   line-height: 1.2;
 }
 
+.hero-copy h1,
+.sector-hero-copy h1,
+.privacy-hero h1,
+.not-found h1 {
+  color: var(--navy);
+  font-size: var(--type-hero);
+  font-weight: 800;
+  line-height: 1.08;
+}
+
 .section-heading h2,
 .split-copy h2,
 .comparison-copy h2,
 .mago-intro h2,
-.sector-detail h2 {
-  color: #000000;
-  font-size: clamp(40px, 5vw, 64px);
+.sector-detail h2,
+.cta-card h2 {
+  color: var(--navy);
+  font-size: var(--type-section);
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+.contact-modal h2 {
+  color: var(--navy);
+  font-size: clamp(32px, 5vw, 52px);
   font-weight: 800;
   line-height: 1.08;
 }
@@ -426,7 +459,7 @@ h3 {
 .mago-card h3,
 .comparison-card h3,
 .testimonial-card h3 {
-  font-size: clamp(24px, 2.5vw, 32px);
+  font-size: var(--type-card);
   font-weight: 700;
   line-height: 1.15;
 }
@@ -438,7 +471,7 @@ h3 {
 .comparison-card p,
 .detail-panel p {
   color: var(--muted);
-  font-size: 18px;
+  font-size: var(--type-body);
   font-weight: 400;
   line-height: 1.45;
 }
@@ -1580,6 +1613,14 @@ h3 {
 }
 
 @media (max-width: 720px) {
+  :root {
+    --type-hero: clamp(36px, 10vw, 44px);
+    --type-section: clamp(36px, 10vw, 44px);
+    --type-panel: clamp(30px, 8.5vw, 38px);
+    --type-card: clamp(24px, 7vw, 30px);
+    --type-body: 17px;
+  }
+
   .announcement {
     flex-direction: column;
     gap: 2px;
@@ -1608,7 +1649,8 @@ h3 {
   .split-copy h2,
   .comparison-copy h2,
   .mago-intro h2,
-  .sector-detail h2 {
+  .sector-detail h2,
+  .cta-card h2 {
     font-size: clamp(36px, 10.8vw, 44px);
     line-height: 1.08;
   }

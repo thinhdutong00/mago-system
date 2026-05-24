@@ -452,9 +452,40 @@ function ContactModal({ isOpen, onClose }) {
   );
 }
 
-function Header({ navigate, openModal }) {
+function Header({ navigate, openModal, modalOpen }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [headerHidden, setHeaderHidden] = useState(false);
   const closeMenu = () => setMenuOpen(false);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const updateHeader = () => {
+      const currentScrollY = window.scrollY;
+      const scrollingDown = currentScrollY > lastScrollY;
+      const pastThreshold = currentScrollY > 100;
+
+      if (menuOpen || modalOpen || currentScrollY <= 8) {
+        setHeaderHidden(false);
+      } else {
+        setHeaderHidden(scrollingDown && pastThreshold);
+      }
+
+      lastScrollY = Math.max(currentScrollY, 0);
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [menuOpen, modalOpen]);
 
   return (
     <>
@@ -464,7 +495,7 @@ function Header({ navigate, openModal }) {
           Analizza il tuo settore <ArrowUpRight size={15} />
         </button>
       </div>
-      <header className="site-header">
+      <header className={`site-header ${headerHidden ? 'is-hidden' : ''}`}>
         <div className="header-inner">
           <Logo navigate={navigate} />
           <nav className="desktop-nav" aria-label="Navigazione principale">
@@ -517,7 +548,14 @@ function Header({ navigate, openModal }) {
               {sector.label}
             </SmartLink>
           ))}
-          <button className="button primary" type="button" onClick={openModal}>
+          <button
+            className="button primary"
+            type="button"
+            onClick={() => {
+              closeMenu();
+              openModal();
+            }}
+          >
             Richiedi consulenza <ArrowUpRight size={18} />
           </button>
         </nav>
@@ -1113,7 +1151,7 @@ function App() {
 
   return (
     <>
-      <Header navigate={navigate} openModal={() => setModalOpen(true)} />
+      <Header navigate={navigate} openModal={() => setModalOpen(true)} modalOpen={modalOpen} />
       {path === '/' && <HomePage navigate={navigate} openModal={() => setModalOpen(true)} />}
       {activeSector && <SectorPage sector={activeSector} navigate={navigate} openModal={() => setModalOpen(true)} />}
       {isPrivacyPath && <PrivacyPolicyPage navigate={navigate} />}
