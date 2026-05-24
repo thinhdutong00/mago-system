@@ -404,6 +404,33 @@ h3 {
   line-height: 1.2;
 }
 
+.section-heading h2,
+.split-copy h2,
+.comparison-copy h2,
+.mago-intro h2,
+.sector-detail h2 {
+  color: #000000;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+.method-section .section-heading h2,
+.detail-panel.featured h2 {
+  color: #ffffff;
+}
+
+.sector-card h3,
+.method-card h3,
+.benefit-card h3,
+.mago-card h3,
+.comparison-card h3,
+.testimonial-card h3 {
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
 .hero-copy > p:not(.eyebrow),
 .sector-hero-copy > p:not(.eyebrow),
 .section-heading > p:not(.eyebrow),
@@ -1575,6 +1602,25 @@ h3 {
 
   h1 {
     font-size: clamp(32px, 10vw, 44px);
+  }
+
+  .section-heading h2,
+  .split-copy h2,
+  .comparison-copy h2,
+  .mago-intro h2,
+  .sector-detail h2 {
+    font-size: clamp(36px, 10.8vw, 44px);
+    line-height: 1.08;
+  }
+
+  .sector-card h3,
+  .method-card h3,
+  .benefit-card h3,
+  .mago-card h3,
+  .comparison-card h3,
+  .testimonial-card h3 {
+    font-size: clamp(24px, 7vw, 30px);
+    line-height: 1.15;
   }
 
   .hero-actions,
