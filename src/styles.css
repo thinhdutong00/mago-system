@@ -18,8 +18,8 @@
   --shadow-soft: 0 14px 42px rgba(17, 101, 186, 0.12);
   --radius: 8px;
   --rounded-pill: 999px;
-  --font-display: OPPOSans, Helvetica, Arial, sans-serif;
-  --font-body: OPPOSans, Helvetica, Arial, sans-serif;
+  --font-display: OPPOSans, Helvetica, Arial, sans-serif, system-ui;
+  --font-body: OPPOSans, Helvetica, Arial, sans-serif, system-ui;
 }
 
 @font-face {
@@ -153,9 +153,10 @@ picture {
   gap: 18px;
   color: #ffffff;
   background: var(--navy);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 400;
   letter-spacing: 0;
+  line-height: 1.4;
   text-align: center;
 }
 
@@ -166,7 +167,7 @@ picture {
   gap: 6px;
   color: #ffffff;
   background: transparent;
-  font-weight: 800;
+  font-weight: 500;
 }
 
 .site-header {
@@ -202,9 +203,9 @@ picture {
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 24px;
-  font-size: 14px;
-  font-weight: 700;
+  gap: 26px;
+  font-size: 20px;
+  font-weight: 500;
   letter-spacing: 0;
 }
 
@@ -266,8 +267,8 @@ picture {
   align-items: center;
   padding: 0 12px;
   color: var(--muted);
-  font-size: 13px;
-  font-weight: 800;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .sector-menu-panel a:hover,
@@ -277,7 +278,7 @@ picture {
 }
 
 .button {
-  min-height: 54px;
+  min-height: 52px;
   border: 0;
   border-radius: var(--rounded-pill);
   padding: 0 24px;
@@ -285,10 +286,10 @@ picture {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 500;
   letter-spacing: 0;
-  line-height: 1.2;
+  line-height: 24px;
   transition:
     transform 0.18s ease,
     box-shadow 0.18s ease,
@@ -366,8 +367,8 @@ picture {
 .eyebrow {
   margin: 0 0 18px;
   color: var(--blue-2);
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   letter-spacing: 0;
   line-height: 1.2;
   text-transform: uppercase;
@@ -379,25 +380,27 @@ h3 {
   margin: 0;
   color: var(--navy);
   font-family: var(--font-display);
-  font-weight: 800;
-  line-height: 1.05;
+  font-weight: 600;
+  line-height: 1.1;
   letter-spacing: 0;
 }
 
 h1 {
-  max-width: 780px;
-  font-size: clamp(43px, 6.2vw, 86px);
-  line-height: 1;
-}
-
-h2 {
-  font-size: clamp(34px, 4.2vw, 56px);
+  max-width: 760px;
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 700;
   line-height: 1.08;
 }
 
+h2 {
+  font-size: clamp(32px, 3.75vw, 48px);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
 h3 {
-  font-size: 21px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 600;
   line-height: 1.2;
 }
 
@@ -409,8 +412,8 @@ h3 {
 .detail-panel p {
   color: var(--muted);
   font-size: 18px;
-  font-weight: 500;
-  line-height: 1.55;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .hero-copy > p:not(.eyebrow),
@@ -439,8 +442,8 @@ h3 {
   padding: 8px 12px;
   color: var(--navy);
   background: rgba(255, 255, 255, 0.72);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .hero-proof span:first-child {
@@ -492,14 +495,14 @@ h3 {
 
 .medical-card strong {
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .medical-card small {
   color: var(--muted);
-  font-size: 13px;
-  font-weight: 800;
-  line-height: 1.35;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 .medical-card.main {
@@ -568,8 +571,8 @@ h3 {
   display: grid;
   place-items: center;
   color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
   text-align: center;
   transition:
     color 0.3s ease,
@@ -641,8 +644,8 @@ h3 {
   margin: 22px 0 0;
   color: var(--muted);
   font-size: 18px;
-  font-weight: 500;
-  line-height: 1.55;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .mago-grid {
@@ -677,8 +680,8 @@ h3 {
   place-items: center;
   color: #ffffff;
   background: var(--navy);
-  font-size: 34px;
-  font-weight: 800;
+  font-size: 32px;
+  font-weight: 700;
   line-height: 1;
 }
 
@@ -689,8 +692,8 @@ h3 {
 .mago-card p {
   margin: 16px 0 0;
   color: var(--muted);
-  font-weight: 500;
-  line-height: 1.5;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .split-section {
@@ -746,7 +749,7 @@ h3 {
   align-items: flex-start;
   gap: 10px;
   color: var(--navy);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .check-list svg {
@@ -791,8 +794,8 @@ h3 {
 
 .sector-card span {
   color: var(--blue-2);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
   letter-spacing: 0;
   text-transform: uppercase;
 }
@@ -805,8 +808,8 @@ h3 {
 .sector-card p {
   margin: 16px 0 0;
   color: var(--muted);
-  font-weight: 500;
-  line-height: 1.5;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .sector-card svg {
@@ -842,7 +845,7 @@ h3 {
 .method-card small {
   display: block;
   color: var(--cyan);
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 22px;
 }
 
@@ -858,8 +861,8 @@ h3 {
 .method-card p {
   margin: 16px 0 0;
   color: rgba(255, 255, 255, 0.76);
-  font-weight: 500;
-  line-height: 1.55;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .comparison-grid {
@@ -926,8 +929,8 @@ h3 {
   margin: 20px 0 24px;
   color: var(--navy);
   font-size: 18px;
-  font-weight: 600;
-  line-height: 1.5;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 .testimonial-card strong,
@@ -937,13 +940,13 @@ h3 {
 
 .testimonial-card strong {
   color: var(--navy);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .testimonial-card span {
   color: var(--muted);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   margin-top: 4px;
 }
 
@@ -963,8 +966,8 @@ h3 {
   border-radius: 999px;
   padding: 7px 12px;
   color: var(--blue-2);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .sector-score div {
@@ -976,9 +979,9 @@ h3 {
 .sector-score strong {
   display: block;
   color: var(--navy);
-  font-size: clamp(24px, 3vw, 38px);
-  font-weight: 800;
-  line-height: 1.08;
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .sector-detail-grid {
@@ -1053,13 +1056,13 @@ h3 {
 
 .dashboard-card span {
   color: rgba(255, 255, 255, 0.72);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .dashboard-card strong {
-  font-size: 22px;
-  line-height: 1.1;
+  font-size: 24px;
+  line-height: 1.2;
 }
 
 .footer-cta {
@@ -1086,7 +1089,8 @@ h3 {
   margin: 22px 0 32px;
   color: var(--muted);
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .cta-card img {
@@ -1118,13 +1122,15 @@ h3 {
 .footer-grid p {
   margin: 22px 0 0;
   color: rgba(255, 255, 255, 0.72);
-  font-weight: 500;
+  font-weight: 400;
+  line-height: 1.4;
 }
 
 .footer-grid h3 {
   margin: 0 0 22px;
   color: #ffffff;
-  font-size: 17px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .footer-grid a,
@@ -1138,8 +1144,8 @@ h3 {
   gap: 10px;
   color: rgba(255, 255, 255, 0.72);
   background: transparent;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
   text-align: left;
 }
 
@@ -1174,7 +1180,7 @@ h3 {
 .footer-bottom p {
   margin: 0;
   color: rgba(255, 255, 255, 0.66);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .modal-layer {
@@ -1214,7 +1220,8 @@ h3 {
 .contact-modal > p:not(.eyebrow) {
   margin: 18px 0 28px;
   color: var(--muted);
-  font-weight: 500;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .modal-form {
@@ -1228,7 +1235,7 @@ h3 {
   gap: 8px;
   color: var(--navy);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .modal-form input,
@@ -1240,7 +1247,7 @@ h3 {
   padding: 13px 14px;
   color: var(--navy);
   background: #ffffff;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .modal-form textarea {
@@ -1250,7 +1257,7 @@ h3 {
 .modal-form span[role='alert'] {
   color: #b42318;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .full-field {
@@ -1277,8 +1284,8 @@ h3 {
   margin: 28px 0 0;
   color: var(--muted);
   font-size: 18px;
-  font-weight: 500;
-  line-height: 1.55;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .privacy-content {
@@ -1303,13 +1310,14 @@ h3 {
 
 .privacy-summary h2 {
   font-size: 24px;
+  font-weight: 600;
 }
 
 .privacy-summary p {
   margin: 14px 0 20px;
   color: var(--muted);
-  font-weight: 500;
-  line-height: 1.5;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .privacy-summary a {
@@ -1317,7 +1325,7 @@ h3 {
   align-items: center;
   gap: 8px;
   color: #0758cf;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .privacy-copy {
@@ -1334,20 +1342,21 @@ h3 {
 }
 
 .privacy-copy h2 {
-  font-size: clamp(24px, 3vw, 34px);
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 600;
 }
 
 .privacy-copy p {
   margin: 16px 0 0;
   color: var(--muted);
   font-size: 17px;
-  font-weight: 500;
-  line-height: 1.55;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .privacy-copy a {
   color: var(--blue-2);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .cookie-banner {
@@ -1373,14 +1382,14 @@ h3 {
 .cookie-banner strong {
   display: block;
   font-size: 17px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .cookie-banner p {
   margin: 6px 0 0;
   color: var(--muted);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.45;
 }
 
@@ -1393,14 +1402,14 @@ h3 {
 .cookie-actions a {
   color: var(--blue-2);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 500;
   white-space: nowrap;
 }
 
 .cookie-actions .button {
   min-height: 44px;
   padding: 0 18px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .not-found {
@@ -1483,13 +1492,14 @@ h3 {
     align-items: center;
     padding: 0 12px;
     color: var(--navy);
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 500;
   }
 
   .mobile-nav span {
     margin-top: 8px;
     color: var(--blue-2);
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 0;
     text-transform: uppercase;
   }
@@ -1547,6 +1557,7 @@ h3 {
     flex-direction: column;
     gap: 2px;
     padding: 8px 18px 10px;
+    font-size: 14px;
   }
 
   .header-inner {
@@ -1563,7 +1574,7 @@ h3 {
   }
 
   h1 {
-    font-size: clamp(38px, 12vw, 52px);
+    font-size: clamp(32px, 10vw, 44px);
   }
 
   .hero-actions,
@@ -1642,7 +1653,7 @@ h3 {
   .button {
     min-height: 52px;
     padding: 0 18px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .hero-visual {
