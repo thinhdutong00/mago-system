@@ -18,9 +18,50 @@
   --shadow-soft: 0 14px 42px rgba(17, 101, 186, 0.12);
   --radius: 8px;
   --rounded-pill: 999px;
-  --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: OPPOSans, Helvetica, Arial, sans-serif;
+  --font-body: OPPOSans, Helvetica, Arial, sans-serif;
 }
+
+@font-face {
+  font-family: OPPOSans;
+  src: url('/assets/fonts/OPPOSans-Regular.woff2') format('woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: OPPOSans;
+  src: url('/assets/fonts/OPPOSans-Medium.woff2') format('woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: OPPOSans;
+  src: url('/assets/fonts/OPPOSans-Bold.woff2') format('woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: OPPOSans;
+  src: url('/assets/fonts/OPPOSans-Bold.woff2') format('woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: OPPOSans;
+  src: url('/assets/fonts/OPPOSans-Bold.woff2') format('woff2');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 800;
+}
+
 
 * {
   box-sizing: border-box;
