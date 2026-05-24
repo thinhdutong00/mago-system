@@ -309,6 +309,7 @@ function ContactModal({ isOpen, onClose }) {
     message: '',
   });
   const [errors, setErrors] = useState({});
+  const [submitState, setSubmitState] = useState('idle');
   const firstFieldRef = useRef(null);
 
   useEffect(() => {
@@ -330,9 +331,10 @@ function ContactModal({ isOpen, onClose }) {
   const updateField = (event) => {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
+    setSubmitState('idle');
   };
 
-  const submitForm = (event) => {
+  const submitForm = async (event) => {
     event.preventDefault();
     const nextErrors = {};
     if (!form.name.trim()) nextErrors.name = 'Inserisci il nome.';
@@ -341,11 +343,32 @@ function ContactModal({ isOpen, onClose }) {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    const subject = encodeURIComponent(`Nuovo lead sanitario da ${form.name}`);
-    const body = encodeURIComponent(
-      `Nome: ${form.name}\nEmail: ${form.email}\nTelefono: ${form.phone || 'Non indicato'}\nSettore: ${form.service}\n\nMessaggio:\n${form.message}`,
-    );
-    window.location.href = `mailto:hello@magosystem.it?subject=${subject}&body=${body}`;
+    setSubmitState('loading');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Invio non riuscito.');
+      }
+
+      setForm({
+        name: '',
+        email: '',
+        phone: '',
+        service: sectorOptions[0],
+        message: '',
+      });
+      setSubmitState('success');
+    } catch (error) {
+      setSubmitState('error');
+      setErrors({ submit: error.message || 'Invio non riuscito. Riprova tra poco.' });
+    }
   };
 
   return (
@@ -443,9 +466,14 @@ function ContactModal({ isOpen, onClose }) {
               </span>
             )}
           </label>
-          <button className="button primary full-field" type="submit">
-            Invia richiesta <Send size={18} />
+          <button className="button primary full-field" type="submit" disabled={submitState === 'loading'}>
+            {submitState === 'loading' ? 'Invio in corso...' : 'Invia richiesta'} <Send size={18} />
           </button>
+          <p className={`form-status full-field ${submitState === 'success' ? 'is-success' : ''}`} role="status">
+            {submitState === 'success'
+              ? 'Richiesta inviata correttamente. Ti risponderemo a breve.'
+              : errors.submit || ''}
+          </p>
         </form>
       </div>
     </div>

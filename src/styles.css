@@ -317,6 +317,12 @@ picture {
   transform: translateY(-2px);
 }
 
+.button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
+}
+
 .button.primary {
   color: #ffffff;
   background: linear-gradient(135deg, var(--blue) 0%, var(--blue-2) 58%, #0758cf 100%);
@@ -1318,6 +1324,18 @@ h3 {
   color: #b42318;
   font-size: 13px;
   font-weight: 600;
+}
+
+.form-status {
+  min-height: 20px;
+  margin: 0;
+  color: #b42318;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-status.is-success {
+  color: #087443;
 }
 
 .full-field {
