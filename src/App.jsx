@@ -176,6 +176,15 @@ const bookingWindows = [
   'Fine giornata 18:00 - 20:00',
 ];
 
+const CONSENT_STORAGE_KEY = 'mago-cookie-consent-v2';
+const CONSENT_MAX_AGE_DAYS = 180;
+const defaultConsent = {
+  necessary: true,
+  analytics: false,
+  marketing: false,
+  version: 2,
+};
+
 const homeMeta = {
   title: 'Mago System Sanitario - Acquisizione pazienti per strutture sanitarie',
   description:
@@ -267,6 +276,66 @@ function getTodayInputValue() {
   const today = new Date();
   today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
   return today.toISOString().slice(0, 10);
+}
+
+function normalizeConsent(value = {}) {
+  return {
+    ...defaultConsent,
+    analytics: Boolean(value.analytics),
+    marketing: Boolean(value.marketing),
+    necessary: true,
+  };
+}
+
+function getStoredConsent() {
+  try {
+    const rawConsent = window.localStorage.getItem(CONSENT_STORAGE_KEY);
+    if (!rawConsent) return null;
+    const parsedConsent = JSON.parse(rawConsent);
+    const savedAt = Number(parsedConsent.savedAt || 0);
+    const isExpired = Date.now() - savedAt > CONSENT_MAX_AGE_DAYS * 24 * 60 * 60 * 1000;
+    if (parsedConsent.version !== defaultConsent.version || isExpired) return null;
+    return normalizeConsent(parsedConsent);
+  } catch {
+    return null;
+  }
+}
+
+function updateConsentMode(consent) {
+  if (typeof window === 'undefined') return;
+
+  const normalizedConsent = normalizeConsent(consent);
+  window.magoConsent = normalizedConsent;
+
+  if (typeof window.gtag === 'function') {
+    window.gtag('consent', 'update', {
+      ad_storage: normalizedConsent.marketing ? 'granted' : 'denied',
+      analytics_storage: normalizedConsent.analytics ? 'granted' : 'denied',
+      ad_user_data: normalizedConsent.marketing ? 'granted' : 'denied',
+      ad_personalization: normalizedConsent.marketing ? 'granted' : 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+    });
+  }
+
+  if (typeof window.fbq === 'function') {
+    window.fbq('consent', normalizedConsent.marketing ? 'grant' : 'revoke');
+  }
+
+  window.dispatchEvent(new CustomEvent('mago-consent-change', { detail: normalizedConsent }));
+}
+
+function saveConsent(consent) {
+  const normalizedConsent = normalizeConsent(consent);
+  window.localStorage.setItem(
+    CONSENT_STORAGE_KEY,
+    JSON.stringify({
+      ...normalizedConsent,
+      savedAt: Date.now(),
+    }),
+  );
+  updateConsentMode(normalizedConsent);
+  return normalizedConsent;
 }
 
 function setMeta(name, content, attr = 'name') {
@@ -1271,8 +1340,15 @@ function PrivacyPolicyPage({ navigate }) {
             <article>
               <h2>Cookie</h2>
               <p>
-                Il sito utilizza solo strumenti tecnici essenziali, inclusa la preferenza di visualizzazione del banner
-                cookie salvata nel browser. Non vengono caricati tag Google, GA4, GTM, Ads o cookie di profilazione.
+                Il sito usa cookie e strumenti tecnici essenziali, inclusa la preferenza salvata nel browser. Eventuali
+                strumenti di analytics, Google Ads, Meta Ads, remarketing o misurazione conversioni vengono attivati
+                solo dopo consenso esplicito nelle rispettive categorie. Puoi modificare o revocare le preferenze in
+                qualsiasi momento dal link “Preferenze cookie” nel footer.
+              </p>
+              <p>
+                Per Google viene predisposto Consent Mode con impostazione predefinita negata per analytics, annunci,
+                dati utente pubblicitari e personalizzazione annunci. I segnali vengono aggiornati solo dopo la tua
+                scelta.
               </p>
             </article>
             <article>
@@ -1331,7 +1407,7 @@ function FinalCta({ openModal, openBooking, title = 'Vuoi portare più pazienti 
   );
 }
 
-function Footer({ navigate, openModal, openBooking }) {
+function Footer({ navigate, openModal, openBooking, openCookieSettings }) {
   return (
     <footer className="site-footer" id="contatti">
       <div className="container footer-grid">
@@ -1355,6 +1431,7 @@ function Footer({ navigate, openModal, openBooking }) {
           </a>
           <button type="button" onClick={openBooking}>Prenota videochiamata</button>
           <button type="button" onClick={openModal}>Parla con noi</button>
+          <button type="button" onClick={openCookieSettings}>Preferenze cookie</button>
           <SmartLink href="/privacy-policy" navigate={navigate}>
             Privacy Policy
           </SmartLink>
@@ -1370,40 +1447,167 @@ function Footer({ navigate, openModal, openBooking }) {
   );
 }
 
-function CookieBanner({ navigate }) {
-  const [isVisible, setIsVisible] = useState(false);
+function CookieToggle({ id, title, text, checked, disabled = false, onChange }) {
+  return (
+    <label className={`cookie-toggle ${disabled ? 'is-disabled' : ''}`} htmlFor={id}>
+      <span>
+        <strong>{title}</strong>
+        <small>{text}</small>
+      </span>
+      <input
+        id={id}
+        type="checkbox"
+        checked={checked}
+        disabled={disabled}
+        onChange={(event) => onChange?.(event.target.checked)}
+      />
+      <span className="cookie-switch" aria-hidden="true" />
+    </label>
+  );
+}
+
+function CookieBanner({ navigate, settingsOpen, onSettingsClose }) {
+  const [bannerVisible, setBannerVisible] = useState(false);
+  const [panelOpen, setPanelOpen] = useState(false);
+  const [preferences, setPreferences] = useState(defaultConsent);
 
   useEffect(() => {
-    setIsVisible(window.localStorage.getItem('mago-essential-cookie-consent') !== 'accepted');
+    const storedConsent = getStoredConsent();
+    if (storedConsent) {
+      setPreferences(storedConsent);
+      updateConsentMode(storedConsent);
+      setBannerVisible(false);
+    } else {
+      updateConsentMode(defaultConsent);
+      setPreferences(defaultConsent);
+      setBannerVisible(true);
+    }
   }, []);
 
-  if (!isVisible) return null;
+  useEffect(() => {
+    if (!settingsOpen) return;
+    const storedConsent = getStoredConsent();
+    setPreferences(storedConsent || defaultConsent);
+    setPanelOpen(true);
+    setBannerVisible(false);
+  }, [settingsOpen]);
+
+  useEffect(() => {
+    if (!panelOpen) return undefined;
+    document.body.classList.add('modal-open');
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') closePanel();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.classList.remove('modal-open');
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [panelOpen]);
+
+  const closePanel = () => {
+    setPanelOpen(false);
+    onSettingsClose();
+  };
+
+  const confirmConsent = (nextConsent) => {
+    const savedConsent = saveConsent(nextConsent);
+    setPreferences(savedConsent);
+    setBannerVisible(false);
+    closePanel();
+  };
+
+  const rejectOptional = () => confirmConsent(defaultConsent);
+  const acceptAll = () => confirmConsent({ ...defaultConsent, analytics: true, marketing: true });
 
   return (
-    <aside className="cookie-banner" aria-label="Informativa cookie">
-      <div>
-        <strong>Cookie essenziali</strong>
-        <p>
-          Usiamo solo cookie tecnici necessari al funzionamento del sito e alla memorizzazione di questa preferenza. Non
-          carichiamo tag Google o cookie di profilazione.
-        </p>
-      </div>
-      <div className="cookie-actions">
-        <SmartLink href="/privacy-policy" navigate={navigate}>
-          Privacy Policy
-        </SmartLink>
-        <button
-          className="button primary"
-          type="button"
-          onClick={() => {
-            window.localStorage.setItem('mago-essential-cookie-consent', 'accepted');
-            setIsVisible(false);
-          }}
-        >
-          Accetta essenziali
-        </button>
-      </div>
-    </aside>
+    <>
+      {bannerVisible && (
+        <aside className="cookie-banner" aria-label="Informativa cookie">
+          <div>
+            <strong>Gestione cookie e annunci</strong>
+            <p>
+              Usiamo cookie tecnici necessari. Analytics, Google/Meta Ads, remarketing e misurazione conversioni restano
+              disattivati finché non dai consenso. Puoi accettare, rifiutare o scegliere per categoria.
+            </p>
+            <SmartLink href="/privacy-policy" navigate={navigate}>
+              Leggi Privacy e Cookie Policy
+            </SmartLink>
+          </div>
+          <div className="cookie-actions" aria-label="Azioni consenso cookie">
+            <button className="button ghost" type="button" onClick={rejectOptional}>
+              Rifiuta
+            </button>
+            <button className="button secondary" type="button" onClick={() => setPanelOpen(true)}>
+              Personalizza
+            </button>
+            <button className="button primary" type="button" onClick={acceptAll}>
+              Accetta tutto
+            </button>
+          </div>
+        </aside>
+      )}
+
+      {panelOpen && (
+        <div className="modal-layer cookie-modal-layer" role="presentation" onMouseDown={closePanel}>
+          <section
+            className="cookie-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cookie-panel-title"
+            aria-describedby="cookie-panel-description"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <button className="icon-button modal-close" type="button" onClick={closePanel} aria-label="Chiudi preferenze">
+              <X size={22} />
+            </button>
+            <p className="eyebrow">Centro preferenze</p>
+            <h2 id="cookie-panel-title">Scegli come possiamo usare cookie e pixel</h2>
+            <p id="cookie-panel-description">
+              Le categorie non essenziali sono disattivate di default. Le scelte vengono salvate per 6 mesi e puoi
+              modificarle dal footer.
+            </p>
+            <div className="cookie-toggle-list">
+              <CookieToggle
+                id="cookie-necessary"
+                title="Necessari"
+                text="Servono per sicurezza, funzionamento del sito, moduli e memorizzazione della preferenza."
+                checked
+                disabled
+              />
+              <CookieToggle
+                id="cookie-analytics"
+                title="Analytics"
+                text="Misurazione aggregata delle visite e delle conversioni, per esempio Google Analytics."
+                checked={preferences.analytics}
+                onChange={(analytics) => setPreferences((current) => ({ ...current, analytics }))}
+              />
+              <CookieToggle
+                id="cookie-marketing"
+                title="Marketing e remarketing"
+                text="Google Ads, Meta Pixel, conversioni pubblicitarie, pubblici personalizzati e remarketing."
+                checked={preferences.marketing}
+                onChange={(marketing) => setPreferences((current) => ({ ...current, marketing }))}
+              />
+            </div>
+            <div className="cookie-panel-actions">
+              <button className="button ghost" type="button" onClick={rejectOptional}>
+                Rifiuta non essenziali
+              </button>
+              <button className="button secondary" type="button" onClick={() => confirmConsent(preferences)}>
+                Salva preferenze
+              </button>
+              <button className="button primary" type="button" onClick={acceptAll}>
+                Accetta tutto
+              </button>
+            </div>
+            <SmartLink className="cookie-policy-link" href="/privacy-policy" navigate={navigate}>
+              Privacy Policy completa <ArrowUpRight size={16} />
+            </SmartLink>
+          </section>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -1411,6 +1615,7 @@ function App() {
   const [path, setPath] = useState(getPath);
   const [modalOpen, setModalOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [cookieSettingsOpen, setCookieSettingsOpen] = useState(false);
 
   const activeSector = useMemo(() => sectors.find((sector) => `/${sector.slug}` === path), [path]);
   const isPrivacyPath = path === '/privacy-policy';
@@ -1509,10 +1714,19 @@ function App() {
       )}
       {isPrivacyPath && <PrivacyPolicyPage navigate={navigate} />}
       {!isKnownPath && <NotFoundPage navigate={navigate} />}
-      <Footer navigate={navigate} openModal={() => setModalOpen(true)} openBooking={() => setBookingOpen(true)} />
+      <Footer
+        navigate={navigate}
+        openModal={() => setModalOpen(true)}
+        openBooking={() => setBookingOpen(true)}
+        openCookieSettings={() => setCookieSettingsOpen(true)}
+      />
       <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
-      <CookieBanner navigate={navigate} />
+      <CookieBanner
+        navigate={navigate}
+        settingsOpen={cookieSettingsOpen}
+        onSettingsClose={() => setCookieSettingsOpen(false)}
+      />
     </>
   );
 }
