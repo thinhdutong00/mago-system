@@ -39,9 +39,9 @@ const sectors = [
     slug: 'cliniche-dentali',
     label: 'Cliniche dentali',
     eyebrow: 'Acquisizione pazienti per odontoiatria',
-    headline: 'Appuntamenti già fissati da pazienti locali per prestazioni ad alto valore',
+    headline: 'Appuntamenti già fissati da pazienti locali per servizi dentali ad alto valore',
     subhead:
-      'Aiutiamo studi e cliniche dentali a intercettare persone con necessità concrete, senza basarsi solo su sconti, passaparola o campagne generiche.',
+      'Un percorso di acquisizione pensato per studi e cliniche dentali che vogliono più richieste locali, più valore percepito e meno dipendenza da sconti o passaparola.',
     cardText: 'Funnel locali per prime visite, urgenze e trattamenti ad alto valore.',
     pain: 'Troppe campagne parlano a tutti e portano preventivi al ribasso.',
     system:
@@ -236,6 +236,70 @@ const magoPillars = [
     letter: 'O',
     title: 'Optimization',
     text: 'Ottimizziamo landing, tracking, follow-up e creatività per migliorare qualità del lead e controllo del budget.',
+  },
+];
+
+const dentalHeroPills = ['Pazienti locali', 'Necessità urgente', 'Servizi alto spendenti', 'Una clinica per città'];
+
+const dentalValueCards = [
+  {
+    title: 'Più desiderio',
+    text: 'La promessa mette al centro appuntamenti per implantologia, ortodonzia, estetica dentale e urgenze realmente prenotabili.',
+  },
+  {
+    title: 'Più fiducia',
+    text: 'Landing e messaggi spiegano perché scegliere lo studio prima del contatto, con tono professionale e chiaro.',
+  },
+  {
+    title: 'Meno tempo',
+    text: 'Il percorso porta il paziente verso una richiesta concreta già dai primi giorni di attivazione operativa.',
+  },
+  {
+    title: 'Meno sforzo',
+    text: 'Annuncio, pagina e follow-up riducono attrito: il team riceve richieste più ordinate e facili da lavorare.',
+  },
+];
+
+const dentalServices = [
+  'Implantologia e riabilitazioni',
+  'Ortodonzia invisibile',
+  'Urgenze odontoiatriche',
+  'Estetica dentale',
+  'Prime visite qualificate',
+  'Igiene e prevenzione privata',
+];
+
+const dentalMagoPillars = [
+  {
+    letter: 'M',
+    title: 'Marketing dentale',
+    text: 'Posizioniamo i trattamenti ad alto valore con messaggi che fanno percepire risultato, fiducia e percorso.',
+  },
+  {
+    letter: 'A',
+    title: 'Advertising locale',
+    text: 'Attiviamo campagne Google e Meta su città, urgenza, servizio e intenzione di prenotazione.',
+  },
+  {
+    letter: 'G',
+    title: 'Growth dell’agenda',
+    text: 'Orientiamo le richieste verso prime visite e consulenze utili, non semplici curiosità da prezzo.',
+  },
+  {
+    letter: 'O',
+    title: 'Optimization continua',
+    text: 'Miglioriamo creatività, landing e follow-up leggendo qualità delle richieste, chiamate e conversioni.',
+  },
+];
+
+const dentalComparison = [
+  {
+    title: 'Percorso dispersivo',
+    text: 'Richieste non sempre pronte, messaggi centrati sul prezzo e segreteria costretta a ricostruire bisogno, urgenza e servizio.',
+  },
+  {
+    title: 'Percorso Mago System',
+    text: 'Il paziente arriva da una pagina specifica, capisce il valore del trattamento e lascia una richiesta più completa.',
   },
 ];
 
@@ -1185,8 +1249,184 @@ function DentalHeroVisual() {
   );
 }
 
-function SectorPage({ sector, navigate, openModal, openBooking }) {
-  const isDental = sector.slug === 'cliniche-dentali';
+function DentalMagoSection() {
+  return (
+    <section className="mago-section dental-mago-section" id="mago-dentale">
+      <div className="wide-container mago-panel reveal">
+        <div className="mago-intro">
+          <p className="eyebrow">Metodo MAGO per cliniche dentali</p>
+          <h2>Quattro leve per trasformare attenzione locale in appuntamenti più pronti</h2>
+          <p>
+            Ogni leva aumenta valore percepito e semplicità del percorso: il paziente capisce cosa chiedere, perché
+            farlo ora e quale passo compiere per entrare in contatto con lo studio.
+          </p>
+        </div>
+        <div className="mago-grid" aria-label="Metodo MAGO applicato alle cliniche dentali">
+          {dentalMagoPillars.map((pillar, index) => (
+            <article className="mago-card reveal" style={{ transitionDelay: `${index * 0.06}s` }} key={pillar.letter}>
+              <span>{pillar.letter}</span>
+              <h3>{pillar.title}</h3>
+              <p>{pillar.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DentalPage({ openModal, openBooking }) {
+  return (
+    <main className="dental-page">
+      <section className="dental-landing-hero">
+        <div className="wide-container dental-hero-grid">
+          <div className="dental-hero-copy reveal">
+            <p className="dental-question-pill">
+              <Stethoscope size={24} /> Sei un dentista?
+            </p>
+            <h1>
+              Portiamo al tuo studio dentistico <span>appuntamenti già fissati</span> di{' '}
+              <strong>pazienti locali</strong> con necessità urgente per servizi alto spendenti.
+            </h1>
+            <p>
+              L’obiettivo è avviare un sistema capace di generare richieste più pronte già dalla 1° settimana operativa,
+              senza dover basarti su sconti o passaparola.
+            </p>
+            <div className="dental-pill-row" aria-label="Elementi principali dell'offerta">
+              {dentalHeroPills.map((pill) => (
+                <span key={pill}>{pill}</span>
+              ))}
+            </div>
+            <div className="hero-actions">
+              <button className="button primary" type="button" onClick={openBooking}>
+                Prenota videochiamata <CalendarCheck size={18} />
+              </button>
+              <button className="button secondary" type="button" onClick={openModal}>
+                Richiedi consulenza <ArrowUpRight size={18} />
+              </button>
+            </div>
+          </div>
+          <DentalHeroVisual />
+        </div>
+      </section>
+
+      <section className="dental-city-section">
+        <div className="container dental-city-card reveal">
+          <ShieldCheck size={30} />
+          <p>Collaboriamo solo con</p>
+          <h2>una clinica per città</h2>
+          <span>
+            Per mantenere posizionamento, messaggi e campagne realmente distintivi nella stessa area locale.
+          </span>
+        </div>
+      </section>
+
+      <section className="dental-value-section">
+        <div className="container">
+          <div className="section-heading reveal">
+            <p className="eyebrow">Equazione del valore</p>
+            <h2>Più desiderio e fiducia, meno tempo e meno attrito nel percorso di prenotazione</h2>
+            <p>
+              La pagina non cerca “contatti qualsiasi”: costruisce un percorso che rende chiara la prestazione, aumenta
+              fiducia e accompagna il paziente verso una richiesta più completa.
+            </p>
+          </div>
+          <div className="dental-value-grid">
+            {dentalValueCards.map((card) => (
+              <article className="dental-value-card reveal" key={card.title}>
+                <CheckCircle2 size={24} />
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <DentalMagoSection />
+
+      <section className="dental-services-section">
+        <div className="container">
+          <div className="section-heading reveal">
+            <p className="eyebrow">Servizi prioritari</p>
+            <h2>Campagne verticali sui trattamenti che alzano valore medio e intenzione</h2>
+          </div>
+          <div className="dental-service-grid">
+            {dentalServices.map((service) => (
+              <article className="dental-service-card reveal" key={service}>
+                <span>{service}</span>
+                <ArrowUpRight size={20} aria-hidden="true" />
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="dental-comparison-section">
+        <div className="container dental-comparison-grid">
+          <div className="comparison-copy reveal">
+            <p className="eyebrow">Prima / dopo</p>
+            <h2>Quando il valore è chiaro prima del contatto, la conversazione cambia.</h2>
+          </div>
+          <div className="comparison-panels">
+            {dentalComparison.map((item, index) => (
+              <article className={`comparison-card reveal ${index === 1 ? 'active delay-1' : 'muted'}`} key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="split-section">
+        <div className="container split-grid reverse">
+          <div className="split-copy reveal">
+            <p className="eyebrow">Dalla richiesta alla prenotazione</p>
+            <h2>Annuncio, pagina e follow-up lavorano come un unico percorso.</h2>
+            <p>
+              Ogni passaggio riduce incertezza: il paziente vede un messaggio coerente, sceglie il servizio più adatto e
+              lascia informazioni più utili al team dello studio.
+            </p>
+            <div className="split-actions">
+              <button className="button primary" type="button" onClick={openBooking}>
+                Prenota videochiamata <CalendarCheck size={18} />
+              </button>
+              <button className="button secondary" type="button" onClick={openModal}>
+                Analizza la tua città <ArrowUpRight size={18} />
+              </button>
+            </div>
+          </div>
+          <div className="dashboard-card reveal delay-1">
+            <div>
+              <BarChart3 size={26} />
+              <span>Richieste locali</span>
+              <strong>Intenzione chiara</strong>
+            </div>
+            <div>
+              <Activity size={26} />
+              <span>Servizi prioritari</span>
+              <strong>Valore percepito</strong>
+            </div>
+            <div>
+              <MapPin size={26} />
+              <span>Area esclusiva</span>
+              <strong>Una città</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <FinalCta
+        openModal={openModal}
+        openBooking={openBooking}
+        title="Vuoi capire se la tua città è disponibile per una clinica dentale?"
+      />
+    </main>
+  );
+}
+
+function SectorPage({ sector, openModal, openBooking }) {
 
   return (
     <main>
@@ -1205,23 +1445,17 @@ function SectorPage({ sector, navigate, openModal, openBooking }) {
               </button>
             </div>
           </div>
-          {isDental ? (
-            <DentalHeroVisual />
-          ) : (
-            <div className="sector-score reveal delay-1" aria-label={`Sistema MAGO per ${sector.label}`}>
-              <span>{sector.label}</span>
-              <div>
-                <strong>M Marketing sanitario</strong>
-                <strong>A Advertising locale</strong>
-                <strong>G Growth misurata</strong>
-                <strong>O Optimization continua</strong>
-              </div>
+          <div className="sector-score reveal delay-1" aria-label={`Sistema MAGO per ${sector.label}`}>
+            <span>{sector.label}</span>
+            <div>
+              <strong>M Marketing sanitario</strong>
+              <strong>A Advertising locale</strong>
+              <strong>G Growth misurata</strong>
+              <strong>O Optimization continua</strong>
             </div>
-          )}
+          </div>
         </div>
       </section>
-
-      {isDental && <MagoSection />}
 
       <section className="sector-detail">
         <div className="container sector-detail-grid">
@@ -1668,7 +1902,10 @@ function App() {
   useEffect(() => {
     const pageMeta = activeSector
       ? {
-          title: `${activeSector.label} - Acquisizione pazienti | Mago System`,
+          title:
+            activeSector.slug === 'cliniche-dentali'
+              ? 'Cliniche dentali - Appuntamenti da pazienti locali | Mago System'
+              : `${activeSector.label} - Acquisizione pazienti | Mago System`,
           description: activeSector.subhead,
           path: `/${activeSector.slug}`,
         }
@@ -1728,10 +1965,12 @@ function App() {
       {path === '/' && (
         <HomePage navigate={navigate} openModal={() => setModalOpen(true)} openBooking={() => setBookingOpen(true)} />
       )}
-      {activeSector && (
+      {activeSector?.slug === 'cliniche-dentali' && (
+        <DentalPage openModal={() => setModalOpen(true)} openBooking={() => setBookingOpen(true)} />
+      )}
+      {activeSector && activeSector.slug !== 'cliniche-dentali' && (
         <SectorPage
           sector={activeSector}
-          navigate={navigate}
           openModal={() => setModalOpen(true)}
           openBooking={() => setBookingOpen(true)}
         />
