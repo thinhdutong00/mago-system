@@ -1122,7 +1122,10 @@ h3 {
 .dental-landing-hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(72px, 8vw, 128px) 0 clamp(64px, 8vw, 112px);
+  min-height: calc(100svh - 150px);
+  display: flex;
+  align-items: center;
+  padding: clamp(34px, 4vw, 62px) 0 clamp(34px, 4vw, 62px);
 }
 
 .dental-landing-hero::before {
@@ -1138,73 +1141,67 @@ h3 {
 .dental-hero-grid {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(390px, 0.94fr);
-  align-items: start;
-  gap: clamp(36px, 6vw, 84px);
+  grid-template-columns: minmax(0, 0.92fr) minmax(390px, 1.08fr);
+  align-items: center;
+  gap: clamp(30px, 5vw, 72px);
 }
 
 .dental-hero-copy {
-  max-width: 850px;
+  max-width: 760px;
 }
 
 .dental-question-pill {
   width: fit-content;
-  min-height: 70px;
-  margin: 0 0 34px;
+  min-height: 58px;
+  margin: 0 0 24px;
   border-radius: var(--rounded-pill);
   display: inline-flex;
   align-items: center;
   gap: 14px;
-  padding: 10px 28px 10px 12px;
+  padding: 8px 24px 8px 10px;
   color: #ffffff;
   background: linear-gradient(135deg, var(--blue) 0%, var(--blue-2) 56%, var(--navy) 100%);
   box-shadow: 0 18px 42px rgba(22, 135, 242, 0.28);
-  font-size: clamp(24px, 3vw, 42px);
+  font-size: clamp(22px, 2.45vw, 36px);
   font-weight: 800;
   line-height: 1;
 }
 
 .dental-question-pill svg {
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  padding: 10px;
+  padding: 9px;
   color: var(--blue-2);
   background: #ffffff;
 }
 
 .dental-hero-copy h1 {
-  max-width: 900px;
+  max-width: 820px;
   color: var(--navy);
-  font-size: clamp(46px, 6vw, 88px);
+  font-size: clamp(46px, 5vw, 76px);
   font-weight: 800;
-  line-height: 1.02;
+  line-height: 0.98;
 }
 
 .dental-hero-copy h1 span,
 .dental-hero-copy h1 strong {
-  display: block;
+  display: inline;
 }
 
 .dental-hero-copy h1 span {
-  margin-top: 10px;
   color: var(--navy);
-  font-size: clamp(58px, 8vw, 116px);
-  line-height: 0.94;
 }
 
 .dental-hero-copy h1 strong {
-  margin-top: 12px;
   color: var(--blue-2);
-  font-size: clamp(54px, 7vw, 104px);
-  line-height: 0.98;
 }
 
 .dental-hero-copy > p:not(.dental-question-pill) {
-  max-width: 760px;
-  margin: 28px 0 0;
+  max-width: 650px;
+  margin: 20px 0 0;
   color: var(--muted);
-  font-size: clamp(18px, 2vw, 24px);
+  font-size: clamp(17px, 1.55vw, 21px);
   font-weight: 500;
   line-height: 1.35;
 }
@@ -1213,7 +1210,7 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 28px;
+  margin-top: 22px;
 }
 
 .dental-pill-row span {
@@ -1229,7 +1226,7 @@ h3 {
 
 .dental-hero-visual {
   position: relative;
-  min-height: clamp(430px, 46vw, 560px);
+  min-height: clamp(390px, 38vw, 560px);
   border: 1px solid rgba(255, 255, 255, 0.78);
   border-radius: var(--radius);
   overflow: hidden;
@@ -1244,7 +1241,8 @@ h3 {
   height: 100%;
   min-height: inherit;
   object-fit: cover;
-  transform: scale(1.02);
+  object-position: center;
+  transform: scale(1.01);
 }
 
 .dental-hero-badge {
@@ -2169,8 +2167,12 @@ h3 {
     min-height: 520px;
   }
 
+  .dental-landing-hero {
+    min-height: auto;
+  }
+
   .dental-hero-visual {
-    min-height: 500px;
+    min-height: 440px;
   }
 
   .mago-grid,
@@ -2240,7 +2242,8 @@ h3 {
   }
 
   .dental-landing-hero {
-    padding-top: 54px;
+    padding-top: 42px;
+    padding-bottom: 44px;
   }
 
   h1 {
@@ -2260,19 +2263,26 @@ h3 {
   }
 
   .dental-hero-copy h1 {
-    font-size: clamp(38px, 11vw, 54px);
+    font-size: clamp(34px, 9.5vw, 46px);
+    line-height: 1;
   }
 
-  .dental-hero-copy h1 span {
-    font-size: clamp(48px, 13vw, 66px);
-  }
-
+  .dental-hero-copy h1 span,
   .dental-hero-copy h1 strong {
-    font-size: clamp(46px, 12vw, 64px);
+    font-size: inherit;
   }
 
   .dental-hero-copy > p:not(.dental-question-pill) {
-    font-size: 18px;
+    margin-top: 16px;
+    font-size: 17px;
+  }
+
+  .dental-pill-row {
+    margin-top: 18px;
+  }
+
+  .dental-page .hero-actions {
+    margin-top: 22px;
   }
 
   .section-heading h2,
@@ -2407,16 +2417,16 @@ h3 {
   }
 
   .dental-hero-visual {
-    min-height: 340px;
+    min-height: 300px;
   }
 
   .dental-hero-copy h1 {
-    font-size: clamp(34px, 10vw, 46px);
+    font-size: clamp(32px, 9.5vw, 40px);
   }
 
   .dental-hero-copy h1 span,
   .dental-hero-copy h1 strong {
-    font-size: clamp(40px, 12vw, 54px);
+    font-size: inherit;
   }
 
   .dental-hero-badge {

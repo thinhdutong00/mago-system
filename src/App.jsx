@@ -1236,7 +1236,15 @@ function BookingBand({ openBooking }) {
 function DentalHeroVisual() {
   return (
     <div className="dental-hero-visual reveal delay-1" aria-label="Visual clinica dentale Mago System">
-      <img src={`${ASSETS}dental-hero-visual.svg`} alt="Dentista in clinica odontoiatrica moderna" width="980" height="760" />
+      <img
+        src={`${ASSETS}dental-hero-dentist.webp`}
+        alt="Dentista sorridente in una clinica moderna con interfacce digitali per appuntamenti e crescita"
+        width="1200"
+        height="900"
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
+      />
       <div className="dental-hero-badge dental-hero-badge--top">
         <CalendarCheck size={20} />
         <span>Prime visite qualificate</span>
@@ -1285,12 +1293,11 @@ function DentalPage({ openModal, openBooking }) {
               <Stethoscope size={24} /> Sei un dentista?
             </p>
             <h1>
-              Portiamo al tuo studio dentistico <span>appuntamenti già fissati</span> di{' '}
-              <strong>pazienti locali</strong> con necessità urgente per servizi alto spendenti.
+              <span>Appuntamenti già fissati</span> per servizi dentali <strong>ad alto valore</strong>
             </h1>
             <p>
-              L’obiettivo è avviare un sistema capace di generare richieste più pronte già dalla 1° settimana operativa,
-              senza dover basarti su sconti o passaparola.
+              Da pazienti locali con necessità urgente, già dalla 1° settimana operativa, senza basarti su sconti o
+              passaparola.
             </p>
             <div className="dental-pill-row" aria-label="Elementi principali dell'offerta">
               {dentalHeroPills.map((pill) => (
