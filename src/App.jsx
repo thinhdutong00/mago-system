@@ -239,54 +239,6 @@ const magoPillars = [
   },
 ];
 
-const defaultSectorMagoCards = [
-  {
-    letter: 'M',
-    title: 'Messaggio ad alto valore',
-    text: 'Posizionamento, promessa e prova costruiti sul bisogno reale del paziente.',
-  },
-  {
-    letter: 'A',
-    title: 'Acquisizione locale',
-    text: 'Campagne Google e Meta orientate a zona, intento e servizio prioritario.',
-  },
-  {
-    letter: 'G',
-    title: 'Gestione crescita',
-    text: 'Richieste più leggibili, follow-up ordinato e agenda più prevedibile.',
-  },
-  {
-    letter: 'O',
-    title: 'Ottimizzazione continua',
-    text: 'Landing, tracciamento e creatività migliorati sui dati delle richieste.',
-  },
-];
-
-const dentalMagoCards = [
-  {
-    letter: 'M',
-    title: 'Messaggi per trattamenti premium',
-    text: 'Implantologia, ortodonzia invisibile, urgenze e prime visite spiegate senza scivolare sullo sconto.',
-  },
-  {
-    letter: 'A',
-    title: 'Campagne su pazienti vicini',
-    text: 'Google e Meta intercettano persone in zona con bisogni concreti e tempi di decisione più brevi.',
-  },
-  {
-    letter: 'G',
-    title: 'Prime visite più pronte',
-    text: 'Il percorso qualifica la richiesta prima del contatto e porta più chiarezza al team di segreteria.',
-  },
-  {
-    letter: 'O',
-    title: 'Tracking e follow-up',
-    text: 'Chiamate, form, WhatsApp e richiami vengono letti insieme per ridurre sprechi e richieste perse.',
-  },
-];
-
-const dentalHeroTags = ['Implantologia', 'Urgenze locali', 'Ortodonzia invisibile', 'Prime visite qualificate'];
-
 const privacyMeta = {
   title: 'Privacy Policy - Mago System',
   description:
@@ -1217,69 +1169,15 @@ function BookingBand({ openBooking }) {
   );
 }
 
-function SectorScore({ sector }) {
-  const isDental = sector.slug === 'cliniche-dentali';
-  const cards = isDental ? dentalMagoCards : defaultSectorMagoCards;
-
-  return (
-    <aside
-      className={`sector-score ${isDental ? 'sector-score--dental' : ''} reveal delay-1`}
-      aria-label={`Sistema MAGO per ${sector.label}`}
-    >
-      <div className="sector-score-header">
-        <span>{sector.label}</span>
-        <strong>{isDental ? 'Funnel dentale premium' : 'Sistema verticale'}</strong>
-      </div>
-      {isDental && (
-        <div className="dental-tag-row" aria-label="Servizi dentali prioritari">
-          {dentalHeroTags.map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
-        </div>
-      )}
-      <div className="sector-score-grid">
-        {cards.map((card) => (
-          <article className="sector-score-item" key={card.letter}>
-            <span>{card.letter}</span>
-            <div>
-              <h3>{card.title}</h3>
-              <p>{card.text}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-      <div className="sector-score-footer">
-        <CalendarCheck size={20} />
-        <span>{isDental ? 'Obiettivo: richieste locali già orientate alla prima visita' : 'Obiettivo: richiesta più chiara prima del contatto'}</span>
-      </div>
-    </aside>
-  );
-}
-
 function SectorPage({ sector, navigate, openModal, openBooking }) {
-  const isDental = sector.slug === 'cliniche-dentali';
-
   return (
-    <main className={`sector-page ${isDental ? 'sector-page--dental' : ''}`}>
-      <section className={`sector-hero sector-hero--${sector.slug}`}>
+    <main>
+      <section className="sector-hero">
         <div className="container sector-hero-grid">
           <div className="sector-hero-copy reveal">
             <p className="eyebrow">{sector.eyebrow}</p>
             <h1>{sector.headline}</h1>
             <p>{sector.subhead}</p>
-            {isDental && (
-              <div className="dental-hero-proof" aria-label="Focus acquisizione cliniche dentali">
-                <span>
-                  <ShieldCheck size={18} /> No guerra di prezzo
-                </span>
-                <span>
-                  <Target size={18} /> Servizi ad alto valore
-                </span>
-                <span>
-                  <MapPin size={18} /> Pazienti nella tua città
-                </span>
-              </div>
-            )}
             <div className="hero-actions">
               <button className="button primary" type="button" onClick={openBooking}>
                 Prenota videochiamata <CalendarCheck size={18} />
@@ -1289,7 +1187,15 @@ function SectorPage({ sector, navigate, openModal, openBooking }) {
               </button>
             </div>
           </div>
-          <SectorScore sector={sector} />
+          <div className="sector-score reveal delay-1" aria-label={`Sistema MAGO per ${sector.label}`}>
+            <span>{sector.label}</span>
+            <div>
+              <strong>M Marketing sanitario</strong>
+              <strong>A Advertising locale</strong>
+              <strong>G Growth misurata</strong>
+              <strong>O Optimization continua</strong>
+            </div>
+          </div>
         </div>
       </section>
 
