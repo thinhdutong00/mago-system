@@ -1,0 +1,39 @@
+<svg width="980" height="760" viewBox="0 0 980 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Dentista in clinica odontoiatrica</title>
+  <desc id="desc">Illustrazione medicale di un dentista accanto a una poltrona odontoiatrica in ambiente clinico moderno.</desc>
+  <rect width="980" height="760" rx="44" fill="#EEF9FF"/>
+  <circle cx="802" cy="128" r="176" fill="#BEEBFF" fill-opacity=".72"/>
+  <circle cx="190" cy="612" r="210" fill="#DFF5FF"/>
+  <path d="M84 573C151 531 222 510 298 510h338c93 0 175 59 205 147l12 35H91l-7-119Z" fill="#D3EEFB"/>
+  <path d="M209 439h456c76 0 138 62 138 138v34H260c-68 0-124-55-124-124 0-26 21-48 48-48h25Z" fill="#FFFFFF"/>
+  <path d="M225 458h440c66 0 119 53 119 119v14H263c-58 0-106-47-106-106 0-15 12-27 27-27h41Z" fill="#C9EFFF"/>
+  <path d="M611 508h144c23 0 42 19 42 42v19H611v-61Z" fill="#1687F2"/>
+  <path d="M611 508h98c23 0 42 19 42 42v19H611v-61Z" fill="#07145F"/>
+  <path d="M177 606h638" stroke="#07145F" stroke-opacity=".12" stroke-width="18" stroke-linecap="round"/>
+  <path d="M274 609l-58 96M657 609l48 96" stroke="#07145F" stroke-opacity=".28" stroke-width="18" stroke-linecap="round"/>
+  <path d="M681 179c35 0 64 29 64 64v251h-76V243c0-35-29-64-64-64h76Z" fill="#B7DDF1"/>
+  <path d="M706 206h82c30 0 55 25 55 55v33" stroke="#07145F" stroke-opacity=".28" stroke-width="18" stroke-linecap="round"/>
+  <rect x="805" y="276" width="98" height="58" rx="29" fill="#1687F2"/>
+  <circle cx="850" cy="305" r="16" fill="#FFFFFF"/>
+  <path d="M716 133c0-37 30-67 67-67h52c37 0 67 30 67 67v15H716v-15Z" fill="#FFFFFF"/>
+  <rect x="704" y="133" width="210" height="36" rx="18" fill="#07145F"/>
+  <path d="M776 169h67v66c0 18-15 33-33 33h-1c-18 0-33-15-33-33v-66Z" fill="#07145F" fill-opacity=".22"/>
+  <path d="M384 225c0-58 47-105 105-105h25c58 0 105 47 105 105v158H384V225Z" fill="#FFFFFF"/>
+  <path d="M383 294h238v151c0 66-53 119-119 119s-119-53-119-119V294Z" fill="#07145F"/>
+  <path d="M409 304h186v132c0 51-42 93-93 93s-93-42-93-93V304Z" fill="#1687F2"/>
+  <path d="M430 202c0-40 32-72 72-72s72 32 72 72v16H430v-16Z" fill="#123B9F"/>
+  <circle cx="459" cy="246" r="12" fill="#07145F"/>
+  <circle cx="545" cy="246" r="12" fill="#07145F"/>
+  <path d="M455 283c31 18 64 18 95 0" stroke="#07145F" stroke-width="12" stroke-linecap="round"/>
+  <path d="M404 319c39 24 75 36 108 36 31 0 65-12 101-36v83c-31 20-68 31-110 31-39 0-72-10-99-29v-85Z" fill="#EAF7FF"/>
+  <path d="M366 377c-40 28-73 67-98 117" stroke="#07145F" stroke-opacity=".28" stroke-width="22" stroke-linecap="round"/>
+  <path d="M634 376c39 28 72 67 97 118" stroke="#07145F" stroke-opacity=".28" stroke-width="22" stroke-linecap="round"/>
+  <path d="M302 507c44-40 90-61 139-61h126c54 0 103 23 148 68" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+  <rect x="86" y="82" width="244" height="118" rx="30" fill="#FFFFFF" fill-opacity=".92"/>
+  <path d="M139 143c20-36 49-36 69-4 20-32 49-32 69 4-7 34-19 61-36 82-7 8-19 3-18-8l3-36c1-12-8-22-20-22s-21 10-20 22l3 36c1 11-12 16-18 8-18-21-30-48-37-82Z" fill="#1687F2" fill-opacity=".18"/>
+  <path d="M154 139c17-28 39-27 54 1 15-28 37-29 54-1" stroke="#1687F2" stroke-width="12" stroke-linecap="round"/>
+  <rect x="638" y="604" width="252" height="78" rx="24" fill="#FFFFFF" fill-opacity=".9"/>
+  <path d="M682 643h54M682 664h134" stroke="#07145F" stroke-opacity=".28" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="838" cy="643" r="20" fill="#1687F2"/>
+  <path d="M829 643l7 7 14-17" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

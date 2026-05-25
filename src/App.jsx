@@ -1169,7 +1169,25 @@ function BookingBand({ openBooking }) {
   );
 }
 
+function DentalHeroVisual() {
+  return (
+    <div className="dental-hero-visual reveal delay-1" aria-label="Visual clinica dentale Mago System">
+      <img src={`${ASSETS}dental-hero-visual.svg`} alt="Dentista in clinica odontoiatrica moderna" width="980" height="760" />
+      <div className="dental-hero-badge dental-hero-badge--top">
+        <CalendarCheck size={20} />
+        <span>Prime visite qualificate</span>
+      </div>
+      <div className="dental-hero-badge dental-hero-badge--bottom">
+        <ShieldCheck size={20} />
+        <span>Servizi ad alto valore</span>
+      </div>
+    </div>
+  );
+}
+
 function SectorPage({ sector, navigate, openModal, openBooking }) {
+  const isDental = sector.slug === 'cliniche-dentali';
+
   return (
     <main>
       <section className="sector-hero">
@@ -1187,17 +1205,23 @@ function SectorPage({ sector, navigate, openModal, openBooking }) {
               </button>
             </div>
           </div>
-          <div className="sector-score reveal delay-1" aria-label={`Sistema MAGO per ${sector.label}`}>
-            <span>{sector.label}</span>
-            <div>
-              <strong>M Marketing sanitario</strong>
-              <strong>A Advertising locale</strong>
-              <strong>G Growth misurata</strong>
-              <strong>O Optimization continua</strong>
+          {isDental ? (
+            <DentalHeroVisual />
+          ) : (
+            <div className="sector-score reveal delay-1" aria-label={`Sistema MAGO per ${sector.label}`}>
+              <span>{sector.label}</span>
+              <div>
+                <strong>M Marketing sanitario</strong>
+                <strong>A Advertising locale</strong>
+                <strong>G Growth misurata</strong>
+                <strong>O Optimization continua</strong>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
+
+      {isDental && <MagoSection />}
 
       <section className="sector-detail">
         <div className="container sector-detail-grid">

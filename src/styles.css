@@ -1113,6 +1113,57 @@ h3 {
   line-height: 1.2;
 }
 
+.dental-hero-visual {
+  position: relative;
+  min-height: clamp(430px, 46vw, 560px);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: var(--shadow);
+}
+
+.dental-hero-visual img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  transform: scale(1.02);
+}
+
+.dental-hero-badge {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.76);
+  border-radius: var(--rounded-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(14px);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.dental-hero-badge svg {
+  color: var(--blue-2);
+}
+
+.dental-hero-badge--top {
+  top: 22px;
+  left: 22px;
+}
+
+.dental-hero-badge--bottom {
+  right: 22px;
+  bottom: 22px;
+}
+
 .sector-detail-grid {
   display: grid;
   grid-template-columns: 0.86fr 1.14fr;
@@ -1842,6 +1893,10 @@ h3 {
     min-height: 520px;
   }
 
+  .dental-hero-visual {
+    min-height: 500px;
+  }
+
   .mago-grid,
   .sector-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1960,6 +2015,10 @@ h3 {
     min-height: 450px;
   }
 
+  .dental-hero-visual {
+    min-height: 390px;
+  }
+
   .medical-card.metric,
   .medical-card.search,
   .medical-card.trust {
@@ -2023,6 +2082,26 @@ h3 {
 
   .hero-visual {
     min-height: 400px;
+  }
+
+  .dental-hero-visual {
+    min-height: 340px;
+  }
+
+  .dental-hero-badge {
+    max-width: calc(100% - 28px);
+    padding: 9px 11px;
+    font-size: 13px;
+  }
+
+  .dental-hero-badge--top {
+    top: 14px;
+    left: 14px;
+  }
+
+  .dental-hero-badge--bottom {
+    right: 14px;
+    bottom: 14px;
   }
 
   .medical-card.main {
