@@ -1420,7 +1420,8 @@ function DentalPage({ openModal, openBooking }) {
       <FinalCta
         openModal={openModal}
         openBooking={openBooking}
-        title="Vuoi capire se la tua città è disponibile per una clinica dentale?"
+        title="Prenota una videochiamata e verifica se possiamo lavorare nella tua città"
+        description="In call controlliamo città, servizi dentali prioritari e situazione attuale. Se l’area è libera, ti mostriamo come potremmo costruire un percorso per portare più richieste qualificate al tuo studio."
       />
     </main>
   );
@@ -1637,7 +1638,12 @@ function PrivacyPolicyPage({ navigate }) {
   );
 }
 
-function FinalCta({ openModal, openBooking, title = 'Vuoi portare più pazienti qualificati alla tua struttura?' }) {
+function FinalCta({
+  openModal,
+  openBooking,
+  title = 'Vuoi portare più pazienti qualificati alla tua struttura?',
+  description = 'Partiamo da settore, città, servizi prioritari e canali attivi. Poi identifichiamo quali percorsi possono generare richieste più utili.',
+}) {
   return (
     <section className="footer-cta">
       <div className="container">
@@ -1645,10 +1651,7 @@ function FinalCta({ openModal, openBooking, title = 'Vuoi portare più pazienti 
           <div>
             <p className="eyebrow">Prima lettura gratuita</p>
             <h2>{title}</h2>
-            <p>
-              Partiamo da settore, città, servizi prioritari e canali attivi. Poi identifichiamo quali percorsi possono
-              generare richieste più utili.
-            </p>
+            <p>{description}</p>
             <div className="cta-actions">
               <button className="button primary" type="button" onClick={openBooking}>
                 Prenota videochiamata <CalendarCheck size={18} />
