@@ -1277,7 +1277,12 @@ h3 {
 }
 
 .dental-city-section {
+  position: relative;
+  margin-top: -1px;
   padding: 0 0 clamp(62px, 8vw, 104px);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(116, 212, 255, 0.28), transparent 25rem),
+    linear-gradient(180deg, rgba(237, 248, 255, 0.98) 0%, rgba(247, 252, 255, 0) 72%);
 }
 
 .dental-city-card {
