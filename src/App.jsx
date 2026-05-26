@@ -422,7 +422,7 @@ function Logo({ navigate }) {
         navigate('/');
       }}
     >
-      <img src={`${ASSETS}mago-system-logo-2026-05-17.png`} alt="Mago System" width="865" height="288" />
+      <img src={`${ASSETS}mago-system-logo-header.webp`} alt="Mago System" width="499" height="166" />
     </a>
   );
 }
@@ -1234,15 +1234,22 @@ function BookingBand({ openBooking }) {
 function DentalHeroVisual() {
   return (
     <div className="dental-hero-visual reveal delay-1" aria-label="Visual clinica dentale Mago System">
-      <img
-        src={`${ASSETS}dental-hero-dentist.webp`}
-        alt="Dentista sorridente in una clinica moderna con interfacce digitali per appuntamenti e crescita"
-        width="1200"
-        height="900"
-        loading="eager"
-        decoding="async"
-        fetchPriority="high"
-      />
+      <picture>
+        <source
+          srcSet={`${ASSETS}dental-hero-dentist-640.webp 640w, ${ASSETS}dental-hero-dentist-900.webp 900w`}
+          sizes="(max-width: 720px) 92vw, min(48vw, 760px)"
+          type="image/webp"
+        />
+        <img
+          src={`${ASSETS}dental-hero-dentist-900.webp`}
+          alt="Dentista sorridente in una clinica moderna con interfacce digitali per appuntamenti e crescita"
+          width="900"
+          height="675"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
+      </picture>
       <div className="dental-hero-badge dental-hero-badge--top">
         <CalendarCheck size={20} />
         <span>Prime visite qualificate</span>
