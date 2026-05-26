@@ -1373,7 +1373,7 @@ function DentalPage({ openModal, openBooking }) {
         <div className="container dental-comparison-grid">
           <div className="comparison-copy reveal">
             <p className="eyebrow">Prima / dopo</p>
-            <h2>Quando il valore è chiaro prima del contatto, la conversazione cambia.</h2>
+            <h2>Quando il valore è chiaro prima della visita, la conversazione cambia.</h2>
           </div>
           <div className="comparison-panels">
             {dentalComparison.map((item, index) => (
