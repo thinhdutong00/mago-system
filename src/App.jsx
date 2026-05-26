@@ -239,8 +239,6 @@ const magoPillars = [
   },
 ];
 
-const dentalHeroPills = ['Pazienti locali', 'Necessità urgente', 'Servizi alto spendenti', 'Una clinica per città'];
-
 const dentalValueCards = [
   {
     title: 'Più desiderio',
@@ -1299,11 +1297,6 @@ function DentalPage({ openModal, openBooking }) {
               Da pazienti locali con necessità urgente, già dalla 1° settimana operativa, senza basarti su sconti o
               passaparola.
             </p>
-            <div className="dental-pill-row" aria-label="Elementi principali dell'offerta">
-              {dentalHeroPills.map((pill) => (
-                <span key={pill}>{pill}</span>
-              ))}
-            </div>
             <div className="hero-actions">
               <button className="button primary" type="button" onClick={openBooking}>
                 Prenota videochiamata <CalendarCheck size={18} />
