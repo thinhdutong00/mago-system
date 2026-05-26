@@ -1661,7 +1661,14 @@ function FinalCta({
               </button>
             </div>
           </div>
-          <img src={`${ASSETS}footer-pattern.svg`} alt="" width="534" height="290" loading="lazy" />
+          <img
+            src={`${ASSETS}footer-cta-person-real.webp`}
+            alt="Consulente Mago System pronto per una videochiamata strategica"
+            width="900"
+            height="980"
+            loading="eager"
+            decoding="async"
+          />
         </div>
       </div>
     </section>
