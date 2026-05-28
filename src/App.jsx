@@ -8,14 +8,12 @@ import {
   CalendarCheck,
   CheckCircle2,
   ChevronDown,
-  Clock3,
   Mail,
   MapPin,
   Menu,
   Search,
   Send,
   ShieldCheck,
-  Sparkles,
   Stethoscope,
   Target,
   Video,
@@ -169,6 +167,738 @@ const sectors = [
 
 const sectorOptions = sectors.map((sector) => sector.label);
 
+const sectorLandingPages = {
+  'centri-diagnostici-privati': {
+    metaTitle: 'Centri diagnostici privati - Acquisizione pazienti | Mago System',
+    metaDescription:
+      'Sistema di acquisizione per centri diagnostici privati: intercettiamo domanda locale già interessata a esami, visite, screening e check-up.',
+    question: 'Gestisci un centro diagnostico privato?',
+    headline: 'Richieste più chiare per esami, visite e check-up privati',
+    subhead:
+      'Costruiamo un sistema che intercetta persone già orientate alla sanità privata, mette in evidenza tempi, percorso e specializzazioni, e le accompagna verso una richiesta ordinata.',
+    qualifierTitle: 'Lavoriamo su domanda reale, non su traffico indistinto',
+    qualifierText:
+      'Prima di aprire budget, definiamo quali prestazioni meritano una landing dedicata, quali intenzioni di ricerca hanno valore e quali richieste devono arrivare già leggibili al front office.',
+    valueCards: [
+      {
+        title: 'Più desiderio',
+        text: 'La pagina collega il bisogno del paziente a esami, controlli e check-up concreti, senza comunicare la diagnostica come una lista fredda di prestazioni.',
+      },
+      {
+        title: 'Più fiducia',
+        text: 'Percorso, tempi indicativi, specializzazioni e modalità di contatto sono spiegati con precisione, così la scelta non si riduce al prezzo.',
+      },
+      {
+        title: 'Meno tempo',
+        text: 'Chi arriva sulla pagina capisce rapidamente se il centro è adatto alla sua esigenza e quale passo fare per chiedere informazioni.',
+      },
+      {
+        title: 'Meno sforzo',
+        text: 'Campagne, pagina e follow-up raccolgono informazioni utili, riducendo richieste vaghe e conversazioni da ricostruire da zero.',
+      },
+    ],
+    magoPillars: [
+      {
+        letter: 'M',
+        title: 'Marketing diagnostico',
+        text: 'Definiamo messaggi per esami, prevenzione e pacchetti privati con un linguaggio chiaro per persone già in fase di scelta.',
+      },
+      {
+        letter: 'A',
+        title: 'Advertising locale',
+        text: 'Intercettiamo ricerche e bisogni per città, prestazione e priorità, evitando campagne generiche su tutto il listino.',
+      },
+      {
+        letter: 'G',
+        title: 'Growth delle richieste',
+        text: 'Orientiamo la crescita verso prenotazioni e contatti lavorabili, non verso volumi che appesantiscono il centralino.',
+      },
+      {
+        letter: 'O',
+        title: 'Optimization continua',
+        text: 'Leggiamo qualità delle richieste, servizi richiesti e frizioni del percorso per migliorare pagina, annunci e follow-up.',
+      },
+    ],
+    services: [
+      'Diagnostica per immagini privata',
+      'Ecografie e visite specialistiche',
+      'Analisi e percorsi di prevenzione',
+      'Screening e controlli periodici',
+      'Check-up aziendali e privati',
+      'Prestazioni con tempi rapidi',
+    ],
+    comparison: [
+      {
+        title: 'Campagne generiche',
+        text: 'Traffico su pagine troppo ampie, poca chiarezza sulla prestazione richiesta e richieste difficili da qualificare.',
+      },
+      {
+        title: 'Sistema Mago',
+        text: 'Percorsi per prestazione, zona e intenzione, con messaggi che aiutano il paziente a capire e il centro a rispondere meglio.',
+      },
+    ],
+    workflowTitle: 'Dalla ricerca specifica alla richiesta gestibile dal front office',
+    workflowText:
+      'Il sistema collega intenti di ricerca, landing e contatto. La persona trova informazioni essenziali, lascia una richiesta più completa e il team puo valutare priorità, servizio e disponibilità con meno attrito.',
+    dashboard: [
+      ['Domanda locale', 'Esame specifico'],
+      ['Percorso chiaro', 'Meno attrito'],
+      ['Front office', 'Richieste leggibili'],
+    ],
+    ctaTitle: 'Verifica quali prestazioni diagnostiche meritano un funnel dedicato',
+    ctaDescription:
+      'In videochiamata analizziamo servizi prioritari, area geografica e percorso attuale. Se c’è spazio per lavorare bene, definiamo quali richieste ha senso intercettare per prime.',
+  },
+  'fisioterapia-specializzata': {
+    metaTitle: 'Fisioterapia specializzata - Acquisizione pazienti | Mago System',
+    metaDescription:
+      'Sistema di acquisizione per centri fisioterapici: percorsi per riabilitazione, sport, post-operatorio e dolore, con richieste più coerenti.',
+    question: 'Hai uno studio o centro fisioterapico specializzato?',
+    headline: 'Portiamo persone già motivate verso percorsi fisioterapici strutturati',
+    subhead:
+      'Non vendiamo la singola seduta. Costruiamo un percorso che fa capire metodo, specializzazione e continuità, così chi contatta arriva con un bisogno più chiaro.',
+    qualifierTitle: 'Il valore non e nella seduta isolata, ma nel percorso',
+    qualifierText:
+      'Quando la comunicazione spiega problema, metodo e progressione, il paziente smette di confrontare solo il prezzo orario e valuta se il centro è adatto alla sua situazione.',
+    valueCards: [
+      {
+        title: 'Più desiderio',
+        text: 'Il messaggio parte dal problema reale: recupero, dolore, ritorno allo sport o continuità post-operatoria.',
+      },
+      {
+        title: 'Più fiducia',
+        text: 'Metodo, specializzazione e modalità di presa in carico vengono spiegati prima del contatto, senza promesse terapeutiche.',
+      },
+      {
+        title: 'Meno tempo',
+        text: 'La persona trova rapidamente il percorso più vicino al suo bisogno e capisce quale informazione lasciare.',
+      },
+      {
+        title: 'Meno sforzo',
+        text: 'La segreteria riceve richieste più ordinate, con contesto sul problema e sul tipo di percorso cercato.',
+      },
+    ],
+    magoPillars: [
+      {
+        letter: 'M',
+        title: 'Marketing del percorso',
+        text: 'Posizioniamo la fisioterapia come presa in carico specialistica, non come commodity da calendario.',
+      },
+      {
+        letter: 'A',
+        title: 'Advertising per bisogno',
+        text: 'Separiamo ricerche e creativita per sport, post-operatorio, dolore persistente e programmi specialistici.',
+      },
+      {
+        letter: 'G',
+        title: 'Growth sostenibile',
+        text: 'Puntiamo a richieste coerenti con competenze, agenda e valore del centro, non a contatti indiscriminati.',
+      },
+      {
+        letter: 'O',
+        title: 'Optimization sul dato',
+        text: 'Ottimizziamo in base alla qualità delle richieste e alla capacità del team di trasformarle in prime valutazioni.',
+      },
+    ],
+    services: [
+      'Riabilitazione sportiva',
+      'Percorsi post-operatori',
+      'Dolore persistente e ricorrente',
+      'Valutazioni funzionali',
+      'Fisioterapia specialistica',
+      'Programmi di continuità',
+    ],
+    comparison: [
+      {
+        title: 'Pagina da listino',
+        text: 'Servizi elencati senza contesto, richiesta generica e paziente che chiede solo il costo della seduta.',
+      },
+      {
+        title: 'Sistema Mago',
+        text: 'Landing per bisogno, metodo spiegato e CTA che porta verso una prima valutazione più coerente.',
+      },
+    ],
+    workflowTitle: 'Dal bisogno fisico alla richiesta per un percorso adatto',
+    workflowText:
+      'Campagne e pagina chiariscono a chi si rivolge il centro, quali percorsi sono prioritari e quali informazioni servono per iniziare una conversazione utile.',
+    dashboard: [
+      ['Bisogno specifico', 'Percorso adatto'],
+      ['Metodo visibile', 'Fiducia prima'],
+      ['Agenda', 'Richieste coerenti'],
+    ],
+    ctaTitle: 'Capisci quali percorsi fisioterapici possono generare richieste più coerenti',
+    ctaDescription:
+      'Analizziamo specializzazioni, zona, agenda e comunicazione attuale per capire dove costruire un funnel utile senza banalizzare il valore clinico.',
+  },
+  dermatologi: {
+    metaTitle: 'Dermatologi - Acquisizione pazienti | Mago System',
+    metaDescription:
+      'Sistema di acquisizione per dermatologi e centri dermatologici: richieste locali per visite, controlli, acne, tricologia e trattamenti specialistici.',
+    question: 'Sei un dermatologo o gestisci un centro dermatologico?',
+    headline: 'Richieste più qualificate per visite, controlli e percorsi dermatologici',
+    subhead:
+      'Intercettiamo persone già interessate a una visita o a un problema specifico, con pagine che spiegano autorevolezza, percorso e modalità di contatto senza usare toni allarmistici.',
+    qualifierTitle: 'La fiducia si costruisce prima della prenotazione',
+    qualifierText:
+      'In dermatologia il paziente cerca competenza, chiarezza e tempi ragionevoli. La landing deve trasformare una ricerca confusa in una richiesta comprensibile e rispettosa.',
+    valueCards: [
+      {
+        title: 'Più desiderio',
+        text: 'Il bisogno viene nominato con precisione: controllo, visita, problema ricorrente o trattamento specialistico.',
+      },
+      {
+        title: 'Più fiducia',
+        text: 'La pagina mette in ordine competenze, aree di intervento e percorso, evitando affermazioni cliniche improprie.',
+      },
+      {
+        title: 'Meno tempo',
+        text: 'Chi legge capisce subito se il servizio è pertinente e come chiedere informazioni alla struttura.',
+      },
+      {
+        title: 'Meno sforzo',
+        text: 'CTA e follow-up riducono l’indecisione e raccolgono contesto utile per qualificare la richiesta.',
+      },
+    ],
+    magoPillars: [
+      {
+        letter: 'M',
+        title: 'Marketing dermatologico',
+        text: 'Strutturiamo messaggi per visite, controlli e aree specifiche con tono autorevole e comprensibile.',
+      },
+      {
+        letter: 'A',
+        title: 'Advertising per intento',
+        text: 'Attiviamo campagne su ricerche locali e bisogni concreti, non su comunicazione generica da ambulatorio.',
+      },
+      {
+        letter: 'G',
+        title: 'Growth delle consulenze',
+        text: 'Portiamo l’attenzione sui percorsi prioritari e sulle richieste che la struttura vuole davvero ricevere.',
+      },
+      {
+        letter: 'O',
+        title: 'Optimization prudente',
+        text: 'Miglioriamo messaggi e pagina leggendo qualità, domande frequenti e frizioni prima del contatto.',
+      },
+    ],
+    services: [
+      'Visite dermatologiche private',
+      'Mappatura nei e controlli',
+      'Acne e problemi ricorrenti',
+      'Tricologia',
+      'Dermatologia pediatrica',
+      'Trattamenti specialistici',
+    ],
+    comparison: [
+      {
+        title: 'Visibilita indistinta',
+        text: 'Annunci ampi, pagina generica e paziente che non capisce se il professionista è adatto al suo problema.',
+      },
+      {
+        title: 'Sistema Mago',
+        text: 'Percorsi per esigenza, messaggi sobri e richiesta guidata verso il contatto più utile.',
+      },
+    ],
+    workflowTitle: 'Dalla ricerca del problema a una richiesta dermatologica più chiara',
+    workflowText:
+      'Il funnel collega intenzione, specializzazione e passo successivo. La persona non riceve promesse, riceve chiarezza per capire se contattare lo studio.',
+    dashboard: [
+      ['Intento locale', 'Problema chiaro'],
+      ['Tono sanitario', 'Autorevolezza'],
+      ['Contatto', 'Richiesta utile'],
+    ],
+    ctaTitle: 'Valuta quali aree dermatologiche meritano una landing dedicata',
+    ctaDescription:
+      'In call leggiamo servizi, zona, concorrenza e percorso attuale per capire dove intercettare persone già orientate a una visita privata.',
+  },
+  oculisti: {
+    metaTitle: 'Oculisti - Acquisizione pazienti | Mago System',
+    metaDescription:
+      'Sistema di acquisizione per oculisti e centri oculistici: percorsi per visite private, prevenzione, diagnostica e controlli specialistici.',
+    question: 'Sei un oculista o gestisci un centro oculistico?',
+    headline: 'Richieste più coerenti per visite, controlli e percorsi oculistici privati',
+    subhead:
+      'Costruiamo pagine e campagne per persone che stanno già cercando una risposta professionale, con messaggi chiari su servizio, percorso e modalità di prenotazione.',
+    qualifierTitle: 'La pagina deve chiarire, non semplificare troppo',
+    qualifierText:
+      'Chi cerca un oculista valuta tempi, competenza, strumenti e fiducia. Il funnel deve aiutare la persona a scegliere il passo giusto senza trasformare la sanità in pubblicita superficiale.',
+    valueCards: [
+      {
+        title: 'Più desiderio',
+        text: 'Il messaggio parte dalla necessità: visita, controllo, prevenzione, diagnostica o percorso specialistico.',
+      },
+      {
+        title: 'Più fiducia',
+        text: 'Spieghiamo cosa aspettarsi dal contatto e per quali bisogni la struttura è posizionata.',
+      },
+      {
+        title: 'Meno tempo',
+        text: 'La persona trova rapidamente il servizio pertinente e non deve navigare pagine dispersive.',
+      },
+      {
+        title: 'Meno sforzo',
+        text: 'CTA, tracciamento e follow-up rendono la richiesta più semplice da inviare e da gestire.',
+      },
+    ],
+    magoPillars: [
+      {
+        letter: 'M',
+        title: 'Marketing oculistico',
+        text: 'Organizziamo messaggi per prevenzione, visite e diagnostica con linguaggio professionale e leggibile.',
+      },
+      {
+        letter: 'A',
+        title: 'Advertising locale',
+        text: 'Separiamo intenzioni e campagne per città, servizio e priorità di prenotazione.',
+      },
+      {
+        letter: 'G',
+        title: 'Growth controllata',
+        text: 'Facciamo crescere richieste coerenti con agenda, prestazioni e struttura, non traffico casuale.',
+      },
+      {
+        letter: 'O',
+        title: 'Optimization del percorso',
+        text: 'Ottimizziamo messaggi e CTA leggendo quali ricerche portano richieste realmente lavorabili.',
+      },
+    ],
+    services: [
+      'Visite oculistiche private',
+      'Controlli periodici',
+      'Diagnostica strumentale',
+      'Prevenzione e screening',
+      'Percorsi pediatrici',
+      'Servizi specialistici avanzati',
+    ],
+    comparison: [
+      {
+        title: 'Approccio generico',
+        text: 'Una pagina uguale per tutti, poche informazioni sul percorso e contatti non sempre in target.',
+      },
+      {
+        title: 'Sistema Mago',
+        text: 'Messaggi per bisogno, landing verticale e richiesta guidata verso una conversazione più utile.',
+      },
+    ],
+    workflowTitle: 'Dal dubbio visivo alla richiesta per il servizio corretto',
+    workflowText:
+      'Il sistema mette in ordine annuncio, pagina e follow-up per far capire quando contattare lo studio e quali informazioni lasciare.',
+    dashboard: [
+      ['Visita privata', 'Intento alto'],
+      ['Diagnostica', 'Percorso chiaro'],
+      ['Richiesta', 'Meno attrito'],
+    ],
+    ctaTitle: 'Scopri quali percorsi oculistici possono essere comunicati meglio',
+    ctaDescription:
+      'Analizziamo servizi, zona e pagine attuali per individuare le aree dove una landing verticale puo aumentare chiarezza e qualità delle richieste.',
+  },
+  ginecologi: {
+    metaTitle: 'Ginecologi - Acquisizione pazienti | Mago System',
+    metaDescription:
+      'Sistema di acquisizione per ginecologi e studi privati: comunicazione rispettosa per visite, prevenzione, gravidanza, menopausa e percorsi specialistici.',
+    question: 'Sei una ginecologa, un ginecologo o gestisci uno studio specialistico?',
+    headline: 'Richieste più adatte per visite ginecologiche e percorsi privati',
+    subhead:
+      'Costruiamo un percorso digitale discreto e chiaro, pensato per pazienti che cercano competenza, ascolto e semplicita di contatto in un ambito sensibile.',
+    qualifierTitle: 'In un ambito sensibile, il tono e parte del sistema',
+    qualifierText:
+      'La pagina deve informare, rassicurare e facilitare il primo passo senza pressione e senza linguaggio invasivo. La fiducia viene prima della conversione.',
+    valueCards: [
+      {
+        title: 'Più desiderio',
+        text: 'La comunicazione collega visita, prevenzione o percorso specialistico a un bisogno già percepito dalla paziente.',
+      },
+      {
+        title: 'Più fiducia',
+        text: 'Tono, chiarezza e modalità di contatto rendono il percorso leggibile e rispettoso prima della richiesta.',
+      },
+      {
+        title: 'Meno tempo',
+        text: 'Le informazioni essenziali sono ordinate per aiutare la persona a capire se lo studio è pertinente.',
+      },
+      {
+        title: 'Meno sforzo',
+        text: 'CTA discrete e follow-up riducono l’attrito del primo contatto e raccolgono richieste più complete.',
+      },
+    ],
+    magoPillars: [
+      {
+        letter: 'M',
+        title: 'Marketing rispettoso',
+        text: 'Definiamo messaggi per visite, prevenzione e percorsi specialistici con cura del tono e della sensibilita.',
+      },
+      {
+        letter: 'A',
+        title: 'Advertising selettivo',
+        text: 'Segmentiamo per bisogno, zona e intenzione senza usare leve aggressive o improprie.',
+      },
+      {
+        letter: 'G',
+        title: 'Growth della fiducia',
+        text: 'Portiamo richieste coerenti con servizi e modalità dello studio, non contatti forzati.',
+      },
+      {
+        letter: 'O',
+        title: 'Optimization continua',
+        text: 'Miglioriamo percorso, messaggi e CTA leggendo qualità della richiesta e domande ricorrenti.',
+      },
+    ],
+    services: [
+      'Visite ginecologiche private',
+      'Prevenzione e controlli',
+      'Percorsi gravidanza',
+      'Menopausa',
+      'Consulenze specialistiche',
+      'Visite adolescenti e giovani adulte',
+    ],
+    comparison: [
+      {
+        title: 'Comunicazione fredda',
+        text: 'Pagina tecnica, poca attenzione al primo passo e paziente lasciata sola nel capire se contattare.',
+      },
+      {
+        title: 'Sistema Mago',
+        text: 'Percorso chiaro, tono rispettoso e richiesta guidata senza pressione commerciale fuori luogo.',
+      },
+    ],
+    workflowTitle: 'Dal bisogno privato a un primo contatto più semplice',
+    workflowText:
+      'La landing mette ordine tra servizio, contesto e passo successivo. La paziente trova informazioni essenziali e sceglie come entrare in contatto con meno frizione.',
+    dashboard: [
+      ['Tono', 'Discreto'],
+      ['Percorso', 'Chiaro'],
+      ['Contatto', 'Rispettoso'],
+    ],
+    ctaTitle: 'Valuta come rendere più chiaro il percorso di richiesta per il tuo studio',
+    ctaDescription:
+      'In videochiamata analizziamo servizi, target, zona e comunicazione attuale per capire dove migliorare qualità e pertinenza delle richieste.',
+  },
+  'urologi-andrologi': {
+    metaTitle: 'Urologi e Andrologi - Acquisizione pazienti | Mago System',
+    metaDescription:
+      'Sistema di acquisizione discreto per urologi e andrologi: visite private, prevenzione e percorsi specialistici con richieste più qualificate.',
+    question: 'Sei un urologo, un andrologo o gestisci uno studio specialistico?',
+    headline: 'Facilitiamo il primo contatto per visite urologiche e andrologiche private',
+    subhead:
+      'Intercettiamo persone già interessate a una visita o a un problema specifico, con una comunicazione discreta che riduce attrito, imbarazzo e confusione.',
+    qualifierTitle: 'La discrezione non e un dettaglio, e una leva di conversione corretta',
+    qualifierText:
+      'In questi percorsi il paziente puo rimandare. La landing deve rendere normale e semplice chiedere informazioni, senza sensazionalismo e senza forzature.',
+    valueCards: [
+      {
+        title: 'Più desiderio',
+        text: 'Il messaggio parla al bisogno concreto: visita, prevenzione, controllo o problema ricorrente.',
+      },
+      {
+        title: 'Più fiducia',
+        text: 'Tono riservato, percorso chiaro e competenze leggibili abbassano la barriera del primo contatto.',
+      },
+      {
+        title: 'Meno tempo',
+        text: 'La persona capisce subito quale servizio è pertinente e come inviare una richiesta senza esporsi inutilmente.',
+      },
+      {
+        title: 'Meno sforzo',
+        text: 'Campagne e pagina guidano verso una richiesta essenziale, più semplice da gestire per lo studio.',
+      },
+    ],
+    magoPillars: [
+      {
+        letter: 'M',
+        title: 'Marketing discreto',
+        text: 'Costruiamo messaggi chiari per aree sensibili, con rispetto e precisione.',
+      },
+      {
+        letter: 'A',
+        title: 'Advertising per intento',
+        text: 'Intercettiamo ricerche e bisogni locali senza creativita aggressive o imbarazzanti.',
+      },
+      {
+        letter: 'G',
+        title: 'Growth qualificata',
+        text: 'Orientiamo richieste verso visite e percorsi compatibili con specializzazione e agenda.',
+      },
+      {
+        letter: 'O',
+        title: 'Optimization riservata',
+        text: 'Ottimizziamo frizioni e messaggi osservando qualità delle richieste, non solo volume.',
+      },
+    ],
+    services: [
+      'Visite urologiche private',
+      'Visite andrologiche',
+      'Prevenzione maschile',
+      'Problemi ricorrenti',
+      'Controlli specialistici',
+      'Percorsi diagnostici privati',
+    ],
+    comparison: [
+      {
+        title: 'Percorso che fa rimandare',
+        text: 'Pagina generica, tono poco calibrato e richiesta percepita come difficile o imbarazzante.',
+      },
+      {
+        title: 'Sistema Mago',
+        text: 'Comunicazione riservata, bisogno nominato con cura e CTA che rende più semplice il primo passo.',
+      },
+    ],
+    workflowTitle: 'Dal problema rimandato a una richiesta discreta e gestibile',
+    workflowText:
+      'Il funnel riduce attrito e confusione, aiutando il paziente a capire se contattare lo studio e quali informazioni lasciare.',
+    dashboard: [
+      ['Privacy', 'Tono corretto'],
+      ['Bisogno', 'Nominato bene'],
+      ['Contatto', 'Primo passo'],
+    ],
+    ctaTitle: 'Verifica come rendere più semplice il primo contatto per visite urologiche e andrologiche',
+    ctaDescription:
+      'Analizziamo zona, servizi prioritari e percorso attuale per capire dove migliorare qualità, discrezione e chiarezza delle richieste.',
+  },
+  'medicina-estetica-chirurgia-estetica': {
+    metaTitle: 'Medicina estetica e chirurgia estetica - Acquisizione pazienti | Mago System',
+    metaDescription:
+      'Sistema di acquisizione per medicina estetica e chirurgia estetica: consulenze più consapevoli per trattamenti viso, corpo e percorsi premium.',
+    question: 'Gestisci una clinica o uno studio di medicina estetica?',
+    headline: 'Consulenze più consapevoli per trattamenti estetici e chirurgia privata',
+    subhead:
+      'Costruiamo percorsi che spostano l’attenzione dal prezzo al valore percepito, alla fiducia e alla coerenza tra aspettativa, consulenza e servizio offerto.',
+    qualifierTitle: 'Nel mercato estetico vince chi filtra, non chi grida più forte',
+    qualifierText:
+      'La pagina deve attrarre persone realmente interessate, ma anche qualificare aspettative e servizio. Il tono resta premium, concreto e responsabile.',
+    valueCards: [
+      {
+        title: 'Più desiderio',
+        text: 'Il trattamento viene inserito in un percorso di consulenza, non presentato come offerta isolata.',
+      },
+      {
+        title: 'Più fiducia',
+        text: 'Messaggi, prova e processo aiutano la persona a capire perché fissare una consulenza con professionisti qualificati.',
+      },
+      {
+        title: 'Meno tempo',
+        text: 'La landing rende più rapido capire trattamento, approccio e passo successivo.',
+      },
+      {
+        title: 'Meno sforzo',
+        text: 'Domande e CTA filtrano richieste poco coerenti e preparano una conversazione più ordinata.',
+      },
+    ],
+    magoPillars: [
+      {
+        letter: 'M',
+        title: 'Marketing premium',
+        text: 'Posizioniamo trattamenti e consulenze con messaggi orientati a valore, qualità e aspettative corrette.',
+      },
+      {
+        letter: 'A',
+        title: 'Advertising selettivo',
+        text: 'Segmentiamo per trattamento, intenzione e area, evitando creativita da sconto che abbassano percezione.',
+      },
+      {
+        letter: 'G',
+        title: 'Growth delle consulenze',
+        text: 'Puntiamo a richieste più consapevoli, compatibili con servizi, agenda e posizionamento della clinica.',
+      },
+      {
+        letter: 'O',
+        title: 'Optimization della qualità',
+        text: 'Miglioriamo funnel e follow-up leggendo qualità delle consulenze, non solo costo del contatto.',
+      },
+    ],
+    services: [
+      'Trattamenti viso',
+      'Trattamenti corpo',
+      'Consulenze estetiche',
+      'Percorsi premium',
+      'Chirurgia estetica privata',
+      'Follow-up consulenziale',
+    ],
+    comparison: [
+      {
+        title: 'Domanda da prezzo',
+        text: 'Annunci aggressivi, aspettative poco filtrate e consulenze con persone non realmente adatte.',
+      },
+      {
+        title: 'Sistema Mago',
+        text: 'Posizionamento premium, pagina orientata alla consulenza e filtri per richieste più consapevoli.',
+      },
+    ],
+    workflowTitle: 'Dal trattamento desiderato a una consulenza più qualificata',
+    workflowText:
+      'Campagna, pagina e follow-up preparano la persona alla consulenza, chiarendo contesto, aspettative e modalità di contatto.',
+    dashboard: [
+      ['Posizionamento', 'Premium'],
+      ['Consulenza', 'Consapevole'],
+      ['Qualifica', 'Prima della call'],
+    ],
+    ctaTitle: 'Capisci quali trattamenti meritano un funnel premium dedicato',
+    ctaDescription:
+      'In videochiamata analizziamo servizi, posizionamento e qualità delle richieste attuali per costruire un percorso più selettivo.',
+  },
+  'psicologi-psicoterapeuti': {
+    metaTitle: 'Psicologi e Psicoterapeuti - Acquisizione richieste | Mago System',
+    metaDescription:
+      'Sistema di acquisizione sobrio per psicologi, psicoterapeuti e centri: comunicazione per specializzazioni, approccio e modalità di contatto.',
+    question: 'Sei psicologo, psicoterapeuta o gestisci un centro?',
+    headline: 'Richieste più adatte al tuo approccio, alla tua specializzazione e al tuo setting',
+    subhead:
+      'Costruiamo percorsi digitali sobri, umani e chiari per aiutare chi sta già cercando supporto a capire se si sente nel posto giusto.',
+    qualifierTitle: 'Qui la persuasione deve essere al servizio della chiarezza',
+    qualifierText:
+      'La pagina non deve forzare. Deve far emergere approccio, aree di intervento, modalità e confini, così la richiesta arriva più coerente.',
+    valueCards: [
+      {
+        title: 'Più desiderio',
+        text: 'Il bisogno viene riconosciuto con rispetto, collegandolo a specializzazioni e modalità di percorso.',
+      },
+      {
+        title: 'Più fiducia',
+        text: 'Approccio, setting e aree di intervento sono comprensibili prima del contatto.',
+      },
+      {
+        title: 'Meno tempo',
+        text: 'La persona trova rapidamente informazioni essenziali e capisce come chiedere un primo confronto.',
+      },
+      {
+        title: 'Meno sforzo',
+        text: 'CTA e follow-up sono delicati, riducono confusione e aiutano a inviare una richiesta più chiara.',
+      },
+    ],
+    magoPillars: [
+      {
+        letter: 'M',
+        title: 'Marketing sobrio',
+        text: 'Organizziamo messaggi per specializzazioni e approcci senza usare linguaggio manipolativo.',
+      },
+      {
+        letter: 'A',
+        title: 'Advertising rispettoso',
+        text: 'Intercettiamo bisogni e ricerche con tono misurato, evitando urgenze artificiali.',
+      },
+      {
+        letter: 'G',
+        title: 'Growth compatibile',
+        text: 'Portiamo richieste coerenti con setting, disponibilità e tipo di percorso offerto.',
+      },
+      {
+        letter: 'O',
+        title: 'Optimization della coerenza',
+        text: 'Miglioriamo pagina e messaggi leggendo pertinenza delle richieste e frizioni del primo contatto.',
+      },
+    ],
+    services: [
+      'Terapia individuale',
+      'Terapia di coppia',
+      'Adolescenti e famiglie',
+      'Ansia e stress',
+      'Percorsi online',
+      'Centri psicologici',
+    ],
+    comparison: [
+      {
+        title: 'Presenza poco leggibile',
+        text: 'Pagina generica, approccio poco chiaro e richieste non sempre compatibili con specializzazione e setting.',
+      },
+      {
+        title: 'Sistema Mago',
+        text: 'Messaggi sobri, specializzazioni ordinate e contatto guidato in modo umano e professionale.',
+      },
+    ],
+    workflowTitle: 'Dal bisogno di supporto a una richiesta più coerente',
+    workflowText:
+      'La landing aiuta la persona a orientarsi senza pressione: capisce approccio, modalità e passo successivo, poi sceglie se contattare.',
+    dashboard: [
+      ['Approccio', 'Leggibile'],
+      ['Setting', 'Coerente'],
+      ['Contatto', 'Delicato'],
+    ],
+    ctaTitle: 'Valuta come rendere più chiaro il tuo posizionamento psicologico online',
+    ctaDescription:
+      'Analizziamo specializzazioni, target, setting e comunicazione attuale per capire come ricevere richieste più adatte.',
+  },
+  'nutrizionisti-specializzati': {
+    metaTitle: 'Nutrizionisti specializzati - Acquisizione clienti | Mago System',
+    metaDescription:
+      'Sistema di acquisizione per nutrizionisti specializzati: percorsi per nutrizione sportiva, clinica, metabolica e programmi continuativi.',
+    question: 'Sei un nutrizionista specializzato?',
+    headline: 'Richieste più coerenti per percorsi nutrizionali specialistici e continuativi',
+    subhead:
+      'Costruiamo un sistema che spiega metodo, specializzazione e valore del percorso, così chi contatta non cerca solo una dieta rapida.',
+    qualifierTitle: 'Il mercato promette scorciatoie. Tu devi far capire metodo e serietà',
+    qualifierText:
+      'Una landing efficace seleziona persone interessate a un percorso professionale, non a soluzioni improvvisate o consigli generici.',
+    valueCards: [
+      {
+        title: 'Più desiderio',
+        text: 'Il messaggio collega obiettivo e contesto: sport, metabolismo, clinica, salute femminile o continuità del percorso.',
+      },
+      {
+        title: 'Più fiducia',
+        text: 'Metodo, specializzazione e modalità di lavoro sono chiari prima del contatto.',
+      },
+      {
+        title: 'Meno tempo',
+        text: 'La persona capisce subito se il percorso è adatto alle sue esigenze e cosa aspettarsi dal primo passo.',
+      },
+      {
+        title: 'Meno sforzo',
+        text: 'CTA e follow-up raccolgono obiettivo e contesto, evitando richieste vaghe o non in linea.',
+      },
+    ],
+    magoPillars: [
+      {
+        letter: 'M',
+        title: 'Marketing del metodo',
+        text: 'Posizioniamo il percorso nutrizionale come lavoro specialistico e continuativo, non come dieta standard.',
+      },
+      {
+        letter: 'A',
+        title: 'Advertising per obiettivo',
+        text: 'Segmentiamo campagne per obiettivi, bisogni e specializzazioni, evitando messaggi generici.',
+      },
+      {
+        letter: 'G',
+        title: 'Growth del percorso',
+        text: 'Orientiamo la crescita verso richieste coerenti con programmi, agenda e valore professionale.',
+      },
+      {
+        letter: 'O',
+        title: 'Optimization della qualifica',
+        text: 'Miglioriamo funnel e follow-up leggendo qualità delle richieste e aderenza al servizio.',
+      },
+    ],
+    services: [
+      'Nutrizione sportiva',
+      'Nutrizione clinica',
+      'Percorsi metabolici',
+      'Salute femminile',
+      'Educazione alimentare',
+      'Programmi continuativi',
+    ],
+    comparison: [
+      {
+        title: 'Richieste da dieta veloce',
+        text: 'Comunicazione generica, aspettative poco realistiche e contatti interessati solo al prezzo.',
+      },
+      {
+        title: 'Sistema Mago',
+        text: 'Percorso specialistico spiegato, filtri di qualifica e richiesta orientata a metodo e continuità.',
+      },
+    ],
+    workflowTitle: 'Dall’obiettivo personale alla richiesta per un percorso serio',
+    workflowText:
+      'Campagne, pagina e follow-up aiutano la persona a riconoscere il valore del metodo e a lasciare informazioni utili per una prima valutazione.',
+    dashboard: [
+      ['Obiettivo', 'Specifico'],
+      ['Metodo', 'Visibile'],
+      ['Percorso', 'Continuativo'],
+    ],
+    ctaTitle: 'Scopri quali percorsi nutrizionali possono attirare richieste più coerenti',
+    ctaDescription:
+      'Analizziamo specializzazione, target e comunicazione attuale per costruire un funnel che selezioni persone interessate a un percorso professionale.',
+  },
+};
+
 const bookingWindows = [
   'Mattina 09:00 - 12:00',
   'Pausa pranzo 12:00 - 14:00',
@@ -188,7 +918,7 @@ const defaultConsent = {
 const homeMeta = {
   title: 'Mago System Sanitario - Acquisizione pazienti per strutture sanitarie',
   description:
-    'Sistema di acquisizione pazienti per cliniche, studi e professionisti sanitari: più appuntamenti qualificati da pazienti locali, senza dipendere da sconti o passaparola.',
+    'Sistema di acquisizione per cliniche, studi e professionisti sanitari: intercettiamo persone locali già interessate ai servizi prioritari.',
   path: '/',
 };
 
@@ -207,7 +937,7 @@ const methodSteps = [
   {
     icon: Target,
     title: 'Costruiamo messaggi che filtrano',
-    text: 'Promessa, prova, obiezioni e CTA lavorano insieme per far percepire valore prima del contatto.',
+    text: 'Messaggio, prova, obiezioni e CTA lavorano insieme per far percepire valore prima del contatto.',
   },
   {
     icon: CalendarCheck,
@@ -1039,7 +1769,7 @@ function HomePage({ navigate, openModal, openBooking }) {
             <h1>Portiamo alla tua struttura appuntamenti qualificati da pazienti locali</h1>
             <p>
               Costruiamo sistemi di acquisizione per cliniche e professionisti sanitari: posizionamento chiaro,
-              campagne locali, crescita misurabile e ottimizzazione continua dei percorsi di richiesta.
+              campagne locali, crescita misurabile e percorsi che intercettano persone già interessate ai servizi.
             </p>
             <div className="hero-actions">
               <button className="button primary" type="button" onClick={openBooking}>
@@ -1104,8 +1834,8 @@ function HomePage({ navigate, openModal, openBooking }) {
             <p className="eyebrow">Settori sanitari</p>
             <h2>Pagine e funnel verticali per ogni specializzazione</h2>
             <p>
-              Ogni verticale ha bisogno di una promessa diversa. Qui sotto trovi le aree per cui costruiamo percorsi di
-              acquisizione pazienti su misura.
+              Ogni verticale ha bisogno di messaggi, filtri e percorsi diversi. Qui sotto trovi le aree per cui
+              costruiamo sistemi di acquisizione pazienti su misura.
             </p>
           </div>
           <div className="sector-grid">
@@ -1435,15 +2165,43 @@ function DentalPage({ openModal, openBooking }) {
 }
 
 function SectorPage({ sector, openModal, openBooking }) {
+  const landing = sectorLandingPages[sector.slug];
+
+  if (!landing) {
+    return (
+      <main>
+        <section className="sector-hero">
+          <div className="container sector-hero-grid">
+            <div className="sector-hero-copy reveal">
+              <p className="eyebrow">{sector.eyebrow}</p>
+              <h1>{sector.headline}</h1>
+              <p>{sector.subhead}</p>
+              <div className="hero-actions">
+                <button className="button primary" type="button" onClick={openBooking}>
+                  Prenota videochiamata <CalendarCheck size={18} />
+                </button>
+                <button className="button secondary" type="button" onClick={openModal}>
+                  Richiedi consulenza <ArrowUpRight size={18} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   return (
-    <main>
-      <section className="sector-hero">
-        <div className="container sector-hero-grid">
-          <div className="sector-hero-copy reveal">
+    <main className="sector-landing-page">
+      <section className="sector-landing-hero">
+        <div className="wide-container sector-landing-hero-grid">
+          <div className="sector-landing-copy reveal">
+            <p className="sector-question-pill">
+              <Stethoscope size={24} /> {landing.question}
+            </p>
             <p className="eyebrow">{sector.eyebrow}</p>
-            <h1>{sector.headline}</h1>
-            <p>{sector.subhead}</p>
+            <h1>{landing.headline}</h1>
+            <p>{landing.subhead}</p>
             <div className="hero-actions">
               <button className="button primary" type="button" onClick={openBooking}>
                 Prenota videochiamata <CalendarCheck size={18} />
@@ -1453,44 +2211,110 @@ function SectorPage({ sector, openModal, openBooking }) {
               </button>
             </div>
           </div>
-          <div className="sector-score reveal delay-1" aria-label={`Sistema MAGO per ${sector.label}`}>
+          <div className="sector-landing-visual reveal delay-1" aria-label={`Sistema Mago System per ${sector.label}`}>
             <span>{sector.label}</span>
-            <div>
-              <strong>M Marketing sanitario</strong>
-              <strong>A Advertising locale</strong>
-              <strong>G Growth misurata</strong>
-              <strong>O Optimization continua</strong>
+            <div className="sector-visual-stack">
+              <article>
+                <Search size={24} />
+                <strong>Domanda già interessata</strong>
+                <small>ricerche, bisogni e zona corretta</small>
+              </article>
+              <article>
+                <Target size={24} />
+                <strong>Messaggio che qualifica</strong>
+                <small>servizio, contesto e passo successivo</small>
+              </article>
+              <article>
+                <CalendarCheck size={24} />
+                <strong>Richiesta più lavorabile</strong>
+                <small>meno traffico casuale, più coerenza</small>
+              </article>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="sector-detail">
-        <div className="container sector-detail-grid">
-          <article className="detail-panel reveal">
-            <Clock3 size={30} />
-            <h2>Il problema</h2>
-            <p>{sector.pain}</p>
-          </article>
-          <article className="detail-panel featured reveal delay-1">
-            <Sparkles size={30} />
-            <h2>Il sistema</h2>
-            <p>{sector.system}</p>
-          </article>
+      <section className="sector-qualifier-section">
+        <div className="container sector-qualifier-card reveal">
+          <ShieldCheck size={30} />
+          <p>{landing.qualifierTitle}</p>
+          <h2>Prima si seleziona, poi si scala</h2>
+          <span>{landing.qualifierText}</span>
         </div>
       </section>
 
-      <section className="benefit-section">
+      <section className="sector-value-section">
         <div className="container">
           <div className="section-heading reveal">
-            <p className="eyebrow">Cosa costruiamo</p>
-            <h2>Un percorso pensato per far percepire valore prima del contatto</h2>
+            <p className="eyebrow">Equazione del valore</p>
+            <h2>Più desiderio e fiducia, meno tempo e meno attrito nel primo contatto</h2>
+            <p>
+              Ogni sezione porta la persona già interessata a capire meglio il servizio, ridurre dubbi inutili e
+              lasciare una richiesta più coerente con il percorso che offri.
+            </p>
           </div>
-          <div className="benefit-grid">
-            {sector.benefits.map((benefit) => (
-              <article className="benefit-card reveal" key={benefit}>
+          <div className="sector-value-grid">
+            {landing.valueCards.map((card) => (
+              <article className="sector-value-card reveal" key={card.title}>
                 <CheckCircle2 size={24} />
-                <h3>{benefit}</h3>
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mago-section sector-mago-section" id={`mago-${sector.slug}`}>
+        <div className="wide-container mago-panel reveal">
+          <div className="mago-intro">
+            <p className="eyebrow">Metodo MAGO per {sector.label.toLowerCase()}</p>
+            <h2>Quattro leve per trasformare attenzione locale in richieste più coerenti</h2>
+            <p>
+              Strategia, campagne, crescita e ottimizzazione lavorano insieme: il sistema intercetta persone già
+              interessate e le accompagna verso il contatto con un percorso leggibile.
+            </p>
+          </div>
+          <div className="mago-grid" aria-label={`Metodo MAGO applicato a ${sector.label}`}>
+            {landing.magoPillars.map((pillar, index) => (
+              <article className="mago-card reveal" style={{ transitionDelay: `${index * 0.06}s` }} key={pillar.letter}>
+                <span>{pillar.letter}</span>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="sector-services-section">
+        <div className="container">
+          <div className="section-heading reveal">
+            <p className="eyebrow">Servizi e percorsi prioritari</p>
+            <h2>Landing e campagne verticali sulle aree dove la domanda ha già un’intenzione</h2>
+          </div>
+          <div className="sector-service-grid">
+            {landing.services.map((service) => (
+              <article className="sector-service-card reveal" key={service}>
+                <span>{service}</span>
+                <ArrowUpRight size={20} aria-hidden="true" />
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="sector-comparison-section">
+        <div className="container sector-comparison-grid">
+          <div className="comparison-copy reveal">
+            <p className="eyebrow">Prima / dopo</p>
+            <h2>Quando il percorso è chiaro prima del contatto, cambia la qualità della richiesta.</h2>
+          </div>
+          <div className="comparison-panels">
+            {landing.comparison.map((item, index) => (
+              <article className={`comparison-card reveal ${index === 1 ? 'active delay-1' : 'muted'}`} key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
               </article>
             ))}
           </div>
@@ -1501,11 +2325,8 @@ function SectorPage({ sector, openModal, openBooking }) {
         <div className="container split-grid reverse">
           <div className="split-copy reveal">
             <p className="eyebrow">Campagne, landing e follow-up</p>
-            <h2>Dal primo clic a una richiesta più pronta, leggibile e coerente.</h2>
-            <p>
-              Non promettiamo risultati clinici o scorciatoie. Costruiamo un sistema di comunicazione e acquisizione
-              che aiuta la persona giusta a capire perché contattarti e quale passo fare dopo.
-            </p>
+            <h2>{landing.workflowTitle}</h2>
+            <p>{landing.workflowText}</p>
             <div className="split-actions">
               <button className="button primary" type="button" onClick={openBooking}>
                 Prenota videochiamata <CalendarCheck size={18} />
@@ -1516,21 +2337,16 @@ function SectorPage({ sector, openModal, openBooking }) {
             </div>
           </div>
           <div className="dashboard-card reveal delay-1">
-            <div>
-              <BarChart3 size={26} />
-              <span>Richieste qualificate</span>
-              <strong>Intento alto</strong>
-            </div>
-            <div>
-              <Activity size={26} />
-              <span>Servizi prioritari</span>
-              <strong>Budget protetto</strong>
-            </div>
-            <div>
-              <MapPin size={26} />
-              <span>Area locale</span>
-              <strong>Domanda vicina</strong>
-            </div>
+            {landing.dashboard.map(([label, value], index) => {
+              const Icon = index === 0 ? BarChart3 : index === 1 ? Activity : MapPin;
+              return (
+                <div key={label}>
+                  <Icon size={26} />
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1538,7 +2354,8 @@ function SectorPage({ sector, openModal, openBooking }) {
       <FinalCta
         openModal={openModal}
         openBooking={openBooking}
-        title={`Vuoi capire il potenziale per ${sector.label.toLowerCase()}?`}
+        title={landing.ctaTitle}
+        description={landing.ctaDescription}
       />
     </main>
   );
@@ -1885,6 +2702,7 @@ function App() {
   const [cookieSettingsOpen, setCookieSettingsOpen] = useState(false);
 
   const activeSector = useMemo(() => sectors.find((sector) => `/${sector.slug}` === path), [path]);
+  const activeLanding = activeSector ? sectorLandingPages[activeSector.slug] : null;
   const isPrivacyPath = path === '/privacy-policy';
   const isKnownPath = path === '/' || Boolean(activeSector) || isPrivacyPath;
 
@@ -1912,10 +2730,11 @@ function App() {
     const pageMeta = activeSector
       ? {
           title:
-            activeSector.slug === 'cliniche-dentali'
+            activeLanding?.metaTitle ||
+            (activeSector.slug === 'cliniche-dentali'
               ? 'Cliniche dentali - Appuntamenti da pazienti locali | Mago System'
-              : `${activeSector.label} - Acquisizione pazienti | Mago System`,
-          description: activeSector.subhead,
+              : `${activeSector.label} - Acquisizione pazienti | Mago System`),
+          description: activeLanding?.metaDescription || activeSector.subhead,
           path: `/${activeSector.slug}`,
         }
       : isPrivacyPath
@@ -1937,31 +2756,42 @@ function App() {
       document.head.appendChild(canonical);
     }
     canonical.setAttribute('href', `${SITE_URL}${pageMeta.path}`);
-  }, [activeSector, isPrivacyPath]);
 
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const elements = Array.from(document.querySelectorAll('.reveal'));
-    if (reduced) {
-      elements.forEach((element) => element.classList.add('is-visible'));
-      return undefined;
+    let schema = document.getElementById('mago-page-schema');
+    if (!schema) {
+      schema = document.createElement('script');
+      schema.id = 'mago-page-schema';
+      schema.type = 'application/ld+json';
+      document.head.appendChild(schema);
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
+    schema.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': activeSector ? 'Service' : isPrivacyPath ? 'WebPage' : 'ProfessionalService',
+      name: activeSector ? `Mago System per ${activeSector.label}` : pageMeta.title,
+      url: `${SITE_URL}${pageMeta.path}`,
+      description: pageMeta.description,
+      inLanguage: 'it-IT',
+      provider: {
+        '@type': 'ProfessionalService',
+        name: 'Mago System',
+        url: SITE_URL,
+        email: 'info@magodigital.it',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Via L. Ariosto, 4/c',
+          postalCode: '41012',
+          addressLocality: 'Carpi',
+          addressRegion: 'MO',
+          addressCountry: 'IT',
+        },
       },
-      { threshold: 0.12, rootMargin: '0px 0px -60px' },
-    );
-
-    elements.forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
-  }, [path]);
+      areaServed: 'IT',
+      serviceType: activeSector
+        ? `Sistema di acquisizione per ${activeSector.label.toLowerCase()}`
+        : 'Acquisizione pazienti per strutture sanitarie private',
+    });
+  }, [activeSector, activeLanding, isPrivacyPath]);
 
   return (
     <>

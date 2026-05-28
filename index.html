@@ -5,23 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Mago System aiuta cliniche, studi e professionisti sanitari ad acquisire pazienti locali qualificati per servizi ad alto valore, senza dipendere da sconti o passaparola."
+      content="Mago System aiuta cliniche, studi e professionisti sanitari a intercettare persone locali già interessate ai servizi prioritari."
     />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="theme-color" content="#f5fbff" />
     <link rel="canonical" href="https://magosystem.it/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preload" href="/assets/fonts/OPPOSans-Bold.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/assets/fonts/OPPOSans-Medium.woff2" as="font" type="font/woff2" crossorigin />
-    <link
-      rel="preload"
-      href="/assets/dental-hero-dentist-900.webp"
-      as="image"
-      type="image/webp"
-      imagesrcset="/assets/dental-hero-dentist-640.webp 640w, /assets/dental-hero-dentist-900.webp 900w"
-      imagesizes="(max-width: 720px) 92vw, min(48vw, 760px)"
-      fetchpriority="high"
-    />
     <meta property="og:locale" content="it_IT" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Mago System Sanitario - Acquisizione pazienti" />
@@ -67,11 +56,12 @@
         "name": "Mago System",
         "url": "https://magosystem.it/",
         "email": "info@magodigital.it",
-        "telephone": "+390000000000",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Via Roma 55",
-          "addressLocality": "Milano",
+          "streetAddress": "Via L. Ariosto, 4/c",
+          "postalCode": "41012",
+          "addressLocality": "Carpi",
+          "addressRegion": "MO",
           "addressCountry": "IT"
         },
         "areaServed": "IT",
@@ -81,7 +71,136 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="announcement">Acquisizione pazienti per strutture sanitarie private</div>
+      <header class="site-header">
+        <div class="header-inner">
+          <a href="/" class="logo" aria-label="Mago System home">
+            <img src="/assets/mago-system-logo-header.webp" alt="Mago System" width="499" height="166" />
+          </a>
+        </div>
+      </header>
+      <main>
+        <section class="sector-landing-hero">
+          <div class="wide-container sector-landing-hero-grid">
+            <div class="sector-landing-copy">
+              <p class="eyebrow">Mago System per il settore sanitario</p>
+              <h1>Sistemi di acquisizione per intercettare persone già interessate ai tuoi servizi sanitari</h1>
+              <p>
+                Costruiamo percorsi digitali per cliniche, studi e professionisti sanitari privati, con messaggi chiari
+                e richieste più coerenti.
+              </p>
+            </div>
+            <div class="sector-landing-visual" aria-hidden="true">
+              <span>Sanita privata</span>
+              <div class="sector-visual-stack">
+                <article><strong>Domanda locale</strong><small>persone già in fase di ricerca</small></article>
+                <article><strong>Messaggio che qualifica</strong><small>servizio, contesto e passo successivo</small></article>
+                <article><strong>Richiesta lavorabile</strong><small>meno traffico casuale</small></article>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script>
+      (() => {
+        const pages = {
+          '/cliniche-dentali': [
+            'Acquisizione pazienti per odontoiatria',
+            'Appuntamenti già fissati per servizi dentali ad alto valore',
+            'Da pazienti locali con necessità urgente, già dalla prima settimana operativa, senza basarti su sconti o passaparola.',
+            'Cliniche dentali'
+          ],
+          '/centri-diagnostici-privati': [
+            'Domanda privata e prenotazioni rapide',
+            'Richieste più chiare per esami, visite e check-up privati',
+            'Intercettiamo persone già orientate alla sanità privata e le accompagniamo verso una richiesta ordinata.',
+            'Centri diagnostici privati'
+          ],
+          '/fisioterapia-specializzata': [
+            'Percorsi terapeutici ad alto valore',
+            'Portiamo persone già motivate verso percorsi fisioterapici strutturati',
+            'Facciamo capire metodo, specializzazione e continuità prima del contatto.',
+            'Fisioterapia specializzata'
+          ],
+          '/dermatologi': [
+            'Visite private e dermatologia avanzata',
+            'Richieste più qualificate per visite, controlli e percorsi dermatologici',
+            'Pagine che spiegano autorevolezza, percorso e modalità di contatto senza toni allarmistici.',
+            'Dermatologi'
+          ],
+          '/oculisti': [
+            'Acquisizione pazienti per oculistica',
+            'Richieste più coerenti per visite, controlli e percorsi oculistici privati',
+            'Messaggi chiari su servizio, percorso e modalità di prenotazione.',
+            'Oculisti'
+          ],
+          '/ginecologi': [
+            'Fiducia, discrezione e continuità',
+            'Richieste più adatte per visite ginecologiche e percorsi privati',
+            'Un percorso digitale discreto e chiaro per ambiti in cui il tono conta.',
+            'Ginecologi'
+          ],
+          '/urologi-andrologi': [
+            'Acquisizione pazienti in aree sensibili',
+            'Facilitiamo il primo contatto per visite urologiche e andrologiche private',
+            'Comunicazione discreta per ridurre attrito, imbarazzo e confusione.',
+            'Urologi / Andrologi'
+          ],
+          '/medicina-estetica-chirurgia-estetica': [
+            'Domanda estetica ad alto valore',
+            'Consulenze più consapevoli per trattamenti estetici e chirurgia privata',
+            'Percorsi che spostano l’attenzione dal prezzo al valore percepito e alla consulenza.',
+            'Medicina estetica / Chirurgia estetica'
+          ],
+          '/psicologi-psicoterapeuti': [
+            'Fiducia prima del contatto',
+            'Richieste più adatte al tuo approccio, alla tua specializzazione e al tuo setting',
+            'Percorsi digitali sobri e chiari per chi sta già cercando supporto.',
+            'Psicologi / Psicoterapeuti'
+          ],
+          '/nutrizionisti-specializzati': [
+            'Percorsi nutrizionali ad alto valore',
+            'Richieste più coerenti per percorsi nutrizionali specialistici e continuativi',
+            'Spieghiamo metodo, specializzazione e valore del percorso prima del contatto.',
+            'Nutrizionisti specializzati'
+          ],
+          '/privacy-policy': [
+            'Privacy Policy',
+            'Informativa sul trattamento dei dati personali',
+            'Informazioni su richieste di contatto, cookie tecnici e preferenze privacy.',
+            'Mago System'
+          ]
+        };
+        const path = window.location.pathname.replace(/\/+$/, '') || '/';
+        const page = pages[path];
+        if (!page) return;
+        const root = document.getElementById('root');
+        const isDental = path === '/cliniche-dentali';
+        const visual = isDental
+          ? '<div class="dental-hero-visual" aria-hidden="true"><picture><source srcset="/assets/dental-hero-dentist-640.webp 640w, /assets/dental-hero-dentist-900.webp 900w" sizes="(max-width: 720px) 92vw, min(48vw, 760px)" type="image/webp" /><img src="/assets/dental-hero-dentist-900.webp" alt="" width="900" height="675" decoding="async" fetchpriority="high" /></picture></div>'
+          : '<div class="sector-landing-visual" aria-hidden="true"><span>' +
+            page[3] +
+            '</span><div class="sector-visual-stack"><article><strong>Domanda già interessata</strong><small>ricerche, bisogni e zona corretta</small></article><article><strong>Messaggio che qualifica</strong><small>servizio, contesto e passo successivo</small></article><article><strong>Richiesta più lavorabile</strong><small>meno traffico casuale</small></article></div></div>';
+        root.innerHTML =
+          '<div class="announcement">Acquisizione pazienti per strutture sanitarie private</div><header class="site-header"><div class="header-inner"><a href="/" class="logo" aria-label="Mago System home"><img src="/assets/mago-system-logo-header.webp" alt="Mago System" width="499" height="166" /></a></div></header><main><section class="' +
+          (isDental ? 'dental-landing-hero' : 'sector-landing-hero') +
+          '"><div class="wide-container ' +
+          (isDental ? 'dental-hero-grid' : 'sector-landing-hero-grid') +
+          '"><div class="' +
+          (isDental ? 'dental-hero-copy' : 'sector-landing-copy') +
+          '"><p class="eyebrow">' +
+          page[0] +
+          '</p><h1>' +
+          page[1] +
+          '</h1><p>' +
+          page[2] +
+          '</p></div>' +
+          visual +
+          '</div></section></main>';
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1113,6 +1113,330 @@ h3 {
   line-height: 1.2;
 }
 
+.sector-landing-page {
+  background:
+    radial-gradient(circle at 14% 3%, rgba(116, 212, 255, 0.34), transparent 28rem),
+    linear-gradient(180deg, #f8fdff 0%, #edf8ff 44%, #ffffff 100%);
+}
+
+.sector-landing-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: calc(100svh - 150px);
+  display: flex;
+  align-items: center;
+  padding: clamp(42px, 5vw, 76px) 0 clamp(42px, 5vw, 76px);
+}
+
+.sector-landing-hero::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.24)),
+    radial-gradient(circle at 86% 28%, rgba(22, 135, 242, 0.18), transparent 26rem),
+    radial-gradient(circle at 8% 78%, rgba(116, 212, 255, 0.38), transparent 24rem);
+  content: '';
+}
+
+.sector-landing-hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.94fr) minmax(380px, 1.06fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 78px);
+}
+
+.sector-landing-copy {
+  max-width: 790px;
+}
+
+.sector-question-pill {
+  width: fit-content;
+  min-height: 54px;
+  margin: 0 0 18px;
+  border-radius: var(--rounded-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 20px 8px 10px;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-2) 56%, var(--navy) 100%);
+  box-shadow: 0 18px 42px rgba(22, 135, 242, 0.24);
+  font-size: clamp(18px, 1.8vw, 25px);
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+.sector-question-pill svg {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  padding: 8px;
+  flex: 0 0 auto;
+  color: var(--blue-2);
+  background: #ffffff;
+}
+
+.sector-landing-copy h1 {
+  max-width: 840px;
+  color: var(--navy);
+  font-size: clamp(44px, 5vw, 74px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.sector-landing-copy > p:not(.eyebrow):not(.sector-question-pill) {
+  max-width: 680px;
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: clamp(17px, 1.55vw, 21px);
+  font-weight: 500;
+  line-height: 1.38;
+}
+
+.sector-landing-visual {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: var(--radius);
+  min-height: clamp(390px, 38vw, 540px);
+  padding: clamp(24px, 4vw, 42px);
+  display: grid;
+  align-content: center;
+  gap: 20px;
+  background:
+    radial-gradient(circle at 78% 0%, rgba(116, 212, 255, 0.52), transparent 20rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(237, 248, 255, 0.9));
+  box-shadow: var(--shadow);
+}
+
+.sector-landing-visual::after {
+  position: absolute;
+  right: clamp(18px, 4vw, 40px);
+  top: clamp(18px, 4vw, 40px);
+  color: rgba(22, 135, 242, 0.08);
+  content: 'MAGO';
+  font-size: clamp(70px, 13vw, 170px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.sector-landing-visual > span {
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--rounded-pill);
+  padding: 8px 13px;
+  color: var(--blue-2);
+  background: rgba(255, 255, 255, 0.76);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sector-visual-stack {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 14px;
+}
+
+.sector-visual-stack article {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 14px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: var(--shadow-soft);
+}
+
+.sector-visual-stack svg {
+  grid-row: span 2;
+  color: var(--blue-2);
+  margin-top: 2px;
+}
+
+.sector-visual-stack strong {
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 800;
+  line-height: 1.12;
+}
+
+.sector-visual-stack small {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.sector-qualifier-section {
+  padding: 0 0 clamp(62px, 8vw, 104px);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(116, 212, 255, 0.26), transparent 25rem),
+    linear-gradient(180deg, rgba(237, 248, 255, 0.98) 0%, rgba(247, 252, 255, 0) 72%);
+}
+
+.sector-qualifier-card {
+  border: 1px solid rgba(22, 135, 242, 0.18);
+  border-radius: var(--radius);
+  padding: clamp(28px, 5vw, 52px);
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  color: var(--navy);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(116, 212, 255, 0.52), transparent 24rem),
+    rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.sector-qualifier-card svg {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 12px;
+  color: var(--blue-2);
+}
+
+.sector-qualifier-card p {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.sector-qualifier-card h2 {
+  margin: 8px 0 0;
+  color: var(--blue-2);
+  font-size: clamp(40px, 6vw, 78px);
+  font-weight: 800;
+  line-height: 0.98;
+}
+
+.sector-qualifier-card span {
+  max-width: 780px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.sector-value-section,
+.sector-services-section,
+.sector-comparison-section {
+  padding: clamp(72px, 8vw, 116px) 0;
+}
+
+.sector-value-section {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(237, 248, 255, 0.82) 100%);
+}
+
+.sector-value-grid,
+.sector-service-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.sector-value-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.sector-value-card,
+.sector-service-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-soft);
+}
+
+.sector-value-card {
+  min-height: 270px;
+  padding: 26px;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.sector-value-card:hover,
+.sector-service-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow);
+  transform: translateY(-5px);
+}
+
+.sector-value-card svg {
+  color: var(--blue-2);
+  margin-bottom: 22px;
+}
+
+.sector-value-card h3 {
+  font-size: clamp(23px, 2.4vw, 31px);
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+.sector-value-card p {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.sector-mago-section {
+  background: #ffffff;
+}
+
+.sector-services-section {
+  background: linear-gradient(180deg, rgba(237, 248, 255, 0.76), #ffffff);
+}
+
+.sector-service-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sector-service-card {
+  min-height: 156px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 24px;
+  color: var(--navy);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.sector-service-card span {
+  max-width: 300px;
+  font-size: clamp(23px, 2.4vw, 32px);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.sector-service-card svg {
+  flex: 0 0 auto;
+  color: var(--blue-2);
+}
+
+.sector-comparison-section {
+  background: #ffffff;
+}
+
+.sector-comparison-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(32px, 6vw, 74px);
+  align-items: center;
+}
+
 .dental-page {
   background:
     radial-gradient(circle at 14% 3%, rgba(116, 212, 255, 0.38), transparent 28rem),
@@ -2037,8 +2361,8 @@ h3 {
 }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(-36px);
+  opacity: 1;
+  transform: none;
   transition:
     opacity 0.6s ease,
     transform 0.6s ease;
@@ -2166,10 +2490,12 @@ h3 {
   }
 
   .hero-grid,
+  .sector-landing-hero-grid,
   .dental-hero-grid,
   .sector-hero-grid,
   .split-grid,
   .split-grid.reverse,
+  .sector-comparison-grid,
   .dental-comparison-grid,
   .comparison-grid,
   .privacy-grid {
@@ -2184,12 +2510,22 @@ h3 {
     min-height: auto;
   }
 
+  .sector-landing-hero {
+    min-height: auto;
+  }
+
   .dental-hero-visual {
+    min-height: 440px;
+  }
+
+  .sector-landing-visual {
     min-height: 440px;
   }
 
   .mago-grid,
   .sector-grid,
+  .sector-value-grid,
+  .sector-service-grid,
   .dental-value-grid,
   .dental-service-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2256,6 +2592,11 @@ h3 {
     padding-bottom: 44px;
   }
 
+  .sector-landing-hero {
+    padding-top: 42px;
+    padding-bottom: 44px;
+  }
+
   h1 {
     font-size: clamp(32px, 10vw, 44px);
   }
@@ -2272,7 +2613,24 @@ h3 {
     padding: 9px;
   }
 
+  .sector-question-pill {
+    min-height: 54px;
+    padding: 8px 18px 8px 9px;
+    font-size: clamp(18px, 5.4vw, 27px);
+  }
+
+  .sector-question-pill svg {
+    width: 38px;
+    height: 38px;
+    padding: 8px;
+  }
+
   .dental-hero-copy h1 {
+    font-size: clamp(34px, 9.5vw, 46px);
+    line-height: 1;
+  }
+
+  .sector-landing-copy h1 {
     font-size: clamp(34px, 9.5vw, 46px);
     line-height: 1;
   }
@@ -2287,11 +2645,20 @@ h3 {
     font-size: 17px;
   }
 
+  .sector-landing-copy > p:not(.eyebrow):not(.sector-question-pill) {
+    margin-top: 16px;
+    font-size: 17px;
+  }
+
   .dental-pill-row {
     margin-top: 18px;
   }
 
   .dental-page .hero-actions {
+    margin-top: 22px;
+  }
+
+  .sector-landing-page .hero-actions {
     margin-top: 22px;
   }
 
@@ -2330,6 +2697,8 @@ h3 {
   .hero-proof,
   .mago-grid,
   .sector-grid,
+  .sector-value-grid,
+  .sector-service-grid,
   .dental-value-grid,
   .dental-service-grid,
   .comparison-panels,
@@ -2339,6 +2708,8 @@ h3 {
 
   .mago-grid,
   .sector-grid,
+  .sector-value-grid,
+  .sector-service-grid,
   .dental-value-grid,
   .dental-service-grid,
   .comparison-panels {
@@ -2353,11 +2724,23 @@ h3 {
     min-height: 390px;
   }
 
+  .sector-landing-visual {
+    min-height: 390px;
+  }
+
   .dental-city-card h2 {
     font-size: clamp(42px, 13vw, 64px);
   }
 
+  .sector-qualifier-card h2 {
+    font-size: clamp(40px, 12vw, 60px);
+  }
+
   .dental-value-card {
+    min-height: auto;
+  }
+
+  .sector-value-card {
     min-height: auto;
   }
 
@@ -2430,7 +2813,16 @@ h3 {
     min-height: 300px;
   }
 
+  .sector-landing-visual {
+    min-height: 320px;
+    padding: 18px;
+  }
+
   .dental-hero-copy h1 {
+    font-size: clamp(32px, 9.5vw, 40px);
+  }
+
+  .sector-landing-copy h1 {
     font-size: clamp(32px, 9.5vw, 40px);
   }
 
@@ -2477,6 +2869,8 @@ h3 {
   .mago-panel,
   .mago-card,
   .sector-card,
+  .sector-value-card,
+  .sector-service-card,
   .method-card,
   .comparison-card,
   .testimonial-card,
