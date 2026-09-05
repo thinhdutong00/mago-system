@@ -1931,15 +1931,14 @@ function HeroVisual() {
   );
 }
 
-const FUNNEL_RADII = [1, 0.88, 0.77, 0.67, 0.58, 0.5, 0.43, 0.36, 0.3, 0.245, 0.195, 0.15, 0.11, 0.075, 0.045];
+const FUNNEL_DEPTHS = [0, 0.04, 0.11, 0.2, 0.3, 0.41, 0.52, 0.63, 0.73, 0.82, 0.89, 0.95, 0.98];
 
-function projectFunnelPoint(radius, angle) {
-  const pull = 1 - radius;
-  const twistedAngle = angle + Math.pow(pull, 1.15) * 2.35;
+function projectFunnelPoint(depth, angle) {
+  const radius = Math.pow(1 - depth * 0.1, 0.94);
 
   return [
-    800 + 940 * radius * Math.cos(twistedAngle),
-    665 + 300 * radius * Math.sin(twistedAngle) + 162 * Math.pow(pull, 1.9),
+    800 + 920 * radius * Math.cos(angle),
+    198 + 930 * Math.pow(depth, 0.88) + 86 * Math.pow(1 - depth, 1.08) * Math.sin(angle),
   ];
 }
 
@@ -1951,19 +1950,21 @@ function funnelPath(points, close = false) {
   return close ? `${path} Z` : path;
 }
 
-const FUNNEL_RINGS = FUNNEL_RADII.map((radius) =>
-  funnelPath(
-    Array.from({ length: 97 }, (_, index) => projectFunnelPoint(radius, (Math.PI * 2 * index) / 96)),
-    true,
+const FUNNEL_RINGS = FUNNEL_DEPTHS.map((depth) => ({
+  back: funnelPath(
+    Array.from({ length: 49 }, (_, index) => projectFunnelPoint(depth, Math.PI + (Math.PI * index) / 48)),
   ),
-);
+  front: funnelPath(
+    Array.from({ length: 49 }, (_, index) => projectFunnelPoint(depth, (Math.PI * index) / 48)),
+  ),
+}));
 
-const FUNNEL_SPOKES = Array.from({ length: 32 }, (_, spokeIndex) =>
+const FUNNEL_SPOKES = Array.from({ length: 18 }, (_, spokeIndex) =>
   funnelPath(
-    Array.from({ length: 46 }, (_, step) => {
-      const radius = 1 - (step / 45) * 0.965;
-      const angle = (Math.PI * 2 * spokeIndex) / 32;
-      return projectFunnelPoint(radius, angle);
+    Array.from({ length: 49 }, (_, step) => {
+      const depth = step / 48;
+      const angle = (Math.PI * 2 * (spokeIndex + 0.5)) / 18;
+      return projectFunnelPoint(depth, angle);
     }),
   ),
 );
@@ -1971,77 +1972,60 @@ const FUNNEL_SPOKES = Array.from({ length: 32 }, (_, spokeIndex) =>
 function HeroFunnelBackdrop() {
   return (
     <div className="zd-hero-vortex" aria-hidden="true">
-      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" focusable="false">
+      <svg viewBox="0 0 1600 1000" preserveAspectRatio="none" focusable="false">
         <defs>
           <linearGradient
             id="mago-funnel-stroke"
             gradientUnits="userSpaceOnUse"
             x1="800"
-            y1="340"
+            y1="35"
             x2="800"
-            y2="900"
+            y2="980"
           >
-            <stop offset="0%" stopColor="#cceeff" stopOpacity="0.08" />
-            <stop offset="48%" stopColor="#74d4ff" stopOpacity="0.48" />
-            <stop offset="76%" stopColor="#1687f2" stopOpacity="0.82" />
-            <stop offset="100%" stopColor="#07145f" stopOpacity="0.9" />
+            <stop offset="0%" stopColor="#c9ced5" stopOpacity="0.45" />
+            <stop offset="34%" stopColor="#d7dce2" stopOpacity="0.68" />
+            <stop offset="68%" stopColor="#eceff2" stopOpacity="0.72" />
+            <stop offset="100%" stopColor="#e6e9ed" stopOpacity="0.42" />
           </linearGradient>
           <linearGradient
             id="mago-funnel-mask-gradient"
             gradientUnits="userSpaceOnUse"
             x1="0"
-            y1="260"
+            y1="0"
             x2="0"
-            y2="900"
+            y2="1000"
           >
             <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
-            <stop offset="25%" stopColor="#ffffff" stopOpacity="0.14" />
-            <stop offset="48%" stopColor="#ffffff" stopOpacity="0.72" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
+            <stop offset="4.5%" stopColor="#ffffff" stopOpacity="0.12" />
+            <stop offset="9%" stopColor="#ffffff" stopOpacity="0.55" />
+            <stop offset="15%" stopColor="#ffffff" stopOpacity="1" />
+            <stop offset="82%" stopColor="#ffffff" stopOpacity="0.88" />
+            <stop offset="100%" stopColor="#ffffff" stopOpacity="0.7" />
           </linearGradient>
-          <radialGradient id="mago-funnel-haze" gradientUnits="userSpaceOnUse" cx="800" cy="820" r="780">
-            <stop offset="0%" stopColor="#1687f2" stopOpacity="0.34" />
-            <stop offset="34%" stopColor="#74d4ff" stopOpacity="0.2" />
-            <stop offset="72%" stopColor="#cceeff" stopOpacity="0.08" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-          </radialGradient>
-          <radialGradient id="mago-funnel-core">
-            <stop offset="0%" stopColor="#07145f" stopOpacity="0.84" />
-            <stop offset="34%" stopColor="#1687f2" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#74d4ff" stopOpacity="0" />
-          </radialGradient>
-          <filter id="mago-funnel-glow" x="-80%" y="-180%" width="260%" height="460%">
-            <feGaussianBlur stdDeviation="16" />
-          </filter>
-          <mask id="mago-funnel-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900">
-            <rect width="1600" height="900" fill="url(#mago-funnel-mask-gradient)" />
+          <mask id="mago-funnel-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="1000">
+            <rect width="1600" height="1000" fill="url(#mago-funnel-mask-gradient)" />
           </mask>
         </defs>
 
-        <ellipse cx="800" cy="735" rx="980" ry="390" fill="url(#mago-funnel-haze)" />
         <g mask="url(#mago-funnel-mask)">
           <g className="zd-funnel-mesh">
-            {FUNNEL_RINGS.map((path, index) => (
-              <path
-                className={`zd-funnel-ring ${index % 4 === 0 ? 'is-major' : ''}`}
-                d={path}
-                key={`ring-${index}`}
-              />
+            {FUNNEL_RINGS.map((ring, index) => (
+              <g key={`ring-${index}`}>
+                <path
+                  className={`zd-funnel-ring zd-funnel-ring-back ${index === 0 ? 'is-mouth' : ''} ${index % 3 === 0 ? 'is-major' : ''}`}
+                  d={ring.back}
+                />
+                <path
+                  className={`zd-funnel-ring zd-funnel-ring-front ${index === 0 ? 'is-mouth' : ''} ${index % 3 === 0 ? 'is-major' : ''}`}
+                  d={ring.front}
+                />
+              </g>
             ))}
             {FUNNEL_SPOKES.map((path, index) => (
               <path className="zd-funnel-spoke" d={path} key={`spoke-${index}`} />
             ))}
           </g>
         </g>
-        <ellipse
-          className="zd-funnel-core-glow"
-          cx="800"
-          cy="828"
-          rx="118"
-          ry="38"
-          fill="url(#mago-funnel-core)"
-          filter="url(#mago-funnel-glow)"
-        />
       </svg>
     </div>
   );
@@ -2052,53 +2036,55 @@ function HomePage({ navigate, openModal }) {
 
   return (
     <main className="zd-home">
-      <section className="zd-hero" id="home">
-        <HeroFunnelBackdrop />
-        <div className="container zd-hero-inner reveal">
-          <p className="zd-kicker">Strategia. Creatività. Risultati.</p>
-          <h1>Il performance marketing reso chiaro ed efficace</h1>
-          <p className="zd-hero-text">
-            Dal posizionamento del marchio alle campagne digitali, forniamo soluzioni di marketing pratiche
-            progettate per aumentare la visibilità, il coinvolgimento e la crescita a lungo termine.
-          </p>
-          <div className="zd-hero-actions">
-            <SmartLink className="zd-button zd-button-outline" href="/#settori" navigate={navigate}>
-              Vedi settori <ArrowUpRight size={18} />
-            </SmartLink>
-            <button className="zd-button zd-button-primary" type="button" onClick={openModal}>
-              Richiedi Preventivo <ArrowUpRight size={18} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="zd-about" id="chi-siamo">
-        <div className="container zd-about-grid">
-          <div className="zd-about-copy reveal">
-            <p className="zd-kicker">Chi siamo</p>
-            <p className="zd-about-lead">
-              Siamo un team di strateghi, creativi ed esperti di marketing che lavorano insieme per produrre
-              contenuti straordinari e garantire che raggiungano il pubblico giusto.
+      <div className="zd-intro-stage">
+        <section className="zd-hero" id="home">
+          <div className="container zd-hero-inner reveal">
+            <p className="zd-kicker">Strategia. Creatività. Risultati.</p>
+            <h1>Il performance marketing reso chiaro ed efficace</h1>
+            <p className="zd-hero-text">
+              Dal posizionamento del marchio alle campagne digitali, forniamo soluzioni di marketing pratiche
+              progettate per aumentare la visibilità, il coinvolgimento e la crescita a lungo termine.
             </p>
-            <SmartLink className="zd-text-link zd-text-link-dark" href="/#servizi" navigate={navigate}>
-              Scopri cosa facciamo <ArrowUpRight size={19} />
-            </SmartLink>
+            <div className="zd-hero-actions">
+              <SmartLink className="zd-button zd-button-outline" href="/#settori" navigate={navigate}>
+                Vedi settori <ArrowUpRight size={18} />
+              </SmartLink>
+              <button className="zd-button zd-button-primary" type="button" onClick={openModal}>
+                Richiedi Preventivo <ArrowUpRight size={18} />
+              </button>
+            </div>
           </div>
-          <figure className="zd-about-media reveal delay-1">
-            <img
-              src={`${ASSETS}zeta-team.webp`}
-              alt="Team di strateghi e creativi durante una sessione di lavoro"
-              width="1024"
-              height="577"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>
-              <h2>Guidato dalla strategia. Concentrato sui risultati.</h2>
-            </figcaption>
-          </figure>
-        </div>
-      </section>
+        </section>
+
+        <section className="zd-about" id="chi-siamo">
+          <HeroFunnelBackdrop />
+          <div className="container zd-about-grid">
+            <div className="zd-about-copy reveal">
+              <p className="zd-kicker">Chi siamo</p>
+              <p className="zd-about-lead">
+                Siamo un team di strateghi, creativi ed esperti di marketing che lavorano insieme per produrre
+                contenuti straordinari e garantire che raggiungano il pubblico giusto.
+              </p>
+              <SmartLink className="zd-text-link zd-text-link-dark" href="/#servizi" navigate={navigate}>
+                Scopri cosa facciamo <ArrowUpRight size={19} />
+              </SmartLink>
+            </div>
+            <figure className="zd-about-media reveal delay-1">
+              <img
+                src={`${ASSETS}zeta-team.webp`}
+                alt="Team di strateghi e creativi durante una sessione di lavoro"
+                width="1024"
+                height="577"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                <h2>Guidato dalla strategia. Concentrato sui risultati.</h2>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+      </div>
 
       <section className="zd-services" id="servizi">
         <div className="container">
