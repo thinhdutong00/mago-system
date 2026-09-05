@@ -10,7 +10,8 @@ import {
   ChevronDown,
   Mail,
   MapPin,
-  Menu,
+  MonitorSmartphone,
+  MousePointerClick,
   Search,
   Send,
   ShieldCheck,
@@ -916,16 +917,114 @@ const defaultConsent = {
 };
 
 const homeMeta = {
-  title: 'Mago System Sanitario - Acquisizione pazienti per strutture sanitarie',
+  title: 'Mago System - Performance marketing chiaro ed efficace',
   description:
-    'Sistema di acquisizione per cliniche, studi e professionisti sanitari: intercettiamo persone locali già interessate ai servizi prioritari.',
+    'Strategie di marketing, siti web, advertising, email e SEO progettati per aumentare visibilità, coinvolgimento e crescita.',
   path: '/',
 };
 
+const healthcareMeta = {
+  ...homeMeta,
+  title: 'Sanitario - Performance marketing per strutture sanitarie | Mago System',
+  description:
+    'Strategie digitali e sistemi di acquisizione per cliniche, studi e professionisti sanitari che vogliono una crescita misurabile.',
+  path: '/sanitario',
+};
+
 const navItems = [
-  { label: 'Metodo', href: '/#metodo' },
-  { label: 'MAGO', href: '/#mago' },
-  { label: 'Settori sanitari', href: '/#settori' },
+  { label: 'Chi siamo', href: '/#chi-siamo' },
+  { label: 'Contatti', href: '/#contatti' },
+  { label: 'Blog', href: '/#blog' },
+];
+
+const marketingServices = [
+  {
+    slug: 'realizzazione-siti-web-professionali',
+    title: 'Realizzazione siti web professionali',
+    text: 'Come agenzia per la realizzazione di siti web, creiamo siti aziendali, landing page e pagine veloci pensate per generare richieste.',
+    icon: MonitorSmartphone,
+    featured: true,
+  },
+  {
+    slug: 'realizzazione-ecommerce',
+    title: 'Realizzazione eCommerce',
+    text: 'Progettiamo esperienze eCommerce chiare, veloci e orientate alla conversione, dalla struttura del catalogo fino al percorso di acquisto.',
+    icon: BarChart3,
+  },
+  {
+    slug: 'gestione-campagne-google-ads',
+    title: 'Gestione campagne Google Ads',
+    text: 'Come agenzia Google Ads, gestiamo campagne Search, Performance Max e PPC con tracking, budget sotto controllo e focus su lead e vendite.',
+    icon: MousePointerClick,
+    featured: true,
+  },
+  {
+    slug: 'lead-generation',
+    title: 'Lead Generation',
+    text: 'Costruiamo funnel e campagne progettati per trasformare attenzione e domanda in contatti realmente utili al business.',
+    icon: Target,
+  },
+  {
+    slug: 'consulenza-email-marketing',
+    title: 'Consulenza Email Marketing',
+    text: 'Come agenzia email marketing, progettiamo newsletter, automazioni, segmentazione CRM e campagne orientate a vendite e retention.',
+    icon: Mail,
+    featured: true,
+  },
+  {
+    slug: 'servizi-seo',
+    title: 'Servizi SEO',
+    text: 'Come agenzia SEO, uniamo consulenza, audit tecnico, SEO locale, contenuti e ottimizzazione on-page per traffico qualificato.',
+    icon: Search,
+    featured: true,
+  },
+];
+
+const partnerLogos = [
+  { src: 'partner-sorriso-salute.png', alt: 'Studio Dentistico Sorriso & Salute' },
+  { src: 'partner-fisioterapia-malavasi.png', alt: 'Studio Fisioterapico Malavasi' },
+  { src: 'partner-tulipano-black.png', alt: 'Il Tulipano Risto-Pizza' },
+  { src: 'partner-illume.webp', alt: 'Illume Pizzeria Emiliana', className: 'partner-logo-illume' },
+  { src: 'zeta-partner-toolblueprints.webp', alt: 'toolblueprints.com' },
+];
+
+const differentiators = [
+  {
+    title: 'Focalizzati su ciò che conta davvero',
+    text: 'Diamo priorità ai risultati che fanno davvero la differenza, come prestazioni, crescita e valore a lungo termine, garantendo che ogni sforzo contribuisca a risultati aziendali significativi.',
+  },
+  {
+    title: 'Guidato da intuizioni, non da supposizioni',
+    text: 'Ogni decisione che prendiamo è supportata da dati, ricerche e comprensione reale del cliente, quindi la tua strategia è fondata su ciò che funziona.',
+  },
+  {
+    title: 'Impegnati per il successo a lungo termine',
+    text: 'Non inseguiamo vittorie veloci. Costruiamo strategie pensate per crescere insieme al tuo business e fornire risultati sostenibili nel tempo.',
+  },
+];
+
+const blogPosts = [
+  {
+    title: 'Consigli pratici per rendere il tuo sito mobile friendly',
+    category: 'Approfondimenti · Strategia',
+    date: '24 mar 2026',
+    image: 'zeta-blog-mobile.webp',
+    href: 'https://zetadigital.it/blog/sito-mobile-friendly/',
+  },
+  {
+    title: 'Ottimizzazione per motori generativi: il prossimo passo nella SEO',
+    category: 'Settori',
+    date: '22 mar 2026',
+    image: 'zeta-blog-generative-seo.webp',
+    href: 'https://zetadigital.it/blog/generative-engine-optimization-seo-ai/',
+  },
+  {
+    title: '5 caratteristiche chiave delle agenzie di marketing ad alte performance',
+    category: 'Strategia',
+    date: '27 gen 2026',
+    image: 'zeta-blog-agency-performance.webp',
+    href: 'https://zetadigital.it/blog/agenzia-marketing-alte-performance/',
+  },
 ];
 
 const methodSteps = [
@@ -1599,6 +1698,27 @@ function Header({ navigate, openModal, openBooking, modalOpen }) {
   const closeMenu = () => setMenuOpen(false);
 
   useEffect(() => {
+    if (!menuOpen) return undefined;
+
+    document.body.classList.add('site-menu-open');
+    const desktopQuery = window.matchMedia('(min-width: 1041px)');
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+    const onBreakpointChange = (event) => {
+      if (event.matches) setMenuOpen(false);
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    desktopQuery.addEventListener('change', onBreakpointChange);
+    return () => {
+      document.body.classList.remove('site-menu-open');
+      window.removeEventListener('keydown', onKeyDown);
+      desktopQuery.removeEventListener('change', onBreakpointChange);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
     let lastScrollY = window.scrollY;
     let ticking = false;
 
@@ -1629,47 +1749,63 @@ function Header({ navigate, openModal, openBooking, modalOpen }) {
   }, [menuOpen, modalOpen]);
 
   return (
-    <>
-      <div className="announcement">
-        <span>Acquisizione pazienti per strutture sanitarie private</span>
-        <button type="button" onClick={openBooking}>
-          Prenota videochiamata <CalendarCheck size={15} />
-        </button>
-      </div>
-      <header className={`site-header ${headerHidden ? 'is-hidden' : ''}`}>
+    <header className={`site-header ${headerHidden ? 'is-hidden' : ''} ${menuOpen ? 'menu-is-open' : ''}`}>
         <div className="header-inner">
           <Logo navigate={navigate} />
           <nav className="desktop-nav" aria-label="Navigazione principale">
-            {navItems.map((item) => (
-              <SmartLink key={item.href} href={item.href} navigate={navigate}>
-                {item.label}
-              </SmartLink>
-            ))}
+            <SmartLink href={navItems[0].href} navigate={navigate}>
+              {navItems[0].label}
+            </SmartLink>
+            <div className="sector-menu service-menu">
+              <button type="button" aria-haspopup="true">
+                Servizi <ChevronDown size={16} />
+              </button>
+              <div className="sector-menu-panel service-menu-panel">
+                {marketingServices.map((service) => (
+                  <SmartLink
+                    key={service.slug}
+                    href={service.featured ? `/#${service.slug}` : '/#servizi'}
+                    navigate={navigate}
+                  >
+                    {service.title}
+                  </SmartLink>
+                ))}
+              </div>
+            </div>
+            <SmartLink href={navItems[1].href} navigate={navigate}>
+              {navItems[1].label}
+            </SmartLink>
             <div className="sector-menu">
               <button type="button" aria-haspopup="true">
                 Settori <ChevronDown size={16} />
               </button>
               <div className="sector-menu-panel">
-                {sectors.map((sector) => (
-                  <SmartLink key={sector.slug} href={`/${sector.slug}`} navigate={navigate}>
-                    {sector.label}
-                  </SmartLink>
-                ))}
+                <SmartLink href="/sanitario" navigate={navigate}>
+                  Sanitario
+                </SmartLink>
               </div>
             </div>
+            <SmartLink href={navItems[2].href} navigate={navigate}>
+              {navItems[2].label}
+            </SmartLink>
           </nav>
-          <button className="button primary header-cta" type="button" onClick={openBooking}>
-            Prenota videochiamata <CalendarCheck size={18} />
+          <button className="button primary header-cta" type="button" onClick={openModal}>
+            Richiedi preventivo <ArrowUpRight size={18} />
           </button>
           <button
-            className="icon-button menu-button"
+            className="menu-button"
             type="button"
             onClick={() => setMenuOpen((current) => !current)}
             aria-label={menuOpen ? 'Chiudi menu' : 'Apri menu'}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
           >
-            {menuOpen ? <X size={23} /> : <Menu size={23} />}
+            <span className="menu-button-icon" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
+            <span>Menu</span>
           </button>
         </div>
         <nav
@@ -1678,48 +1814,84 @@ function Header({ navigate, openModal, openBooking, modalOpen }) {
           aria-label="Navigazione mobile"
           aria-hidden={!menuOpen}
         >
+          <div className="mobile-nav-header">
+            <SmartLink className="mobile-nav-logo" href="/" navigate={navigate} onClick={closeMenu}>
+              <img src={`${ASSETS}mago-system-logo-header.webp`} alt="Mago System" width="499" height="166" />
+            </SmartLink>
+            <button className="mobile-nav-close" type="button" onClick={closeMenu}>
+              <X size={28} aria-hidden="true" />
+              <span>Chiudi</span>
+            </button>
+          </div>
           <div className="mobile-nav-scroll">
-            <div className="mobile-nav-section mobile-nav-primary">
-              {navItems.map((item) => (
-                <SmartLink key={item.href} href={item.href} navigate={navigate} onClick={closeMenu}>
-                  {item.label}
-                </SmartLink>
-              ))}
-            </div>
-            <div className="mobile-nav-section">
-              <span className="mobile-nav-label">Settori sanitari</span>
+            <SmartLink className="mobile-nav-primary-link" href="/" navigate={navigate} onClick={closeMenu}>
+              Home
+            </SmartLink>
+            <SmartLink className="mobile-nav-primary-link" href={navItems[0].href} navigate={navigate} onClick={closeMenu}>
+              {navItems[0].label}
+            </SmartLink>
+            <details className="mobile-nav-accordion">
+              <summary>
+                <span>Servizi</span>
+                <ChevronDown size={26} aria-hidden="true" />
+              </summary>
               <div className="mobile-sector-list">
-                {sectors.map((sector) => (
-                  <SmartLink key={sector.slug} href={`/${sector.slug}`} navigate={navigate} onClick={closeMenu}>
-                    {sector.label}
+                {marketingServices.map((service) => (
+                  <SmartLink
+                    key={service.slug}
+                    href={service.featured ? `/#${service.slug}` : '/#servizi'}
+                    navigate={navigate}
+                    onClick={closeMenu}
+                  >
+                    {service.title}
                   </SmartLink>
                 ))}
               </div>
-            </div>
+            </details>
+            <SmartLink className="mobile-nav-primary-link" href={navItems[1].href} navigate={navigate} onClick={closeMenu}>
+              {navItems[1].label}
+            </SmartLink>
+            <details className="mobile-nav-accordion">
+              <summary>
+                <span>Settori</span>
+                <ChevronDown size={26} aria-hidden="true" />
+              </summary>
+              <div className="mobile-sector-list">
+                <SmartLink href="/sanitario" navigate={navigate} onClick={closeMenu}>
+                  Sanitario
+                </SmartLink>
+              </div>
+            </details>
+            <SmartLink className="mobile-nav-primary-link" href={navItems[2].href} navigate={navigate} onClick={closeMenu}>
+              {navItems[2].label}
+            </SmartLink>
+          </div>
+          <div className="mobile-nav-actions" aria-label="Azioni rapide">
             <button
-              className="button primary"
+              className="mobile-nav-action mobile-nav-action-secondary"
               type="button"
-              onClick={() => {
-                closeMenu();
-                openBooking();
-              }}
-            >
-              Prenota videochiamata <CalendarCheck size={18} />
-            </button>
-            <button
-              className="button secondary"
-              type="button"
+              aria-label="Richiedi consulenza"
               onClick={() => {
                 closeMenu();
                 openModal();
               }}
             >
-              Richiedi consulenza <ArrowUpRight size={18} />
+              Richiedi preventivo <ArrowUpRight size={18} />
+            </button>
+            <button
+              className="mobile-nav-action mobile-nav-action-primary"
+              type="button"
+              aria-label="Prenota videochiamata"
+              onClick={() => {
+                closeMenu();
+                openBooking();
+              }}
+            >
+              Prenota call <CalendarCheck size={18} />
             </button>
           </div>
         </nav>
       </header>
-    </>
   );
 }
 
@@ -1759,7 +1931,324 @@ function HeroVisual() {
   );
 }
 
-function HomePage({ navigate, openModal, openBooking }) {
+const FUNNEL_RADII = [1, 0.88, 0.77, 0.67, 0.58, 0.5, 0.43, 0.36, 0.3, 0.245, 0.195, 0.15, 0.11, 0.075, 0.045];
+
+function projectFunnelPoint(radius, angle) {
+  const pull = 1 - radius;
+  const twistedAngle = angle + Math.pow(pull, 1.15) * 2.35;
+
+  return [
+    800 + 940 * radius * Math.cos(twistedAngle),
+    665 + 300 * radius * Math.sin(twistedAngle) + 162 * Math.pow(pull, 1.9),
+  ];
+}
+
+function funnelPath(points, close = false) {
+  const path = points
+    .map(([x, y], index) => `${index === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`)
+    .join(' ');
+
+  return close ? `${path} Z` : path;
+}
+
+const FUNNEL_RINGS = FUNNEL_RADII.map((radius) =>
+  funnelPath(
+    Array.from({ length: 97 }, (_, index) => projectFunnelPoint(radius, (Math.PI * 2 * index) / 96)),
+    true,
+  ),
+);
+
+const FUNNEL_SPOKES = Array.from({ length: 32 }, (_, spokeIndex) =>
+  funnelPath(
+    Array.from({ length: 46 }, (_, step) => {
+      const radius = 1 - (step / 45) * 0.965;
+      const angle = (Math.PI * 2 * spokeIndex) / 32;
+      return projectFunnelPoint(radius, angle);
+    }),
+  ),
+);
+
+function HeroFunnelBackdrop() {
+  return (
+    <div className="zd-hero-vortex" aria-hidden="true">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" focusable="false">
+        <defs>
+          <linearGradient
+            id="mago-funnel-stroke"
+            gradientUnits="userSpaceOnUse"
+            x1="800"
+            y1="340"
+            x2="800"
+            y2="900"
+          >
+            <stop offset="0%" stopColor="#cceeff" stopOpacity="0.08" />
+            <stop offset="48%" stopColor="#74d4ff" stopOpacity="0.48" />
+            <stop offset="76%" stopColor="#1687f2" stopOpacity="0.82" />
+            <stop offset="100%" stopColor="#07145f" stopOpacity="0.9" />
+          </linearGradient>
+          <linearGradient
+            id="mago-funnel-mask-gradient"
+            gradientUnits="userSpaceOnUse"
+            x1="0"
+            y1="260"
+            x2="0"
+            y2="900"
+          >
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+            <stop offset="25%" stopColor="#ffffff" stopOpacity="0.14" />
+            <stop offset="48%" stopColor="#ffffff" stopOpacity="0.72" />
+            <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
+          </linearGradient>
+          <radialGradient id="mago-funnel-haze" gradientUnits="userSpaceOnUse" cx="800" cy="820" r="780">
+            <stop offset="0%" stopColor="#1687f2" stopOpacity="0.34" />
+            <stop offset="34%" stopColor="#74d4ff" stopOpacity="0.2" />
+            <stop offset="72%" stopColor="#cceeff" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="mago-funnel-core">
+            <stop offset="0%" stopColor="#07145f" stopOpacity="0.84" />
+            <stop offset="34%" stopColor="#1687f2" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#74d4ff" stopOpacity="0" />
+          </radialGradient>
+          <filter id="mago-funnel-glow" x="-80%" y="-180%" width="260%" height="460%">
+            <feGaussianBlur stdDeviation="16" />
+          </filter>
+          <mask id="mago-funnel-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900">
+            <rect width="1600" height="900" fill="url(#mago-funnel-mask-gradient)" />
+          </mask>
+        </defs>
+
+        <ellipse cx="800" cy="735" rx="980" ry="390" fill="url(#mago-funnel-haze)" />
+        <g mask="url(#mago-funnel-mask)">
+          <g className="zd-funnel-mesh">
+            {FUNNEL_RINGS.map((path, index) => (
+              <path
+                className={`zd-funnel-ring ${index % 4 === 0 ? 'is-major' : ''}`}
+                d={path}
+                key={`ring-${index}`}
+              />
+            ))}
+            {FUNNEL_SPOKES.map((path, index) => (
+              <path className="zd-funnel-spoke" d={path} key={`spoke-${index}`} />
+            ))}
+          </g>
+        </g>
+        <ellipse
+          className="zd-funnel-core-glow"
+          cx="800"
+          cy="828"
+          rx="118"
+          ry="38"
+          fill="url(#mago-funnel-core)"
+          filter="url(#mago-funnel-glow)"
+        />
+      </svg>
+    </div>
+  );
+}
+
+function HomePage({ navigate, openModal }) {
+  const featuredServices = marketingServices.filter((service) => service.featured);
+
+  return (
+    <main className="zd-home">
+      <section className="zd-hero" id="home">
+        <HeroFunnelBackdrop />
+        <div className="container zd-hero-inner reveal">
+          <p className="zd-kicker">Strategia. Creatività. Risultati.</p>
+          <h1>Il performance marketing reso chiaro ed efficace</h1>
+          <p className="zd-hero-text">
+            Dal posizionamento del marchio alle campagne digitali, forniamo soluzioni di marketing pratiche
+            progettate per aumentare la visibilità, il coinvolgimento e la crescita a lungo termine.
+          </p>
+          <div className="zd-hero-actions">
+            <SmartLink className="zd-button zd-button-outline" href="/#settori" navigate={navigate}>
+              Vedi settori <ArrowUpRight size={18} />
+            </SmartLink>
+            <button className="zd-button zd-button-primary" type="button" onClick={openModal}>
+              Richiedi Preventivo <ArrowUpRight size={18} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="zd-about" id="chi-siamo">
+        <div className="container zd-about-grid">
+          <div className="zd-about-copy reveal">
+            <p className="zd-kicker">Chi siamo</p>
+            <p className="zd-about-lead">
+              Siamo un team di strateghi, creativi ed esperti di marketing che lavorano insieme per produrre
+              contenuti straordinari e garantire che raggiungano il pubblico giusto.
+            </p>
+            <SmartLink className="zd-text-link zd-text-link-dark" href="/#servizi" navigate={navigate}>
+              Scopri cosa facciamo <ArrowUpRight size={19} />
+            </SmartLink>
+          </div>
+          <figure className="zd-about-media reveal delay-1">
+            <img
+              src={`${ASSETS}zeta-team.webp`}
+              alt="Team di strateghi e creativi durante una sessione di lavoro"
+              width="1024"
+              height="577"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <h2>Guidato dalla strategia. Concentrato sui risultati.</h2>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className="zd-services" id="servizi">
+        <div className="container">
+          <header className="zd-section-heading reveal">
+            <p className="zd-kicker">Cosa facciamo</p>
+            <h2>Facciamo marketing che attrae, coinvolge, converte</h2>
+          </header>
+          <div className="zd-service-grid">
+            {featuredServices.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <article className="zd-service-card reveal" id={service.slug} key={service.slug}>
+                  <div className="zd-service-icon" aria-hidden="true">
+                    <Icon size={29} />
+                  </div>
+                  <span className="zd-card-index">0{index + 1}</span>
+                  <h3>{service.title}</h3>
+                  <p>{service.text}</p>
+                  <button className="zd-card-link" type="button" onClick={openModal}>
+                    Scopri il servizio <ArrowUpRight size={18} />
+                  </button>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="zd-partners" aria-labelledby="partner-title">
+        <div className="container">
+          <h2 id="partner-title">Marchi con cui siamo orgogliosi di lavorare</h2>
+          <div className="zd-partner-grid">
+            {partnerLogos.map((partner) => (
+              <img
+                className={partner.className}
+                src={`${ASSETS}${partner.src}`}
+                alt={partner.alt}
+                width="220"
+                height="80"
+                loading="lazy"
+                decoding="async"
+                key={partner.src}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="zd-sectors" id="settori">
+        <div className="container">
+          <header className="zd-section-heading zd-section-heading-split reveal">
+            <div>
+              <p className="zd-kicker">Settori</p>
+              <h2>Strategie verticali, crescita misurabile</h2>
+            </div>
+            <SmartLink className="zd-text-link zd-text-link-dark" href="/sanitario" navigate={navigate}>
+              Esplora il settore <ArrowUpRight size={19} />
+            </SmartLink>
+          </header>
+          <SmartLink className="zd-sector-feature reveal" href="/sanitario" navigate={navigate}>
+            <div className="zd-sector-number">01</div>
+            <div className="zd-sector-copy">
+              <p>Sanità privata e professionisti</p>
+              <h3>Sanitario</h3>
+              <span>
+                Sistemi di acquisizione e performance marketing per cliniche, studi e professionisti che vogliono
+                trasformare visibilità locale in richieste più qualificate.
+              </span>
+            </div>
+            <div className="zd-sector-tags" aria-label="Specializzazioni sanitarie">
+              {sectors.slice(0, 6).map((sector) => (
+                <span key={sector.slug}>{sector.label}</span>
+              ))}
+            </div>
+            <ArrowUpRight className="zd-sector-arrow" size={32} aria-hidden="true" />
+          </SmartLink>
+        </div>
+      </section>
+
+      <section className="zd-why">
+        <div className="container">
+          <header className="zd-section-heading reveal">
+            <p className="zd-kicker">Perché lavorare con noi</p>
+            <h2>Cosa ci distingue</h2>
+          </header>
+          <div className="zd-why-grid">
+            {differentiators.map((item, index) => (
+              <article className="zd-why-card reveal" key={item.title}>
+                <span>0{index + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="zd-blog" id="blog">
+        <div className="container">
+          <header className="zd-section-heading zd-section-heading-split reveal">
+            <div>
+              <p className="zd-kicker">Dal nostro blog</p>
+              <h2>Ultimi approfondimenti dal nostro blog</h2>
+            </div>
+            <a className="zd-text-link zd-text-link-dark" href="https://zetadigital.it/blog/" target="_blank" rel="noreferrer">
+              Leggi il blog <ArrowUpRight size={19} />
+            </a>
+          </header>
+          <div className="zd-blog-grid">
+            {blogPosts.map((post) => (
+              <a className="zd-blog-card reveal" href={post.href} target="_blank" rel="noreferrer" key={post.title}>
+                <div className="zd-blog-media">
+                  <img
+                    src={`${ASSETS}${post.image}`}
+                    alt=""
+                    width="760"
+                    height="500"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div className="zd-blog-meta">
+                  <span>{post.category}</span>
+                  <time>{post.date}</time>
+                </div>
+                <h3>{post.title}</h3>
+                <span className="zd-card-link">
+                  Leggi l’articolo <ArrowUpRight size={18} />
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="zd-final-cta" id="preventivo">
+        <div className="container zd-final-cta-inner reveal">
+          <p className="zd-kicker zd-kicker-light">Pronto a far crescere il tuo brand?</p>
+          <h2>Fai il primo passo verso il successo del tuo marketing</h2>
+          <button className="zd-button zd-button-light" type="button" onClick={openModal}>
+            Richiedi Preventivo <ArrowUpRight size={18} />
+          </button>
+          <p className="zd-final-note">Risponderemo entro 24 ore. Nessuna pressione, solo consigli esperti.</p>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function HealthcareHomePage({ navigate, openModal, openBooking }) {
   return (
     <main>
       <section className="hero" id="home">
@@ -1828,7 +2317,7 @@ function HomePage({ navigate, openModal, openBooking }) {
         </div>
       </section>
 
-      <section className="sectors-section" id="settori">
+      <section className="sectors-section" id="settori-sanitari">
         <div className="container">
           <div className="section-heading reveal">
             <p className="eyebrow">Settori sanitari</p>
@@ -1882,11 +2371,17 @@ function HomePage({ navigate, openModal, openBooking }) {
           <div className="comparison-panels">
             <article className="comparison-card muted reveal">
               <h3>Approccio tradizionale</h3>
-              <p>Annunci generici, traffico freddo, richieste da prezzo basso, follow-up manuale e poca chiarezza sui servizi che generano valore.</p>
+              <p>
+                Annunci generici, traffico freddo, richieste da prezzo basso, follow-up manuale e poca chiarezza sui
+                servizi che generano valore.
+              </p>
             </article>
             <article className="comparison-card active reveal delay-1">
               <h3>Sistema Mago</h3>
-              <p>Messaggi verticali, pagine rapide, prova sociale, CTA semplici e dati per capire quali pazienti arrivano dai canali giusti.</p>
+              <p>
+                Messaggi verticali, pagine rapide, prova sociale, CTA semplici e dati per capire quali pazienti
+                arrivano dai canali giusti.
+              </p>
             </article>
           </div>
         </div>
@@ -2494,38 +2989,52 @@ function FinalCta({
 function Footer({ navigate, openModal, openBooking, openCookieSettings }) {
   return (
     <footer className="site-footer" id="contatti">
-      <div className="container footer-grid">
+      <div className="container footer-grid zd-footer-grid">
         <div className="footer-brand">
           <Logo navigate={navigate} />
-          <p>Acquisizione pazienti per cliniche, studi e professionisti sanitari privati.</p>
+          <p>Marketing che genera crescita, costruisce brand solidi e produce risultati concreti.</p>
         </div>
-        <div>
-          <h3>Settori</h3>
-          {sectors.slice(0, 5).map((sector) => (
-            <SmartLink key={sector.slug} href={`/${sector.slug}`} navigate={navigate}>
-              {sector.label}
+        <div className="zd-footer-links">
+          <h3>Link rapidi</h3>
+          <SmartLink href="/" navigate={navigate}>Home</SmartLink>
+          <SmartLink href="/#chi-siamo" navigate={navigate}>Chi siamo</SmartLink>
+          <SmartLink href="/#servizi" navigate={navigate}>Servizi</SmartLink>
+          <SmartLink href="/#settori" navigate={navigate}>Settori</SmartLink>
+          <SmartLink href="/#blog" navigate={navigate}>Blog</SmartLink>
+        </div>
+        <div className="zd-footer-links">
+          <h3>Servizi</h3>
+          {marketingServices.map((service) => (
+            <SmartLink
+              key={service.slug}
+              href={service.featured ? `/#${service.slug}` : '/#servizi'}
+              navigate={navigate}
+            >
+              {service.title}
             </SmartLink>
           ))}
         </div>
-        <div>
+        <div className="zd-footer-links">
           <h3>Contatti</h3>
           <p>Via L. Ariosto, 4/c, 41012 Carpi MO, Italia</p>
           <a href="mailto:info@magodigital.it">
             <Mail size={18} /> info@magodigital.it
           </a>
-          <button type="button" onClick={openBooking}>Prenota videochiamata</button>
-          <button type="button" onClick={openModal}>Parla con noi</button>
-          <button type="button" onClick={openCookieSettings}>Preferenze cookie</button>
-          <SmartLink href="/privacy-policy" navigate={navigate}>
-            Privacy Policy
-          </SmartLink>
+          <button type="button" onClick={openBooking}>Prenota una videochiamata</button>
+          <button type="button" onClick={openModal}>Richiedi un preventivo</button>
         </div>
       </div>
       <div className="container footer-bottom">
         <a className="scroll-top" href="#home" aria-label="Torna su">
           <ArrowUp size={21} />
         </a>
-        <p>Copyright @2026, Mago System. Tutti i diritti riservati</p>
+        <div className="zd-footer-legal">
+          <p>Copyright © 2026, Mago System. Tutti i diritti riservati.</p>
+          <div>
+            <SmartLink href="/privacy-policy" navigate={navigate}>Privacy Policy</SmartLink>
+            <button type="button" onClick={openCookieSettings}>Preferenze cookie</button>
+          </div>
+        </div>
       </div>
     </footer>
   );
@@ -2703,8 +3212,9 @@ function App() {
 
   const activeSector = useMemo(() => sectors.find((sector) => `/${sector.slug}` === path), [path]);
   const activeLanding = activeSector ? sectorLandingPages[activeSector.slug] : null;
+  const isHealthcarePath = path === '/sanitario';
   const isPrivacyPath = path === '/privacy-policy';
-  const isKnownPath = path === '/' || Boolean(activeSector) || isPrivacyPath;
+  const isKnownPath = path === '/' || isHealthcarePath || Boolean(activeSector) || isPrivacyPath;
 
   const navigate = (to) => {
     const [nextPath, hash] = to.split('#');
@@ -2739,7 +3249,9 @@ function App() {
         }
       : isPrivacyPath
         ? privacyMeta
-        : homeMeta;
+        : isHealthcarePath
+          ? healthcareMeta
+          : homeMeta;
 
     document.title = pageMeta.title;
     setMeta('description', pageMeta.description);
@@ -2789,9 +3301,11 @@ function App() {
       areaServed: 'IT',
       serviceType: activeSector
         ? `Sistema di acquisizione per ${activeSector.label.toLowerCase()}`
-        : 'Acquisizione pazienti per strutture sanitarie private',
+        : isHealthcarePath
+          ? 'Performance marketing per strutture sanitarie private'
+          : 'Strategia digitale, siti web, advertising, email marketing e SEO',
     });
-  }, [activeSector, activeLanding, isPrivacyPath]);
+  }, [activeSector, activeLanding, isHealthcarePath, isPrivacyPath]);
 
   return (
     <>
@@ -2803,6 +3317,13 @@ function App() {
       />
       {path === '/' && (
         <HomePage navigate={navigate} openModal={() => setModalOpen(true)} openBooking={() => setBookingOpen(true)} />
+      )}
+      {isHealthcarePath && (
+        <HealthcareHomePage
+          navigate={navigate}
+          openModal={() => setModalOpen(true)}
+          openBooking={() => setBookingOpen(true)}
+        />
       )}
       {activeSector?.slug === 'cliniche-dentali' && (
         <DentalPage openModal={() => setModalOpen(true)} openBooking={() => setBookingOpen(true)} />
