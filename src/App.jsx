@@ -3102,26 +3102,28 @@ function CookieBanner({ navigate, settingsOpen, onSettingsClose }) {
   return (
     <>
       {bannerVisible && (
-        <aside className="cookie-banner" aria-label="Informativa cookie">
+        <aside className="cookie-banner" aria-labelledby="cookie-banner-title">
           <div>
-            <strong>Gestione cookie e annunci</strong>
+            <h2 id="cookie-banner-title">Utilizziamo i cookie per migliorare la tua esperienza su questo sito.</h2>
             <p>
-              Usiamo cookie tecnici necessari. Analytics, Google/Meta Ads, remarketing e misurazione conversioni restano
-              disattivati finché non dai consenso. Puoi accettare, rifiutare o scegliere per categoria.
+              Utilizziamo cookie essenziali per garantire la sicurezza e il corretto funzionamento del sito. Con il tuo
+              consenso, usiamo anche strumenti di analisi, pubblicità e remarketing per misurare le prestazioni e
+              personalizzare i contenuti. I cookie facoltativi restano disattivati finché non scegli di attivarli.
+              Scopri di più nella nostra{' '}
+              <SmartLink href="/privacy-policy" navigate={navigate}>
+                Privacy e Cookie Policy
+              </SmartLink>.
             </p>
-            <SmartLink href="/privacy-policy" navigate={navigate}>
-              Leggi Privacy e Cookie Policy
-            </SmartLink>
           </div>
           <div className="cookie-actions" aria-label="Azioni consenso cookie">
-            <button className="button ghost" type="button" onClick={rejectOptional}>
-              Rifiuta
+            <button className="button cookie-button" type="button" onClick={() => setPanelOpen(true)}>
+              Impostazioni dei cookie
             </button>
-            <button className="button secondary" type="button" onClick={() => setPanelOpen(true)}>
-              Personalizza
+            <button className="button cookie-button" type="button" onClick={rejectOptional}>
+              Rifiuta i cookie facoltativi
             </button>
-            <button className="button primary" type="button" onClick={acceptAll}>
-              Accetta tutto
+            <button className="button cookie-button cookie-button-accept" type="button" onClick={acceptAll}>
+              Consenti tutti i cookie
             </button>
           </div>
         </aside>
