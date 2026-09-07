@@ -1,8 +1,8 @@
-# Prenotazioni Mago System → Google Sheets
+# Richieste Mago System → Google Sheets
 
-Salva solo le richieste `booking` nel foglio di destinazione (gid 0). Configurare l'ID del documento direttamente nella copia privata di `Code.gs` su Apps Script.
+Salva le prenotazioni videochiamata e le richieste di consulenza/preventivo nel foglio di destinazione (gid 0). Configurare l'ID del documento direttamente nella copia privata di `Code.gs` su Apps Script.
 
-Campi: ID richiesta, data ricezione (Europe/Rome), nome, email, telefono, settore, giorno preferito, fascia oraria, sito attuale, note, stato `Da confermare`.
+Campi: ID richiesta, data ricezione (Europe/Rome), nome, email, telefono, settore, giorno preferito, fascia oraria, sito attuale, note, stato `Da confermare` per le videochiamate o `Da contattare` per le consulenze. Per le consulenze, giorno e fascia oraria sono vuoti e la colonna Note contiene il messaggio.
 
 ## Attivazione
 
@@ -15,7 +15,7 @@ Campi: ID richiesta, data ricezione (Europe/Rome), nome, email, telefono, settor
 
 Se entrambe le variabili sono assenti, resta attivo il flusso email precedente. Se la configurazione è incompleta o Google Sheets rifiuta il salvataggio, il modulo segnala un errore e mantiene i dati per riprovare.
 
-Le richieste ripetute con lo stesso ID e gli stessi dati non generano nuove righe. Le richieste di preventivo/consulenza continuano a usare solo l'email. La notifica email viene tentata dopo il salvataggio: un errore email viene registrato nei log Vercel, ma la prenotazione salvata resta confermata. Non è prevista una coda di ritentativi email automatica.
+Le richieste ripetute con lo stesso ID e gli stessi dati non generano nuove righe. Anche le richieste di preventivo/consulenza vengono salvate prima della notifica email. Sono supportate le schede del sito già aperte, che non inviano ancora requestType. La notifica email viene tentata dopo il salvataggio: un errore email viene registrato nei log Vercel, ma la prenotazione salvata resta confermata. Non è prevista una coda di ritentativi email automatica.
 
 ## Verifiche
 

@@ -73,11 +73,28 @@ test('invalid booking date is rejected before any outbound request', async t => 
   assert.equal(res.code, 400);
   assert.equal(calls.length, 0);
 });
-test('consultation requests keep the existing email route', async t => {
-  const {res, calls} = await run(t, {body: {...booking, requestType: 'consultation'}, steps: [ok()]});
+test('consultation is saved without a booking date before its email is sent', async t => {
+  const body = {name: 'Test consulenza', email: 'test@example.com', phone: '', service: 'Cliniche dentali', message: 'Richiesta preventivo', requestType: 'consultation', requestId: 'consultation-id'};
+  const {res, calls} = await run(t, {body, steps: [ok(), ok()]});
   assert.equal(res.code, 200);
+  assert.equal(calls.length, 2);
+  const saved = JSON.parse(calls[0][1].body);
+  assert.equal(saved.requestType, 'consultation');
+  assert.equal(saved.notes, body.message);
+  assert.equal(saved.preferredDate, '');
+  assert.equal(calls[1][0], 'https://api.resend.com/emails');
+});
+test('cached contact forms without requestType are also saved to Sheets', async t => {
+  const body = {name: 'Test consulenza', email: 'test@example.com', message: 'Vecchia scheda aperta'};
+  const {res, calls} = await run(t, {body, steps: [ok(), ok()]});
+  assert.equal(res.code, 200);
+  assert.equal(JSON.parse(calls[0][1].body).requestType, 'consultation');
+});
+test('a consultation is not confirmed or emailed when Sheets fails', async t => {
+  const body = {name: 'Test', email: 'test@example.com', message: 'Consulenza'};
+  const {res, calls} = await run(t, {body, steps: [ok({ok: false})]});
+  assert.equal(res.code, 502);
   assert.equal(calls.length, 1);
-  assert.equal(calls[0][0], 'https://api.resend.com/emails');
 });
 test('unconfigured integration preserves existing email behavior', async t => {
   const {res, calls} = await run(t, {configured: false, steps: [ok()]});

@@ -46,16 +46,16 @@ export default async function handler(request, response) {
     const isBooking = requestType === 'booking';
     const sheetsUrl = process.env.BOOKING_SHEETS_URL?.trim();
     const sheetsSecret = process.env.BOOKING_SHEETS_SECRET?.trim();
-    let bookingSaved = false;
+    let leadSaved = false;
     let submissionId;
-    if (isBooking && (sheetsUrl || sheetsSecret)) {
+    if (sheetsUrl || sheetsSecret) {
       if (!sheetsUrl || !/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(sheetsUrl) || !sheetsSecret || sheetsSecret.length < 32) {
-        return response.status(503).json({ error: 'Prenotazioni temporaneamente non disponibili. Riprova tra poco.' });
+        return response.status(503).json({ error: 'Invio richieste temporaneamente non disponibile. Riprova tra poco.' });
       }
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(preferredDate) || !preferredTime) {
+      if (isBooking && (!/^\d{4}-\d{2}-\d{2}$/.test(preferredDate) || !preferredTime)) {
         return response.status(400).json({ error: 'Controlla giorno e fascia oraria.' });
       }
-      const notes = sanitize(request.body?.notes ?? message, 2000);
+      const notes = isBooking ? sanitize(request.body?.notes ?? message, 2000) : message;
       const booking = { name, email, phone, service, preferredDate, preferredTime, website, notes };
       const requestId = sanitize(request.body?.requestId, 80) || randomUUID();
       submissionId = createHash('sha256').update(JSON.stringify([requestId, booking])).digest('hex');
@@ -63,20 +63,20 @@ export default async function handler(request, response) {
         const saved = await fetch(sheetsUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...booking, submissionId, secret: sheetsSecret }),
+          body: JSON.stringify({ ...booking, requestType: isBooking ? 'booking' : 'consultation', submissionId, secret: sheetsSecret }),
           signal: AbortSignal.timeout(20000),
         });
         const result = await saved.json().catch(() => null);
         if (!saved.ok || result?.ok !== true) throw new Error('Sheets write failed');
-        bookingSaved = true;
+        leadSaved = true;
         if (result.duplicate) return response.status(200).json({ ok: true });
       } catch {
-        return response.status(502).json({ error: 'Salvataggio della prenotazione non riuscito. Riprova tra poco.' });
+        return response.status(502).json({ error: 'Salvataggio della richiesta non riuscito. Riprova tra poco.' });
       }
     }
     if (!apiKey) {
-      if (bookingSaved) {
-        console.error('Booking saved; email is not configured.', submissionId);
+      if (leadSaved) {
+        console.error('Lead saved; email is not configured.', submissionId);
         return response.status(200).json({ ok: true });
       }
       return response.status(500).json({ error: 'Resend non configurato.' });
@@ -140,16 +140,16 @@ export default async function handler(request, response) {
         signal: AbortSignal.timeout(10000),
       });
     } catch {
-      if (bookingSaved) {
-        console.error('Booking saved; email delivery failed.', submissionId);
+      if (leadSaved) {
+        console.error('Lead saved; email delivery failed.', submissionId);
         return response.status(200).json({ ok: true });
       }
       return response.status(502).json({ error: 'Invio email non riuscito. Riprova tra poco.' });
     }
 
     if (!resendResponse.ok) {
-      if (bookingSaved) {
-        console.error('Booking saved; email delivery failed.', submissionId);
+      if (leadSaved) {
+        console.error('Lead saved; email delivery failed.', submissionId);
         return response.status(200).json({ ok: true });
       }
       const details = await resendResponse.json().catch(() => null);

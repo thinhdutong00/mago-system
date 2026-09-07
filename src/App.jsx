@@ -1286,6 +1286,7 @@ function ContactModal({ isOpen, onClose }) {
   const [errors, setErrors] = useState({});
   const [submitState, setSubmitState] = useState('idle');
   const firstFieldRef = useRef(null);
+  const requestIdRef = useRef(null);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -1306,11 +1307,13 @@ function ContactModal({ isOpen, onClose }) {
   const updateField = (event) => {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
+    requestIdRef.current = null;
     setSubmitState('idle');
   };
 
   const submitForm = async (event) => {
     event.preventDefault();
+    if (submitState === 'loading') return;
     const nextErrors = {};
     if (!form.name.trim()) nextErrors.name = 'Inserisci il nome.';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) nextErrors.email = 'Inserisci una email valida.';
@@ -1321,17 +1324,19 @@ function ContactModal({ isOpen, onClose }) {
     setSubmitState('loading');
 
     try {
+      requestIdRef.current ||= crypto.randomUUID();
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, requestType: 'consultation', requestId: requestIdRef.current }),
       });
       const result = await response.json().catch(() => ({}));
 
-      if (!response.ok) {
+      if (!response.ok || result.ok !== true) {
         throw new Error(result.error || 'Invio non riuscito.');
       }
 
+      requestIdRef.current = null;
       setForm({
         name: '',
         email: '',

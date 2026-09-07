@@ -69,3 +69,26 @@ test('storage failure never reports success and releases the lock', () => {
   assert.equal(h.call(payload).ok, false);
   assert.equal(h.held, false);
 });
+
+test('consultations save their message with no invented booking date or slot', () => {
+  const h = harness();
+  const contact = {...payload, requestType: 'consultation', preferredDate: '', preferredTime: '', notes: 'Richiesta preventivo'};
+  assert.equal(h.call(contact).ok, true);
+  assert.equal(h.rows[1][6], '');
+  assert.equal(h.rows[1][7], '');
+  assert.equal(h.rows[1][9], 'Richiesta preventivo');
+  assert.equal(h.rows[1][10], 'Da contattare');
+  assert.equal(h.call(contact).duplicate, true);
+  assert.equal(h.rows.length, 2);
+});
+test('booking dates remain required for an explicit booking', () => {
+  const h = harness();
+  assert.equal(h.call({...payload, requestType: 'booking', preferredDate: ''}).ok, false);
+  assert.equal(h.opened, 0);
+});
+test('consultations require a message and reject unknown request types', () => {
+  const h = harness();
+  assert.equal(h.call({...payload, requestType: 'consultation', notes: ''}).ok, false);
+  assert.equal(h.call({...payload, requestType: 'unknown'}).ok, false);
+  assert.equal(h.opened, 0);
+});

@@ -22,7 +22,9 @@ function doPost(event) {
     const data = JSON.parse(raw);
     const secret = PropertiesService.getScriptProperties().getProperty('BOOKING_SECRET');
     if (!secret || secret.length < 32 || data.secret !== secret) return jsonReply({ok: false});
-    if (!/^[a-f0-9]{64}$/.test(data.submissionId || '') || !data.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || '') || !/^\d{4}-\d{2}-\d{2}$/.test(data.preferredDate || '')) {
+    if (data.requestType && !['booking', 'consultation'].includes(data.requestType)) return jsonReply({ok: false});
+    const isBooking = data.requestType ? data.requestType === 'booking' : Boolean(data.preferredDate);
+    if (!/^[a-f0-9]{64}$/.test(data.submissionId || '') || !data.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || '') || (isBooking && (!/^\d{4}-\d{2}-\d{2}$/.test(data.preferredDate || '') || !data.preferredTime)) || (!isBooking && !data.notes)) {
       return jsonReply({ok: false});
     }
     lock = LockService.getScriptLock();
@@ -41,7 +43,7 @@ function doPost(event) {
       return jsonReply({ok: true, duplicate: true});
     }
     const receivedAt = Utilities.formatDate(new Date(), 'Europe/Rome', 'yyyy-MM-dd HH:mm:ss');
-    const row = [data.submissionId, receivedAt, textCell(data.name, 120), textCell(data.email, 180), textCell(data.phone, 80), textCell(data.service, 160), textCell(data.preferredDate, 10), textCell(data.preferredTime, 120), textCell(data.website, 240), textCell(data.notes, 2000), 'Da confermare'];
+    const row = [data.submissionId, receivedAt, textCell(data.name, 120), textCell(data.email, 180), textCell(data.phone, 80), textCell(data.service, 160), textCell(data.preferredDate, 10), textCell(data.preferredTime, 120), textCell(data.website, 240), textCell(data.notes, 2000), isBooking ? 'Da confermare' : 'Da contattare'];
     sheet.getRange(lastRow + 1, 1, 1, HEADERS.length).setNumberFormat('@').setValues([row]);
     SpreadsheetApp.flush();
     return jsonReply({ok: true, duplicate: false});
