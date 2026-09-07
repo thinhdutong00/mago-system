@@ -1470,6 +1470,7 @@ function BookingModal({ isOpen, onClose }) {
   const [errors, setErrors] = useState({});
   const [submitState, setSubmitState] = useState('idle');
   const firstFieldRef = useRef(null);
+  const requestIdRef = useRef(null);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -1490,11 +1491,13 @@ function BookingModal({ isOpen, onClose }) {
   const updateField = (event) => {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
+    requestIdRef.current = null;
     setSubmitState('idle');
   };
 
   const submitForm = async (event) => {
     event.preventDefault();
+    if (submitState === 'loading') return;
     const nextErrors = {};
     if (!form.name.trim()) nextErrors.name = 'Inserisci il nome.';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) nextErrors.email = 'Inserisci una email valida.';
@@ -1503,6 +1506,7 @@ function BookingModal({ isOpen, onClose }) {
     if (Object.keys(nextErrors).length > 0) return;
 
     setSubmitState('loading');
+    requestIdRef.current ||= crypto.randomUUID();
 
     const message = [
       'Richiesta booking videochiamata strategica.',
@@ -1521,6 +1525,8 @@ function BookingModal({ isOpen, onClose }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           requestType: 'booking',
+          requestId: requestIdRef.current,
+          notes: form.notes,
           name: form.name,
           email: form.email,
           phone: form.phone,
@@ -1533,10 +1539,11 @@ function BookingModal({ isOpen, onClose }) {
       });
       const result = await response.json().catch(() => ({}));
 
-      if (!response.ok) {
+      if (!response.ok || result.ok !== true) {
         throw new Error(result.error || 'Prenotazione non riuscita.');
       }
 
+      requestIdRef.current = null;
       setForm({
         name: '',
         email: '',
