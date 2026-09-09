@@ -985,7 +985,7 @@ const partnerLogos = [
   { src: 'partner-fisioterapia-malavasi.png', alt: 'Studio Fisioterapico Malavasi' },
   { src: 'partner-tulipano-black.png', alt: 'Il Tulipano Risto-Pizza' },
   { src: 'partner-illume.webp', alt: 'Illume Pizzeria Emiliana', className: 'partner-logo-illume' },
-  { src: 'zeta-partner-toolblueprints.webp', alt: 'toolblueprints.com' },
+  { src: 'logo-eliora-energia.svg', alt: 'Eliora Energia — impianti fotovoltaici' },
 ];
 
 const differentiators = [
