@@ -3389,14 +3389,15 @@ function App() {
 
   const navigate = (to) => {
     const [nextPath, hash] = to.split('#');
-    const targetPath = nextPath || '/';
+    const targetPath = (nextPath || '/').replace(/\/+$/, '') || '/';
+    const behavior = targetPath === path ? 'smooth' : 'instant';
     window.history.pushState({}, '', to);
-    setPath(targetPath.replace(/\/+$/, '') || '/');
+    setPath(targetPath);
     window.requestAnimationFrame(() => {
       if (hash) {
-        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById(hash)?.scrollIntoView({ behavior, block: 'start' });
       } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior });
       }
     });
   };
@@ -3406,6 +3407,34 @@ function App() {
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
+
+  useEffect(() => {
+    const elements = Array.from(document.querySelectorAll('.reveal'));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reducedMotion || typeof window.IntersectionObserver !== 'function') {
+      elements.forEach((element) => element.classList.add('is-visible'));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -60px' },
+    );
+
+    elements.forEach((element) => {
+      element.classList.remove('is-visible');
+      observer.observe(element);
+    });
+    return () => observer.disconnect();
+  }, [path]);
 
   useEffect(() => {
     const pageMeta = activeBusinessSector
