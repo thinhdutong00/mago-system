@@ -81,7 +81,7 @@ export default async function handler(request, response) {
       }
       return response.status(500).json({ error: 'Resend non configurato.' });
     }
-    const subject = isBooking ? `Nuova videochiamata richiesta da ${name}` : `Nuovo lead sanitario da ${name}`;
+    const subject = isBooking ? `Nuova videochiamata richiesta da ${name}` : `Nuova richiesta di consulenza da ${name}`;
     const text = [
       `Tipo richiesta: ${isBooking ? 'Booking videochiamata' : 'Consulenza'}`,
       `Nome: ${name}`,
@@ -102,7 +102,7 @@ export default async function handler(request, response) {
 
     const html = `
     <div style="font-family:Arial,sans-serif;line-height:1.5;color:#111">
-      <h2 style="margin:0 0 16px">Nuovo lead sanitario</h2>
+      <h2 style="margin:0 0 16px">Nuova richiesta di contatto</h2>
       <p><strong>Tipo richiesta:</strong> ${isBooking ? 'Booking videochiamata' : 'Consulenza'}</p>
       <p><strong>Nome:</strong> ${escapeHtml(name)}</p>
       <p><strong>Email:</strong> ${escapeHtml(email)}</p>

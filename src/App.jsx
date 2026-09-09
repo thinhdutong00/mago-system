@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { businessSectors } from './businessSectors.js';
 import {
   Activity,
   ArrowUp,
@@ -166,7 +167,19 @@ const sectors = [
   },
 ];
 
-const sectorOptions = sectors.map((sector) => sector.label);
+const sectorDirectory = [
+  {
+    slug: 'sanitario',
+    label: 'Sanitario',
+    icon: Stethoscope,
+    eyebrow: 'Sanità privata e professionisti',
+    cardText: 'Sistemi di acquisizione per cliniche, studi e professionisti che vogliono trasformare la visibilità locale in richieste più qualificate.',
+    tags: ['Cliniche dentali', 'Centri diagnostici', 'Studi specialistici'],
+  },
+  ...businessSectors,
+];
+
+const sectorOptions = [...sectorDirectory, ...sectors].map((sector) => sector.label);
 
 const sectorLandingPages = {
   'centri-diagnostici-privati': {
@@ -1275,18 +1288,22 @@ function SmartLink({ href, navigate, children, className, onClick, ...props }) {
   );
 }
 
-function ContactModal({ isOpen, onClose }) {
+function ContactModal({ isOpen, onClose, initialSector = '' }) {
   const [form, setForm] = useState({
     name: '',
     email: '',
     phone: '',
-    service: sectorOptions[0],
+    service: initialSector,
     message: '',
   });
   const [errors, setErrors] = useState({});
   const [submitState, setSubmitState] = useState('idle');
   const firstFieldRef = useRef(null);
   const requestIdRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) setForm((current) => ({ ...current, service: initialSector }));
+  }, [isOpen, initialSector]);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -1341,7 +1358,7 @@ function ContactModal({ isOpen, onClose }) {
         name: '',
         email: '',
         phone: '',
-        service: sectorOptions[0],
+        service: initialSector,
         message: '',
       });
       setSubmitState('success');
@@ -1364,11 +1381,11 @@ function ContactModal({ isOpen, onClose }) {
         <button className="icon-button modal-close" type="button" onClick={onClose} aria-label="Chiudi form">
           <X size={22} />
         </button>
-        <p className="eyebrow">Parliamo del tuo settore sanitario</p>
+        <p className="eyebrow">Parliamo della tua attività</p>
         <h2 id="contact-modal-title">Richiedi una consulenza</h2>
         <p id="contact-modal-description">
-          Raccontaci struttura, zona, servizi prioritari e canali attivi. Ti risponderemo con una prima lettura del
-          potenziale di acquisizione pazienti.
+          Raccontaci attività, zona, servizi prioritari e canali attivi. Ti risponderemo con una prima lettura delle
+          opportunità di crescita per il tuo settore.
         </p>
         <form className="modal-form" onSubmit={submitForm} noValidate>
           <label>
@@ -1421,8 +1438,9 @@ function ContactModal({ isOpen, onClose }) {
             />
           </label>
           <label>
-            Servizio
+            Settore
             <select name="service" value={form.service} onChange={updateField}>
+              <option value="">Seleziona il settore</option>
               {sectorOptions.map((option) => (
                 <option key={option}>{option}</option>
               ))}
@@ -1435,7 +1453,7 @@ function ContactModal({ isOpen, onClose }) {
               value={form.message}
               onChange={updateField}
               rows="4"
-              placeholder="Tipo di struttura, servizi da spingere, città, sito attuale e canali da migliorare."
+              placeholder="Tipo di attività, servizi prioritari, città, sito attuale e canali da migliorare."
               required
               aria-invalid={Boolean(errors.message)}
               aria-describedby={errors.message ? 'message-error' : undefined}
@@ -1460,13 +1478,13 @@ function ContactModal({ isOpen, onClose }) {
   );
 }
 
-function BookingModal({ isOpen, onClose }) {
+function BookingModal({ isOpen, onClose, initialSector = '' }) {
   const minBookingDate = useMemo(getTodayInputValue, []);
   const [form, setForm] = useState({
     name: '',
     email: '',
     phone: '',
-    service: sectorOptions[0],
+    service: initialSector,
     preferredDate: '',
     preferredTime: bookingWindows[0],
     website: '',
@@ -1476,6 +1494,10 @@ function BookingModal({ isOpen, onClose }) {
   const [submitState, setSubmitState] = useState('idle');
   const firstFieldRef = useRef(null);
   const requestIdRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) setForm((current) => ({ ...current, service: initialSector }));
+  }, [isOpen, initialSector]);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -1553,7 +1575,7 @@ function BookingModal({ isOpen, onClose }) {
         name: '',
         email: '',
         phone: '',
-        service: sectorOptions[0],
+        service: initialSector,
         preferredDate: '',
         preferredTime: bookingWindows[0],
         website: '',
@@ -1638,6 +1660,7 @@ function BookingModal({ isOpen, onClose }) {
           <label>
             Settore
             <select name="service" value={form.service} onChange={updateField}>
+              <option value="">Seleziona il settore</option>
               {sectorOptions.map((option) => (
                 <option key={option}>{option}</option>
               ))}
@@ -1792,9 +1815,11 @@ function Header({ navigate, openModal, openBooking, modalOpen }) {
                 Settori <ChevronDown size={16} />
               </button>
               <div className="sector-menu-panel">
-                <SmartLink href="/sanitario" navigate={navigate}>
-                  Sanitario
-                </SmartLink>
+                {sectorDirectory.map((sector) => (
+                  <SmartLink key={sector.slug} href={`/${sector.slug}`} navigate={navigate}>
+                    {sector.label}
+                  </SmartLink>
+                ))}
               </div>
             </div>
             <SmartLink href={navItems[2].href} navigate={navigate}>
@@ -1869,9 +1894,11 @@ function Header({ navigate, openModal, openBooking, modalOpen }) {
                 <ChevronDown size={26} aria-hidden="true" />
               </summary>
               <div className="mobile-sector-list">
-                <SmartLink href="/sanitario" navigate={navigate} onClick={closeMenu}>
-                  Sanitario
-                </SmartLink>
+                {sectorDirectory.map((sector) => (
+                  <SmartLink key={sector.slug} href={`/${sector.slug}`} navigate={navigate} onClick={closeMenu}>
+                    {sector.label}
+                  </SmartLink>
+                ))}
               </div>
             </details>
             <SmartLink className="mobile-nav-primary-link" href={navItems[2].href} navigate={navigate} onClick={closeMenu}>
@@ -2152,27 +2179,38 @@ function HomePage({ navigate, openModal }) {
               <p className="zd-kicker">Settori</p>
               <h2>Strategie verticali, crescita misurabile</h2>
             </div>
-            <SmartLink className="zd-text-link zd-text-link-dark" href="/sanitario" navigate={navigate}>
-              Esplora il settore <ArrowUpRight size={19} />
-            </SmartLink>
+            <p className="zd-sectors-intro">Ogni settore ha le sue priorità. Scopri il percorso pensato per la tua attività.</p>
           </header>
-          <SmartLink className="zd-sector-feature reveal" href="/sanitario" navigate={navigate}>
-            <div className="zd-sector-number">01</div>
-            <div className="zd-sector-copy">
-              <p>Sanità privata e professionisti</p>
-              <h3>Sanitario</h3>
-              <span>
-                Sistemi di acquisizione e performance marketing per cliniche, studi e professionisti che vogliono
-                trasformare visibilità locale in richieste più qualificate.
-              </span>
-            </div>
-            <div className="zd-sector-tags" aria-label="Specializzazioni sanitarie">
-              {sectors.slice(0, 6).map((sector) => (
-                <span key={sector.slug}>{sector.label}</span>
-              ))}
-            </div>
-            <ArrowUpRight className="zd-sector-arrow" size={32} aria-hidden="true" />
-          </SmartLink>
+          <div className="zd-sector-grid">
+            {sectorDirectory.map((sector, index) => {
+              const Icon = sector.icon;
+              return (
+                <SmartLink
+                  className="zd-sector-card reveal"
+                  key={sector.slug}
+                  href={`/${sector.slug}`}
+                  navigate={navigate}
+                  aria-labelledby={`sector-title-${sector.slug}`}
+                >
+                  <div className="zd-sector-card-top">
+                    <Icon size={30} aria-hidden="true" />
+                    <span className="zd-sector-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  </div>
+                  <div className="zd-sector-copy">
+                    <p>{sector.eyebrow}</p>
+                    <h3 id={`sector-title-${sector.slug}`}>{sector.label}</h3>
+                    <span>{sector.cardText}</span>
+                  </div>
+                  <div className="zd-sector-tags">
+                    {sector.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                  </div>
+                  <div className="zd-sector-card-link">
+                    Scopri il settore <ArrowUpRight size={22} aria-hidden="true" />
+                  </div>
+                </SmartLink>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -2657,6 +2695,136 @@ function DentalPage({ openModal, openBooking }) {
   );
 }
 
+function BusinessSectorPage({ sector, navigate, openModal, openBooking }) {
+  const Icon = sector.icon;
+
+  return (
+    <main className="sector-landing-page business-sector-page">
+      <section className="sector-landing-hero">
+        <div className="wide-container">
+          <nav className="business-breadcrumb" aria-label="Percorso di navigazione">
+            <SmartLink href="/#settori" navigate={navigate}>Tutti i settori</SmartLink>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{sector.label}</span>
+          </nav>
+          <div className="sector-landing-hero-grid">
+            <div className="sector-landing-copy reveal">
+              <p className="sector-question-pill"><Icon size={24} aria-hidden="true" /> {sector.label}</p>
+              <p className="eyebrow">{sector.eyebrow}</p>
+              <h1>{sector.headline}</h1>
+              <p>{sector.subhead}</p>
+              <div className="hero-actions">
+                <button className="button primary" type="button" onClick={openBooking}>
+                  Prenota videochiamata <CalendarCheck size={18} />
+                </button>
+                <button className="button secondary" type="button" onClick={openModal}>
+                  Richiedi consulenza <ArrowUpRight size={18} />
+                </button>
+              </div>
+            </div>
+            <div className="sector-landing-visual business-sector-visual reveal delay-1">
+              <span>{sector.outcome}</span>
+              <div className="sector-visual-stack">
+                {sector.journey.map(([title, text], index) => {
+                  const StepIcon = [Search, Target, CalendarCheck][index];
+                  return (
+                    <article key={title}>
+                      <StepIcon size={24} aria-hidden="true" />
+                      <strong>{title}</strong>
+                      <small>{text}</small>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="sector-value-section">
+        <div className="container">
+          <div className="section-heading reveal">
+            <p className="eyebrow">La strategia per il tuo settore</p>
+            <h2>{sector.valueTitle}</h2>
+            <p>{sector.valueText}</p>
+          </div>
+          <div className="sector-value-grid">
+            {sector.valueCards.map((card) => (
+              <article className="sector-value-card reveal" key={card.title}>
+                <CheckCircle2 size={24} aria-hidden="true" />
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="sector-services-section">
+        <div className="container">
+          <div className="section-heading reveal">
+            <p className="eyebrow">Ambiti su cui lavorare</p>
+            <h2>{sector.servicesTitle}</h2>
+            {sector.servicesNote && <p>{sector.servicesNote}</p>}
+          </div>
+          <div className="sector-service-grid">
+            {sector.services.map((service) => (
+              <article className="sector-service-card reveal" key={service}>
+                <span>{service}</span>
+                <Icon size={24} aria-hidden="true" />
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="business-workflow-section">
+        <div className="container">
+          <div className="section-heading reveal">
+            <p className="eyebrow">Come lavoriamo</p>
+            <h2>{sector.workflowTitle}</h2>
+          </div>
+          <ol className="business-workflow-grid">
+            {sector.steps.map((step, index) => (
+              <li className="business-workflow-card reveal" key={step.title}>
+                <span aria-hidden="true">0{index + 1}</span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="business-metrics-section">
+        <div className="container">
+          <div className="section-heading reveal">
+            <p className="eyebrow">Crescita misurabile</p>
+            <h2>Misuriamo ciò che conta per la tua attività.</h2>
+            <p>Definiamo insieme gli obiettivi e colleghiamo i dati dei canali agli esiti che il tuo team può condividere.</p>
+          </div>
+          <dl className="business-metrics-grid">
+            {sector.metrics.map(([label, text]) => (
+              <div key={label}>
+                <BarChart3 size={26} aria-hidden="true" />
+                <dt>{label}</dt>
+                <dd>{text}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <FinalCta
+        openModal={openModal}
+        openBooking={openBooking}
+        title={sector.ctaTitle}
+        description={sector.ctaDescription}
+      />
+    </main>
+  );
+}
+
 function SectorPage({ sector, openModal, openBooking }) {
   const landing = sectorLandingPages[sector.slug];
 
@@ -2903,7 +3071,7 @@ function PrivacyPolicyPage({ navigate }) {
               <h2>Dati trattati</h2>
               <p>
                 Trattiamo i dati che invii volontariamente tramite il modulo di contatto, come nome, email, telefono,
-                settore, messaggio e informazioni sulla struttura sanitaria.
+                settore, messaggio e informazioni sull’attività.
               </p>
             </article>
             <article>
@@ -3211,10 +3379,13 @@ function App() {
   const [cookieSettingsOpen, setCookieSettingsOpen] = useState(false);
 
   const activeSector = useMemo(() => sectors.find((sector) => `/${sector.slug}` === path), [path]);
+  const activeBusinessSector = useMemo(() => businessSectors.find((sector) => `/${sector.slug}` === path), [path]);
   const activeLanding = activeSector ? sectorLandingPages[activeSector.slug] : null;
   const isHealthcarePath = path === '/sanitario';
   const isPrivacyPath = path === '/privacy-policy';
-  const isKnownPath = path === '/' || isHealthcarePath || Boolean(activeSector) || isPrivacyPath;
+  const isKnownPath = path === '/' || isHealthcarePath || Boolean(activeSector) || Boolean(activeBusinessSector) || isPrivacyPath;
+  const currentSector = activeSector || activeBusinessSector;
+  const initialSector = currentSector?.label || (isHealthcarePath ? 'Sanitario' : '');
 
   const navigate = (to) => {
     const [nextPath, hash] = to.split('#');
@@ -3237,21 +3408,27 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const pageMeta = activeSector
+    const pageMeta = activeBusinessSector
       ? {
-          title:
-            activeLanding?.metaTitle ||
-            (activeSector.slug === 'cliniche-dentali'
-              ? 'Cliniche dentali - Appuntamenti da pazienti locali | Mago System'
-              : `${activeSector.label} - Acquisizione pazienti | Mago System`),
-          description: activeLanding?.metaDescription || activeSector.subhead,
-          path: `/${activeSector.slug}`,
+          title: activeBusinessSector.metaTitle,
+          description: activeBusinessSector.metaDescription,
+          path: `/${activeBusinessSector.slug}`,
         }
-      : isPrivacyPath
-        ? privacyMeta
-        : isHealthcarePath
-          ? healthcareMeta
-          : homeMeta;
+      : activeSector
+        ? {
+            title:
+              activeLanding?.metaTitle ||
+              (activeSector.slug === 'cliniche-dentali'
+                ? 'Cliniche dentali - Appuntamenti da pazienti locali | Mago System'
+                : `${activeSector.label} - Acquisizione pazienti | Mago System`),
+            description: activeLanding?.metaDescription || activeSector.subhead,
+            path: `/${activeSector.slug}`,
+          }
+        : isPrivacyPath
+          ? privacyMeta
+          : isHealthcarePath
+            ? healthcareMeta
+            : homeMeta;
 
     document.title = pageMeta.title;
     setMeta('description', pageMeta.description);
@@ -3279,8 +3456,8 @@ function App() {
 
     schema.textContent = JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': activeSector ? 'Service' : isPrivacyPath ? 'WebPage' : 'ProfessionalService',
-      name: activeSector ? `Mago System per ${activeSector.label}` : pageMeta.title,
+      '@type': currentSector ? 'Service' : isPrivacyPath ? 'WebPage' : 'ProfessionalService',
+      name: currentSector ? `Mago System per ${currentSector.label}` : pageMeta.title,
       url: `${SITE_URL}${pageMeta.path}`,
       description: pageMeta.description,
       inLanguage: 'it-IT',
@@ -3299,13 +3476,13 @@ function App() {
         },
       },
       areaServed: 'IT',
-      serviceType: activeSector
-        ? `Sistema di acquisizione per ${activeSector.label.toLowerCase()}`
+      serviceType: currentSector
+        ? `Sistema di acquisizione per ${currentSector.label.toLowerCase()}`
         : isHealthcarePath
           ? 'Performance marketing per strutture sanitarie private'
           : 'Strategia digitale, siti web, advertising, email marketing e SEO',
     });
-  }, [activeSector, activeLanding, isHealthcarePath, isPrivacyPath]);
+  }, [activeSector, activeBusinessSector, currentSector, activeLanding, isHealthcarePath, isPrivacyPath]);
 
   return (
     <>
@@ -3335,6 +3512,14 @@ function App() {
           openBooking={() => setBookingOpen(true)}
         />
       )}
+      {activeBusinessSector && (
+        <BusinessSectorPage
+          sector={activeBusinessSector}
+          navigate={navigate}
+          openModal={() => setModalOpen(true)}
+          openBooking={() => setBookingOpen(true)}
+        />
+      )}
       {isPrivacyPath && <PrivacyPolicyPage navigate={navigate} />}
       {!isKnownPath && <NotFoundPage navigate={navigate} />}
       <Footer
@@ -3343,8 +3528,8 @@ function App() {
         openBooking={() => setBookingOpen(true)}
         openCookieSettings={() => setCookieSettingsOpen(true)}
       />
-      <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-      <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
+      <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} initialSector={initialSector} />
+      <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} initialSector={initialSector} />
       <CookieBanner
         navigate={navigate}
         settingsOpen={cookieSettingsOpen}
